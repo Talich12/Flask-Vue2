@@ -8,7 +8,7 @@ def ping_pong():
     return jsonify('Jena PIDORASIC!')
 
 
-@app.route('/Registration', methods=['GET'])
+@app.route('/registration', methods=['GET'])
 def get_register():
     if current_user.is_authenticated:
         return jsonify({"status" : "Redirect"})
@@ -16,7 +16,7 @@ def get_register():
         return jsonify({"status" : "Stay"})
 
 
-@app.route('/Registration', methods=['POST'])
+@app.route('/registration', methods=['POST'])
 def post_register():
     data = request.get_json()
     login = data['login']
@@ -31,4 +31,15 @@ def post_register():
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
+    return jsonify({"status" : "Success"})
+
+@app.route('/login', methods=['POST'])
+def post_login():
+    data = request.get_json()
+    login = data['login']
+    password = data['password']
+    find_user = User.query.filter_by(username=login).first()
+    if find_user is None or not find_user.check_password(password):
+        return jsonify({"status" : "Invalid username"})
+    login_user(find_user)
     return jsonify({"status" : "Success"})
