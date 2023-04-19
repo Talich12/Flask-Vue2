@@ -1,0 +1,144 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #2A2A35;
+}
+.header{
+    margin: 5px 10px 30px 10px;
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.header_right{
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+h1{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 48px;
+    color: #D2C69E;
+}
+input{
+    width: 280px;
+    height: 60px;
+    right: 305px;
+    background: #D2C69E;
+    border-radius: 30px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+.history{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 705px;
+    min-height: 360px;
+    padding: 35px 65px 35px 65px;
+    margin: 0 auto;
+    background: #44444E;
+    border-radius: 50px;
+}
+
+.content{
+    width: 400px;
+}
+
+.hist_head{
+    display: flex;
+    align-items: center;
+    justify-content:baseline ;
+}
+
+.author{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 15px;
+    color: #EEEFF9;
+}
+.eye{
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+    justify-content:baseline ;
+}
+
+.eye_count{
+    margin-left: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.name_history{
+    width: 179px;
+    height: 28px;
+    margin-top: 25px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 36px;
+    color: #D2C69E;
+}
+.date_ganre{
+    display: flex;
+    height: 28px;
+    margin-top: 25px;
+    color: #EEEFF9;
+}
+
+.date{
+    margin-left: 35px;
+}
+.review{
+    display: flex;
+}
+.text_history{
+    width: 452px;
+    margin-top: 25px;
+    font-family: 'Roboto';
+    font-style: italic;
+    font-size: 16px;
+    color: #EEEFF9;
+}
+.img_hist{
+    height: 70%;
+    border-radius: 20px;
+}
+.icons{
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    justify-content:baseline ;
+}
+
+.icon_item{
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.icon_count{
+    margin-left: 5px;
+}
+p{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+

@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Ping from '@/components/Ping';
 import Registration from '@/components/Registration';
+import Login from '@/components/Login';
+import Index from '@/components/Index';
  
 Vue.use(Router);
  
@@ -9,13 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Ping',
-      component: Ping,
+      name: 'Index',
+      component: Index
     },
     {
-      path: '/Regist',
+      path: '/registration',
       name: 'Registration',
       component: Registration,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
     },
   ],
 });
