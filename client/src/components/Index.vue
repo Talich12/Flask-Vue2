@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header">
         <div class="logo">
-            <img src="../assets/img/svg/Logo.svg" alt="#">
+            <img @click="Logout()" src="../assets/img/svg/Logo.svg" alt="#">
         </div>
         <h1>THRILL TOGETHER</h1>
         <div class="header_right">
@@ -64,9 +64,44 @@
  
      },
      methods: {
-         
+        Get(){
+        const path = 'http://localhost:3000/'; 
+        axios.get(path,{
+            headers: {
+                'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+            console.log(this.$cookies.get("access_token"))
+        })
+        .catch((error) =>{
+            console.log(error)
+            this.$router.push({name: 'Login'})
+        })
+        },
+        Logout(){
+        const path = 'http://localhost:3000/LogoutAccess'; 
+        axios.get(path,{
+            headers: {
+                'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                'Access-Control-Allow-Origin': 'http//localhost:8081'
+            }
+        })
+        .then((response) => {
+            console.log(response.data)
+            console.log(this.$cookies.get("access_token"))
+            this.$router.push({name: 'Login'})
+        })
+        .catch((error) =>{
+            console.log(error)
+            console.log(this.$cookies.get("access_token"))
+        })
+        },
      },
-
+     created(){
+        this.Get();
+     },
   
      };
  </script>

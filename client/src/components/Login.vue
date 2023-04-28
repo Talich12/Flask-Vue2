@@ -15,6 +15,7 @@
          </div>
          <p v-if="data.status === 'Invalid username' ">Не правильный логин или пароль</p>
          <button @click="Done()"><h3>Готово!</h3></button>
+         <p>Еще нет аккаунта?<a href="#/registration">Создайте свой аккаунт</a></p>
     </div>
  </template>
   
@@ -33,37 +34,25 @@
      },
      methods: {
          Done() {
-         const path = 'http://localhost:8000/login';
+         const path = 'http://localhost:3000/login';
          axios.post(path, {login: this.Login, password: this.Password})
          .then((response) => {
              console.log(response.data)
              const data = response.data;
              this.data = data;
+             this.$cookies.set("access_token", data.access_token)
+             this.$cookies.set("refresh_token", data.refresh_token)
+             console.log(response)
              if (response.data.status == 'Success'){
-                 this.$router.push({name: 'Ping'})
+                this.$router.push({name: 'Index'})
              }
          })
          .catch((error) =>{
              console.log(error)
          })
          },
-         Get(){
-         const path = 'http://localhost:8000/registration'; 
-         axios.get(path)
-         .then((response) => {
-             console.log(response.data)
-             if (response.data.status == 'Redirect'){
-                 this.$router.push({name: 'Ping'})
-             }
-         })
-         .catch((error) =>{
-             console.log(error)
-         })
-         },
+
  
-     },
-     created(){
-         this.Get();
      },
   
      };
