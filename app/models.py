@@ -1,10 +1,12 @@
-from app import db, login
+from app import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 from hashlib import md5
+import base64
+from datetime import datetime, timedelta
+import os
 
-class User(UserMixin, db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
@@ -29,6 +31,19 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+
+class RevokedTokenModel(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    jti = db.Column(db.String(120))
+    
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    @classmethod
+    def is_jti_blacklisted(cls, jti):
+        query = cls.query.filter_by(jti = jti).first()
+        return bool(query)
+    
+    def __repr__(self):
+        return '<Token {}>'.format(self.body)
