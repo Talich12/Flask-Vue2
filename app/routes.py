@@ -1,7 +1,7 @@
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
-from app.models import User, Post, RevokedTokenModel
+from app.models import User, Post, RevokedTokenModel, PostSchema
 from flask_cors import cross_origin
 
 
@@ -13,7 +13,10 @@ def check_if_token_in_blacklist(jwt_header, decrypted_token):
 @app.route('/', methods=['GET'])
 @jwt_required(refresh=False)
 def get_index():
-    return jsonify({"status" : "Success"})
+    post_schema = PostSchema(many=True)
+    posts = Post.query.all()
+    output = post_schema.dump(posts)
+    return jsonify(output)
 
 
 @app.route('/registration', methods=['POST'])
@@ -78,3 +81,16 @@ def logout_refresh():
     revoked_token = RevokedTokenModel(jti = jti)
     revoked_token.add()
     return jsonify({"msg": "successsss"})
+
+@app.route('/CreatePost', methods=['POST'])
+@jwt_required(refresh=False)
+def create_post():
+    data = request.get_json()
+    title = data['title']
+    body = data['body']
+    username = get_jwt_identity()
+    user = User.query.filter_by(username=username).first()
+    post = Post(title=title, body=body, author_id= user.id ,author=user)
+    db.session.add(post)
+    db.session.commit()
+    return jsonify({"status": "Success"})
