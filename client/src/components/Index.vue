@@ -107,6 +107,5 @@
  </script>
  
  <style>
-     @import '../assets/css/index.css';
-     @import '../assets/css/font.css';
+
  </style>

@@ -1,11 +1,23 @@
 import Vue from 'vue';
+import Vuesax from 'vuesax';
 import Router from 'vue-router';
 import Registration from '@/components/Registration';
 import Login from '@/components/Login';
 import Index from '@/components/Index';
-import Main from '@/components/MainPage';
- 
+import Main from '@/components/Main';
+
+import 'vuesax/dist/vuesax.css';
+import 'boxicons';
+
 Vue.use(Router);
+Vue.use(Vuesax, {
+  colors: {
+    primary:'rgb(42, 42, 53)',
+    dark:'rgb(48, 48, 58)',
+    success:'rgb(238, 239, 249)',
+    danger:'rgb(106, 78, 147)',
+  }
+})
  
 export default new Router({
   mode: "hash",

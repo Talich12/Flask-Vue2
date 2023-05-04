@@ -1,18 +1,27 @@
 import Vue from 'vue';
 import VueCookies from 'vue-cookies'
 import App from './App';
-import router from './router';
 import Vuesax from 'vuesax';
+import router from './router';
+
+import 'vuesax/dist/vuesax.css';
+import 'boxicons/css/boxicons.min.css';
+
+import Card from './components/Card';
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+Vue.component('logoheader', Header);
+Vue.component('sidebar', Sidebar);
+Vue.component('card', Card);
 
 Vue.use(VueCookies);
+
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   VueCookies,
   router,
-  Vuesax,
   components: { App },
   template: '<App/>',
 });

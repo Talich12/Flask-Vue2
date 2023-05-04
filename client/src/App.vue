@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+      <sidebar style="z-index: 10;">
+      </sidebar>
+      <logoheader/>
     <router-view/>
   </div>
 </template>
@@ -11,10 +14,18 @@ export default {
 </script>
 
 <style>
+@import 'assets/css/reset.css';
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  background-color: #2A2A35;
+}
+
+.vs-card{
+  max-width: 100%;
+  background-color:rgb(68, 68, 78);
+  color:rgb(238, 239, 249);
+}
+
+.vs-raw{
+  margin-top: 15%;
 }
 </style>
