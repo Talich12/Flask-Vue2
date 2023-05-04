@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Registration from '@/components/Registration';
 import Login from '@/components/Login';
 import Index from '@/components/Index';
+import Main from '@/components/MainPage';
  
 Vue.use(Router);
  
@@ -23,6 +24,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/main',
+      name: 'Main',
+      component: Main,
     },
   ],
 });
