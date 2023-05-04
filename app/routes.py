@@ -11,7 +11,6 @@ def check_if_token_in_blacklist(jwt_header, decrypted_token):
     return RevokedTokenModel.is_jti_blacklisted(jti)
 
 @app.route('/', methods=['GET'])
-@jwt_required(refresh=False)
 def get_index():
     post_schema = PostSchema(many=True)
     posts = Post.query.all()

@@ -27,6 +27,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
     body = db.Column(db.String(3000))
+    img = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="books")
@@ -68,7 +69,8 @@ class PostSchema(ma.SQLAlchemySchema):
 
     id = auto_field()
     title = auto_field()
-    body = auto_field()   
+    body = auto_field()  
+    img = auto_field() 
 
     author = fields.Nested(UserSchema) 
     
