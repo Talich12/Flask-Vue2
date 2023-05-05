@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" >
       <sidebar style="z-index: 10;">
       </sidebar>
       <logoheader/>
@@ -15,9 +15,12 @@ export default {
 
 <style>
 @import 'assets/css/reset.css';
+
+
 #app {
   background-color: #2A2A35;
 }
+
 
 .vs-card{
   max-width: 100%;

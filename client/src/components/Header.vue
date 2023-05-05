@@ -1,6 +1,5 @@
 <template>
     <div class="header">
-        <img src="../assets/mask.svg" alt="" class="mask">
         <img src="../assets/thrill.svg" alt="" class="image">
     </div>
   </template>

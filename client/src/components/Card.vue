@@ -9,7 +9,7 @@
         </template>
         <template #text>
         <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            <slot name="text"></slot>
         </p>
         </template>
         <template #interactions>
