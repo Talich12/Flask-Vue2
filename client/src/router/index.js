@@ -5,6 +5,7 @@ import Registration from '@/components/Registration';
 import Login from '@/components/Login';
 import Index from '@/components/Index';
 import Main from '@/components/Main';
+import StoryAdd from '@/components/StoryAdd';
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
@@ -22,6 +23,11 @@ Vue.use(Vuesax, {
 export default new Router({
   mode: "hash",
   routes: [
+    {
+      path: '/storyadd',
+      name: 'StoryAdd',
+      component: StoryAdd
+    },
     {
       path: '/',
       name: 'Index',

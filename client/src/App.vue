@@ -21,6 +21,9 @@ export default {
   background-color: #2A2A35;
 }
 
+body {
+  background-color: #2A2A35;
+}
 
 .vs-card{
   max-width: 100%;
