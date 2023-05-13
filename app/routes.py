@@ -1,7 +1,7 @@
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
-from app.models import User, Post, RevokedTokenModel, PostSchema
+from app.models import User, Post,Genre, RevokedTokenModel, PostSchema
 from flask_cors import cross_origin
 
 
@@ -87,9 +87,11 @@ def create_post():
     data = request.get_json()
     title = data['title']
     body = data['body']
+    genre = data['genre']
     username = get_jwt_identity()
-    user = User.query.filter_by(username=username).first()
-    post = Post(title=title, body=body, author_id= user.id ,author=user)
+    find_user = User.query.filter_by(username=username).first()
+    find_genre = Genre.query.filter_by(name=genre).first()
+    post = Post(title=title, body=body, author_id= find_user.id ,author=find_user,genre_id=find_genre.id,genre=find_genre)
     db.session.add(post)
     db.session.commit()
     return jsonify({"status": "Success"})
