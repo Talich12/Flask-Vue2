@@ -10,9 +10,11 @@ import 'boxicons/css/boxicons.min.css';
 import Card from './components/Card';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import Footer from './components/Footer';
 Vue.component('logoheader', Header);
 Vue.component('sidebar', Sidebar);
 Vue.component('card', Card);
+Vue.component('myfooter', Footer);
 
 Vue.use(VueCookies);
 

@@ -1,9 +1,11 @@
 <template>
-  <div id="app" >
+  <div id="app">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
       <sidebar style="z-index: 10;">
       </sidebar>
       <logoheader/>
     <router-view/>
+    <myfooter style="z-index: 10;"></myfooter>
   </div>
 </template>
 
@@ -16,8 +18,9 @@ export default {
 <style>
 @import 'assets/css/reset.css';
 
-
 #app {
+  font-family: 'Unbounded', cursive;
+  font-weight: 100;
   background-color: #2A2A35;
 }
 
@@ -33,5 +36,16 @@ body {
 
 .vs-raw{
   margin-top: 15%;
+}
+
+#app {
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-color: rgb(106, 78, 147) #FFFFFF;
+}
+
+/* Style the scrollbar track */
+#app::-webkit-scrollbar-track {
+  background-color: #FFFFFF;
 }
 </style>

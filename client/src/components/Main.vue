@@ -1,22 +1,26 @@
 <template>
-    <div class="container" style="display: flex; margin-left: 16%; margin-right: 8.33%;">
-        <vs-row justify="space-around" style="margin-top: 6%;">
-            <vs-col v-for="post in this.Data" offset="1" w="5">
-            <card>
-                <template #title>
-                    {{post.title}}
-                </template>
-                <template #text>
-                    {{post.body}}
-                </template>
-                <template #img>
-                    <img :src="require(`@/assets/${post.img}`)" alt="">
-                </template>
-            </card>
+    <div class="container">
+      <vs-row justify="space-around" style="margin-top: 6%;">
+        <vs-col v-for="post in Data" offset="1" w="5">
+          <card>
+            <template #title>
+              {{ post.title }}
+            </template>
+            <template #text>
+              {{ post.body }}
+            </template>
+            <template #img>
+              <img :src="require(`@/assets/${post.img}`)" alt="">
+            </template>
+          </card>
         </vs-col>
-        </vs-row>
+      </vs-row>
+      <div class="footer">
+        <!-- Ваш код футера -->
+      </div>
     </div>
   </template>
+  
   
 <script>
 import axios from 'axios';
@@ -48,3 +52,17 @@ created(){
 },
 };
 </script>
+
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
+  margin-left: 16%;
+  margin-right: 8.33%;
+}
+
+.footer {
+  margin-top: auto; /* Расположение футера внизу контейнера */
+}
+</style>
