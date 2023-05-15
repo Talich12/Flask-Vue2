@@ -3,12 +3,19 @@ from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
 from app.models import User, Post,Genre, RevokedTokenModel, PostSchema
 from flask_cors import cross_origin
+from werkzeug.utils import secure_filename
+import os
 
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 @jwt.token_in_blocklist_loader
 def check_if_token_in_blacklist(jwt_header, decrypted_token):
     jti = decrypted_token['jti']
     return RevokedTokenModel.is_jti_blacklisted(jti)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET'])
 def get_index():
@@ -51,6 +58,23 @@ def post_login():
         "access_token" : access_token,
         "refresh_token" : refresh_token
         })
+
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    data = request.form
+    file = request.files['file']
+    title = data['title']
+    body = data['body']
+    print(body)
+    username = 'denis'
+    filename = secure_filename(file.filename)
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    find_user = User.query.filter_by(username=username).first()
+    post = Post(title=title, body=body, author_id= find_user.id ,author=find_user, img=filename)
+    db.session.add(post)
+    db.session.commit()
+    return jsonify({'status': "ok"})
 
 
 @app.route('/secret', methods=['GET'])
