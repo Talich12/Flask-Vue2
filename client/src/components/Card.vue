@@ -1,5 +1,5 @@
 <template>
-    <vs-card style="margin-top: 10%;">
+    <vs-card style="margin-top: 7%;">
         <template #title>
             <h3><slot name="title"></slot></h3>
         </template>
@@ -28,6 +28,6 @@
 
 <script>
 export default {
- 
+
 }
 </script>

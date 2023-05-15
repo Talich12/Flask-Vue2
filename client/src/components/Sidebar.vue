@@ -8,34 +8,34 @@
       open
       square
       style="width: 16%; max-width: 100%; height: 100vh;"
-      >
+    >
       <template #logo>
         <!-- ...img logo -->
       </template>
-      <vs-sidebar-item to ="main">
+      <vs-sidebar-item to="main">
         <template #icon>
-          <i class='bx bx-home'></i>
+          <i class='bx bx-home' style="font-size: 1vw;"></i>
         </template>
-        <p style="font-size: 20px;">Главная страница</p>
+        <p style="font-size:1vw; font-family: 'Unbounded'; font-weight: bolder;">Главная страница</p>
       </vs-sidebar-item>
       <vs-sidebar-item id="search">
         <template #icon>
-          <i class='bx bx-search'></i>
+          <i class='bx bx-search' style="font-size: 1vw;"></i>
         </template>
-        <p style="font-size: 20px;">Поиск</p>
+        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Поиск</p>
       </vs-sidebar-item>
       <vs-sidebar-item id="recommendations">
         <template #icon>
-          <i class='bx bx-merge'></i>
+          <i class='bx bx-merge' style="font-size: 1vw;"></i>
         </template>
-        <p style="font-size: 20px;">Рекомендации</p>
+        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Рекомендации</p>
       </vs-sidebar-item>
       
       <vs-sidebar-item id="help">
         <template #icon>
-          <i class='bx bx-help-circle'></i>
+          <i class='bx bx-help-circle' style="font-size: 1vw;"></i>
         </template>
-        <p style="font-size: 20px;">О нас</p>
+        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">О нас</p>
       </vs-sidebar-item>
       
       <template #footer>
@@ -56,10 +56,11 @@
     </vs-sidebar>
   </div>
 </template>
+
 <script>
-  export default {
-    data:() => ({
-      active: 'home',
-    })
-  }
+export default {
+  data: () => ({
+    active: 'home',
+  }),
+};
 </script>

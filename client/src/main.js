@@ -11,10 +11,12 @@ import Card from './components/Card';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Information from './components/Information';
 Vue.component('logoheader', Header);
 Vue.component('sidebar', Sidebar);
 Vue.component('card', Card);
 Vue.component('myfooter', Footer);
+Vue.component('information', Information);
 
 Vue.use(VueCookies);
 

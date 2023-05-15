@@ -1,65 +1,76 @@
 <template>
     <footer class="footer">
-      <div class="social-media">
-        <a class="social-icon" href="#"><i class="bx bxl-facebook"></i></a>
-        <a class="social-icon" href="#"><i class="bx bxl-twitter"></i></a>
-        <a class="social-icon" href="#"><i class="bx bxl-google"></i></a>
-        <a class="social-icon" href="#"><i class="bx bxl-instagram"></i></a>
-        <a class="social-icon" href="#"><i class="bx bxl-linkedin"></i></a>
-        <a class="social-icon" href="#"><i class="bx bxl-github"></i></a>
+      <div class="social-media" style="padding-top: 1%;">
+        <p style="margin-bottom: 1%;">Мы в социальных сетях:</p>
+        <div class="social-icons">
+            <a class="social-icon" href="#"><i class="bx bxl-instagram"></i></a>
+            <a class="social-icon" href="#"><i class="bx bxl-telegram"></i></a>
+            <a class="social-icon" href="#"><i class="bx bxl-vk"></i></a>
+            <a class="social-icon" href="#"><i class="bx bxl-github"></i></a>
+        </div>
       </div>
       <form class="newsletter-form">
         <p class="newsletter-text">Подпишитесь на нашу рассылку:</p>
-        <input type="email" class="newsletter-input" placeholder="Email address">
-        <button class="newsletter-button">Subscribe</button>
+        <input type="email" class="newsletter-input" placeholder="Ваш адрес электронной почты">
+        <button class="newsletter-button">Подписаться</button>
       </form>
-      <p class="description">
-        Сайт разработан тремя студентами ДВФУ обучающимися на направлении Б9121-09.03.03пикд. Вся необходимая информация дана ниже.
+        <vs-alert :color="color">
+      <template #icon>
+        <i class='bx bxs-info-circle' style="font-size: 5vh;"></i>
+      </template>
+      <template #title>
+        <p>
+        ThrillTogether
+        </p>
+      </template>
+      <p style="text-align: left;">
+      Приветствуем! Сайт разработан тремя студентами ДВФУ обучающимися на направлении Б9121-09.03.03пикд в ходе обучения на втором курсе в рамках дисциплины "Программная инженерия". Больше о сайте можно прочитать во вкладке "О нас". Вся необходимая информация дана ниже.
       </p>
-      <p class="description" style="color: rgb(106, 78, 147)">
+    </vs-alert>
+      <p class="description" style="color: rgb(238, 239, 249); margin-top: 1%;">
         Пугаем вас уже вот столько дней: {{ randomNumber }} 
       </p>
       <div class="footer-links">
         <div class="footer-column">
-          <h5 class="footer-heading">Links</h5>
+          <h5 class="footer-heading">Оказать помощь ресурсу</h5>
           <ul class="footer-list">
-            <li><a href="#" class="footer-link">Link 1</a></li>
-            <li><a href="#" class="footer-link">Link 2</a></li>
-            <li><a href="#" class="footer-link">Link 3</a></li>
-            <li><a href="#" class="footer-link">Link 4</a></li>
+            <li><a href="#" class="footer-link">Криптовалюта</a></li>
+            <li><a href="#" class="footer-link">Перевод</a></li>
+            <li><a href="#" class="footer-link">Boosty</a></li>
+            <li><a href="#" class="footer-link">Предложить идею</a></li>
           </ul>
         </div>
         <div class="footer-column">
-          <h5 class="footer-heading">Links</h5>
+          <h5 class="footer-heading">Контактная информация</h5>
           <ul class="footer-list">
-            <li><a href="#" class="footer-link">Link 1</a></li>
-            <li><a href="#" class="footer-link">Link 2</a></li>
-            <li><a href="#" class="footer-link">Link 3</a></li>
-            <li><a href="#" class="footer-link">Link 4</a></li>
+            <li><a href="#" class="footer-link">VKontakte</a></li>
+            <li><a href="#" class="footer-link">Telegram</a></li>
+            <li><a href="#" class="footer-link">Instagram</a></li>
+            <li><a href="#" class="footer-link">Mail</a></li>
           </ul>
         </div>
         <div class="footer-column">
-          <h5 class="footer-heading">Links</h5>
+          <h5 class="footer-heading">Для разработчиков</h5>
           <ul class="footer-list">
-            <li><a href="#" class="footer-link">Link 1</a></li>
-            <li><a href="#" class="footer-link">Link 2</a></li>
-            <li><a href="#" class="footer-link">Link 3</a></li>
-            <li><a href="#" class="footer-link">Link 4</a></li>
+            <li><a href="#" class="footer-link">Наша команда</a></li>
+            <li><a href="#" class="footer-link">Работать с нами</a></li>
+            <li><a href="#" class="footer-link">Сообщить об ошибке</a></li>
+            <li><a href="#" class="footer-link">Github</a></li>
         </ul>
 </div>
 <div class="footer-column">
-  <h5 class="footer-heading">Links</h5>
+  <h5 class="footer-heading">Часто задаваемые вопросы</h5>
   <ul class="footer-list">
-    <li><a href="#" class="footer-link">Link 1</a></li>
-    <li><a href="#" class="footer-link">Link 2</a></li>
-    <li><a href="#" class="footer-link">Link 3</a></li>
-    <li><a href="#" class="footer-link">Link 4</a></li>
+    <li><a href="#" class="footer-link">О нас</a></li>
+    <li><a href="#" class="footer-link">Как стать автором?</a></li>
+    <li><a href="#" class="footer-link">Интро сайта</a></li>
+    <li><a href="#" class="footer-link">Удалить аккаунт</a></li>
   </ul>
 </div>
 </div>
 <p class="footer-text">
   © 2023 Copyright:
-  <a class="text-white" style="color: rgb(106, 78, 147)" href="https://thrilltogether.ru/">ThrillTogether.ru</a> <a>все права соблюдены</a>
+  <a class="text-white" style="color: rgb(106, 78, 147)" href="https://thrilltogether.ru/">ThrillTogether.ru</a> <a>Все права защищены</a>
 </p>
 </footer>
 </template>
@@ -70,6 +81,7 @@ export default {
   data() {
     return {
       randomNumber: 0,
+      color: 'danger'
     };
   },
   mounted() {
@@ -85,6 +97,15 @@ export default {
   margin-left: 16%;
   color: white;
   text-align: center;
+}
+
+li {
+    font-size: small;
+    margin-top: 10px;
+}
+
+h5 {
+    font-weight: bolder;
 }
 
 .social-media {
@@ -111,18 +132,23 @@ export default {
 .newsletter-input {
   padding: 8px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  color:#ffffff;
+  background-color: rgb(62, 62, 74);
 }
 
 .newsletter-button {
   padding: 8px 20px;
   border: none;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #2A2A35;
+  border-radius: 5px;
+  background-color: rgb(48, 48, 58);
+  color: #ffffff;
 }
 
 .description {
+    color: rgb(188, 188, 188);
+  font-weight:lighter;
+  font-size: small;
   margin-bottom: 20px;
 }
 
@@ -146,7 +172,7 @@ export default {
 }
 
 .footer-link {
-  color: white;
+  color: rgb(188, 188, 188);
   text-decoration: none;
   margin-bottom: 5px;
 }

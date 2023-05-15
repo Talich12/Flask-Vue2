@@ -1,6 +1,7 @@
 <template>
     <div class="header">
         <img src="../assets/thrill.svg" alt="" class="image">
+        <p style="color: rgb(106, 78, 147); align-self:flex-start">&beta;</p>
     </div>
   </template>
   
