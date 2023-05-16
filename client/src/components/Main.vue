@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <vs-row justify="space-around" style="margin-top: 6%;">
-        <Information style="margin-left: 8%; margin-top: 3%;"></Information>
+        <Information style="margin-left: 8%; margin-top: 5vh; z-index: 0;"></Information>
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>

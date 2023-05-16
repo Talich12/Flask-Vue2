@@ -1,30 +1,19 @@
 <template>
-    <vs-alert relief color="dark" :page.sync="page" class="alert-custom" style="z-index: 0;">
-      <template #title>
-        Рекомендации
-      </template>
-  
-      <template #page-1>
-        Здесь подборка для вас на сегодня:
-      </template>
-  
-      <template #page-2>
-        Подборка обновляется каждые два дня
-      </template>
-  
-      <template #page-3>
-        Подборка генерируется на основе ваших предпочтений
-      </template>
-    </vs-alert>
-  </template>
-  
-  <script>
+  <vs-alert border :hidden-content.sync="hidden" color="danger">
+    <template #title>
+      Рекомендации на сегодня
+    </template>
+    Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+  </vs-alert>
+</template>
+
+<script>
   export default {
-    data: () => ({
-      page: 1,
-    }),
-  };
-  </script>
+    data:() => ({
+      hidden: true
+    })
+  }
+</script>
   
   <style>
   .alert-custom {
@@ -32,4 +21,3 @@
     text-align: left;
   }
   </style>
-  

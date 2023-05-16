@@ -16,7 +16,7 @@
       </form>
         <vs-alert :color="color">
       <template #icon>
-        <i class='bx bxs-info-circle' style="font-size: 5vh;"></i>
+        <i class='bx bxs-info-circle' style="font-size: 3vh;"></i>
       </template>
       <template #title>
         <p>
