@@ -3,26 +3,8 @@
       <vs-col offset="1" style="margin-top: 11%;">
         <vs-row>
           <vs-select placeholder="Select" v-model="value">
-            <vs-option label="Vuesax" value="1">
-              Vuesax
-            </vs-option>
-            <vs-option label="Vue" value="2">
-              Vue
-            </vs-option>
-            <vs-option label="Javascript" value="3">
-              Javascript
-            </vs-option>
-            <vs-option disabled label="Sass" value="4">
-              Sass
-            </vs-option>
-            <vs-option label="Typescript" value="5">
-              Typescript
-            </vs-option>
-            <vs-option label="Webpack" value="6">
-              Webpack
-            </vs-option>
-            <vs-option label="Nodejs" value="7">
-              Nodejs
+            <vs-option v-for="(name, id) in Data" :label="name" :value="id">
+              {{ name.name }}
             </vs-option>
           </vs-select>
         </vs-row>
@@ -60,7 +42,8 @@
         title: '',
         body: '',
         value: '',
-        file: null
+        file: null,
+        Data: []
       }
     },
     methods: {
@@ -70,16 +53,34 @@
       },
       onUpload(){
         const fd = new FormData();
+        fd.append('genre_id', this.value)
         fd.append('file', this.file)
         fd.append('title', this.title)
         fd.append('body', this.body)
         console.log(fd)
         axios.post('http://localhost:3000/upload', fd)
         .then((response) => {
+             console.log(this.value)
              console.log(response)
+             this.$router.push({name: 'Main'})
          })
-      }
-    }
+      },
+      GetGenre() {
+            const path = "http://localhost:3000/Genre";
+            axios.get(path)
+                .then((response) => {
+                console.log(response.data);
+                const data = response.data;
+                this.Data = data;
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+        },
+    },
+    created() {
+        this.GetGenre();
+    },
   }
 </script>
 
