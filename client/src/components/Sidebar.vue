@@ -18,12 +18,14 @@
         </template>
         <p style="font-size:1vw; font-family: 'Unbounded'; font-weight: bolder;">Главная страница</p>
       </vs-sidebar-item>
+
       <vs-sidebar-item id="search">
         <template #icon>
           <i class='bx bxs-search' style="font-size: 1vw;"></i>
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Поиск</p>
       </vs-sidebar-item>
+
       <vs-sidebar-item id="recommendations">
         <template #icon>
           <i class='bx bx-merge' style="font-size: 1vw;"></i>
@@ -127,13 +129,13 @@
       
       <template #footer>
         <vs-row justify="space-between">
-          <vs-avatar>
-            <img src="../assets/sample1.jpg" alt="">
-          </vs-avatar>
-
+          <vs-sidebar-item to="profile">
+            <vs-avatar>
+              <img src="../assets/sample1.jpg" alt="">
+            </vs-avatar>
+          </vs-sidebar-item>
           <vs-avatar color="primary" badge-color="danger" badge-position="top-right">
             <i class='bx bx-bell' style='color:white'></i>
-
             <template #badge>
               <span style='color:white;'>28</span>
             </template>

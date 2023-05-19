@@ -11,4 +11,5 @@ class Config(object):
     JWT_SECRET_KEY = 'jwt-secret-string'
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
+    UPLOAD_FOLDER = '/home/mamba/ThrillTogether/client/src/assets/img/load'
     PROPAGATE_EXCEPTIONS = True

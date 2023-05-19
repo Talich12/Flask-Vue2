@@ -18,11 +18,13 @@ import About from './components/About';
 Vue.component('about', About);
 Vue.component('pagination', Pagination);
 Vue.component('cookie', Cookie);
+import Profile from './components/Profile';
 Vue.component('logoheader', Header);
 Vue.component('sidebar', Sidebar);
 Vue.component('card', Card);
 Vue.component('myfooter', Footer);
 Vue.component('information', Information);
+Vue.component('profile', Profile);
 
 Vue.use(VueCookies);
 

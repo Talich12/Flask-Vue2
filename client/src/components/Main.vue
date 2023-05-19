@@ -19,7 +19,7 @@
               {{ post.body }}
             </template>
             <template #img>
-              <img :src="require(`@/assets/${post.img}`)" alt="">
+              <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
             </template>
           </card>
         </vs-col>
