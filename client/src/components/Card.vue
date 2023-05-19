@@ -4,7 +4,6 @@
             <h3><slot name="title"></slot></h3>
         </template>
         <template #img>
-
             <slot name="img"></slot>
         </template>
         <template #text>

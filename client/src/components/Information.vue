@@ -1,9 +1,9 @@
 <template>
   <vs-alert border :hidden-content.sync="hidden" color="danger">
     <template #title>
-      Рекомендации на сегодня
+      <slot name="title"></slot>
     </template>
-    Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+    <p><slot name="text"></slot></p>
   </vs-alert>
 </template>
 

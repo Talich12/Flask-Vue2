@@ -1,7 +1,15 @@
 <template>
-    <div class="container">
-      <vs-row justify="space-around" style="margin-top: 6%;">
-        <Information style="margin-left: 8%; margin-top: 5vh; z-index: 0;"></Information>
+    <div class="containerMain">
+      <vs-row justify="space-around">
+        <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+          <template #title>
+            Рекомендации на сегодня
+          </template>
+          <template #text>
+            Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+          </template>
+        </information>
+        <cookie></cookie>
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>
@@ -15,7 +23,16 @@
             </template>
           </card>
         </vs-col>
+        <Information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+          <template #title>
+            Рекомендации на сегодня
+          </template>
+          <template #text>
+            Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+          </template>
+        </Information>
       </vs-row>
+      <pagination style="margin-left: 8%;"></pagination>
       <div class="footer">
         <!-- Ваш код футера -->
       </div>
@@ -56,12 +73,13 @@ export default {
 </script>
 
 <style>
-.container {
+.containerMain {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
   margin-left: 16%;
   margin-right: 7%;
+  margin-top: 12vh;
 }
 
 .footer {

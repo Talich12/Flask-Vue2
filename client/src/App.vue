@@ -19,13 +19,14 @@ export default {
 @import 'assets/css/reset.css';
 
 #app {
-  font-family: 'Unbounded';
   background-color: #2A2A35;
+  font-family: 'Unbounded';
   scroll-behavior: smooth;
 }
 
 body {
   background-color: #2A2A35;
+  font-family: 'Unbounded';
 }
 
 .vs-card{

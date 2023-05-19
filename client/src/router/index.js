@@ -6,6 +6,7 @@ import Login from '@/components/Login';
 import Index from '@/components/Index';
 import Main from '@/components/Main';
 import StoryAdd from '@/components/StoryAdd';
+import About from '@/components/About';
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
@@ -47,6 +48,11 @@ export default new Router({
       path: '/main',
       name: 'Main',
       component: Main,
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About,
     },
   ],
 });
