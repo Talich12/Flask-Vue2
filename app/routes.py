@@ -1,7 +1,7 @@
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
-from app.models import User, Post,Genre, RevokedTokenModel, PostSchema
+from app.models import User, Post,Genre, RevokedTokenModel, PostSchema, GenreSchema
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 import os
@@ -66,12 +66,14 @@ def upload():
     file = request.files['file']
     title = data['title']
     body = data['body']
+    genre_id = data['genre_id']
     print(body)
     username = 'denis'
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
-    post = Post(title=title, body=body, author_id= find_user.id ,author=find_user, img=filename)
+    find_genre = Genre.query.filter_by(id=genre_id).first()
+    post = Post(title=title, body=body, author_id= find_user.id ,author=find_user, img=filename, genre_id=genre_id, genre=find_genre)
     db.session.add(post)
     db.session.commit()
     return jsonify({'status': "ok"})
@@ -105,17 +107,12 @@ def logout_refresh():
     revoked_token.add()
     return jsonify({"msg": "successsss"})
 
-@app.route('/CreatePost', methods=['POST'])
-@jwt_required(refresh=False)
-def create_post():
-    data = request.get_json()
-    title = data['title']
-    body = data['body']
-    genre = data['genre']
-    username = get_jwt_identity()
-    find_user = User.query.filter_by(username=username).first()
-    find_genre = Genre.query.filter_by(name=genre).first()
-    post = Post(title=title, body=body, author_id= find_user.id ,author=find_user,genre_id=find_genre.id,genre=find_genre)
-    db.session.add(post)
-    db.session.commit()
-    return jsonify({"status": "Success"})
+
+@app.route('/Genre', methods=['GET'])
+def genre():
+    genre_schema = GenreSchema(many=True)
+    genres = Genre.query.all()
+    output = genre_schema.dump(genres)
+    return jsonify(output)
+
+
