@@ -13,12 +13,12 @@
                 </div>
                 <div class="profile-rank-cog">
                     <div class="profile__user-rank">
-                        <vs-button danger size="large" flat:active="active == 0" @click="active = 0" class="rank">
+                        <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
                             Рейтинг
                         </vs-button>
                     </div>
                     <div class="profile__cog">
-                        <vs-button icon color="danger" flat:active="active == 0" @click="active = 0" class="cog">
+                        <vs-button icon color="danger" shadow :active="active == 0" @click="active = 0" class="cog">
                             <i class='bx bxs-cog'></i>
                         </vs-button>
                     </div>
@@ -26,7 +26,7 @@
 
             </div>
             <div class="profile__writer">
-                <vs-button danger size="large" flat:active="active == 0" @click="active = 0" class="write-history">
+                <vs-button danger size="large" shadow upload to="storyadd" class="write-history">
                     Написать Историю
                 </vs-button>
             </div>
@@ -43,6 +43,7 @@
                     </vs-navbar>
                     <div class="square">
                         <div v-if="active == 'post'">
+                            <div class="containerProfile">
                             <vs-row justify="space-around" style="margin-top: 6%;">
                                 <vs-col v-for="post in Data" offset="1" w="5">
                                 <card>
@@ -58,6 +59,7 @@
                                 </card>
                                 </vs-col>
                             </vs-row>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -102,29 +104,29 @@ export default {
     justify-content: space-between;
     align-items: center;
     background-color: rgb(48, 48, 58);
-    padding: 20px;
+    padding: 1%;
+    padding-top: 6%;
 }
 
 .profile__user {
     display: flex;
     align-items: center;
-    padding-left: 240px;
-    padding-top: 60px;
+    padding-left: 22%;
 }
 
 .profile__user-name {
-    margin-left: 20px;
+    margin-left: 2%;
 }
 
 .username {
-    font-size: 24px;
+    font-size: 2vw;
     color: rgb(238, 239, 249);
 }
 
 .profile__writer {
     display: flex;
     align-items: center;
-    padding-top: 60px;
+    margin-right: 6%;
 }
 
 .profile-rank-cog {
@@ -132,17 +134,26 @@ export default {
     align-items: center;
 }
 
-.rank,
-.cog {
-    margin-left: 20px;
+.rank, .cog {
+    margin-left: 0.5vw;
 }
 .profile__navbar{
     position: relative;
     z-index: 1;
 }
+.vs-navbar-content{
+    margin-left: 7%;
+}
 .center{
     display: flex;
     justify-content: center;
+}
+.containerProfile {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
+  margin-left: 16%;
+  margin-right: 7%;
 }
 
 </style>
