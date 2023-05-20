@@ -5,7 +5,7 @@
                 <div class="profile__user-avatar">
                     
                     <vs-avatar  size="70" class="avatar">
-                        <img src="../assets/sample1.jpg" alt="">
+                        <img src="../assets/img/load/sample1.jpg" alt="">
                     </vs-avatar>
                 </div>
                 <div class="profile__user-name">

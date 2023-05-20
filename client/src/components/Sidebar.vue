@@ -128,19 +128,15 @@
       </vs-sidebar-item>
       
       <template #footer>
-        <vs-row justify="space-between">
-          <vs-sidebar-item to="profile">
-            <vs-avatar>
-              <img src="../assets/sample1.jpg" alt="">
-            </vs-avatar>
-          </vs-sidebar-item>
-          <vs-avatar color="primary" badge-color="danger" badge-position="top-right">
-            <i class='bx bx-bell' style='color:white'></i>
-            <template #badge>
-              <span style='color:white;'>28</span>
-            </template>
+        <vs-row space-between>
+        <router-link v-model="active" to="/profile">
+          <div class="center con-avatars">
+          <vs-avatar @click="active = 0">
+            <img src="../assets/img/load/sample1.jpg" alt="">
           </vs-avatar>
-        </vs-row>
+        </div>
+        </router-link>
+      </vs-row>
       </template>
     </vs-sidebar>
   </div>
