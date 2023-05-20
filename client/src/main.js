@@ -15,6 +15,8 @@ import Footer from './components/Footer';
 import Information from './components/Information';
 import Pagination from './components/Pagination';
 import About from './components/About';
+import CardRecommendations from './components/CardRecommendations';
+Vue.component('cardrecs', CardRecommendations);
 Vue.component('about', About);
 Vue.component('pagination', Pagination);
 Vue.component('cookie', Cookie);

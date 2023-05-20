@@ -31,11 +31,6 @@ export default new Router({
       component: StoryAdd
     },
     {
-      path: '/',
-      name: 'Index',
-      component: Index
-    },
-    {
       path: '/registration',
       name: 'Registration',
       component: Registration,
@@ -46,7 +41,7 @@ export default new Router({
       component: Login,
     },
     {
-      path: '/main',
+      path: '/',
       name: 'Main',
       component: Main,
     },

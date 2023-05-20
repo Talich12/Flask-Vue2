@@ -3,10 +3,10 @@
       <vs-row justify="space-around">
         <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
           <template #title>
-            Рекомендации на сегодня
+            Подборка самых популярных историй на сегодня
           </template>
           <template #text>
-            Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+            Описание подобрки
           </template>
         </information>
         <cookie></cookie>
@@ -23,15 +23,16 @@
             </template>
           </card>
         </vs-col>
-        <Information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+        <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
           <template #title>
             Рекомендации на сегодня
           </template>
           <template #text>
             Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
           </template>
-        </Information>
-        <pagination style="margin-left: 8%;"></pagination>
+        </information>
+        <cardrecs></cardrecs>
+        <pagination style="margin-left: 9%;"></pagination>
       </vs-row>
       <div class="footer">
         <!-- Ваш код футера -->

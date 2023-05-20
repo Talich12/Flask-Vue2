@@ -107,6 +107,9 @@ export default {
     padding: 1%;
     padding-top: 6%;
 }
+.profile {
+    overflow-x: hidden;
+}
 
 .profile__user {
     display: flex;

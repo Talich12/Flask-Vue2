@@ -33,12 +33,30 @@
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Рекомендации</p>
       </vs-sidebar-item>
 
-      <vs-sidebar-item id="audio">
+      <vs-sidebar-group>
+        <template #header>
+          <vs-sidebar-item arrow style="margin-right: 7%;">
+            <template #icon>
+              <i class='bx bxs-folder-plus'></i>
+            </template>
+            Фильтр по медиа
+          </vs-sidebar-item>
+        </template>
+      <vs-sidebar-item>
         <template #icon>
           <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
         </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Истории с аудио</p>
+        <vs-switch danger style="background-color: black;">С озвучкой</vs-switch>
       </vs-sidebar-item>
+
+      <vs-sidebar-item>
+        <template #icon>
+          <i class='bx bxs-film' style="font-size: 1vw;"></i>
+        </template>
+        <vs-switch danger style="background-color: black;">С видео</vs-switch>
+      </vs-sidebar-item>
+      </vs-sidebar-group>
+
       <vs-sidebar-group>
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
@@ -131,7 +149,7 @@
         <vs-row space-between>
         <router-link v-model="active" to="/profile">
           <div class="center con-avatars">
-          <vs-avatar @click="active = 0">
+          <vs-avatar @click="active = ''">
             <img src="../assets/img/load/sample1.jpg" alt="">
           </vs-avatar>
         </div>
