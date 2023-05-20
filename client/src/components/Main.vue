@@ -31,8 +31,8 @@
             Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
           </template>
         </Information>
+        <pagination style="margin-left: 8%;"></pagination>
       </vs-row>
-      <pagination style="margin-left: 8%;"></pagination>
       <div class="footer">
         <!-- Ваш код футера -->
       </div>
