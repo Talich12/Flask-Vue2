@@ -32,42 +32,69 @@
             </div>
         </div>
         <div class="profile__navbar">
-            <template>
-                <div class="center examplex">
+            <div class="center examplex">
                     <vs-navbar dark text-white square left-collapsed v-model="active">
                         
-                        <vs-navbar-item :active="active == 'post'" id="post" style="font-size: 1vw;"> Мои истории </vs-navbar-item>
+                        <vs-navbar-item @click="Get" :active="active == 'post'" id="post" style="font-size: 1vw;"> Мои истории </vs-navbar-item>
                         <vs-navbar-item :active="active == 'subscribers'" id="subscribers" style="font-size: 1vw;"> Подписчики </vs-navbar-item>
                         <vs-navbar-item :active="active == 'subscription'" id="subscription" style="font-size: 1vw;"> Подписки </vs-navbar-item>
                         <vs-navbar-item :active="active == 'achievements'" id="achievements" style="font-size: 1vw;"> Достижения </vs-navbar-item>
                         
                     </vs-navbar>
                     <div class="square">
-                        <div class="child"> child 1 </div>
-                        <div class="child"> child 2 </div>
-                        <div class="child"> child 3 </div>
+                        <div v-if="active == 'post'">
+                            <vs-row justify="space-around" style="margin-top: 6%;">
+                                <vs-col v-for="post in Data" offset="1" w="5">
+                                <card>
+                                    <template #title>
+                                    {{ post.title }}
+                                    </template>
+                                    <template #text>
+                                    {{ post.body }}
+                                    </template>
+                                    <template #img>
+                                    <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
+                                    </template>
+                                </card>
+                                </vs-col>
+                            </vs-row>
+                        </div>
                     </div>
                 </div>
-            </template>
         </div>
     </div>
 </template>
   
-<script>
-export default {
-    data: () => ({
-        active: 0
-    })
-}
 
+<script>
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            active: 'post',
+            Data: []
+        };
+    },
+    methods: {
+        Get() {
+            const path = "http://localhost:3000/posts";
+            axios.get(path)
+                .then((response) => {
+                console.log(response.data);
+                const data = response.data;
+                this.Data = data;
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+        },
+    },
+    created() {
+        this.Get();
+    },
+}
 </script>
-  <script>
-  export default {
-    data:() => ({
-      active: 'guide'
-    })
-  }
-  </script>
 
 <style>
 .profile-header__content {

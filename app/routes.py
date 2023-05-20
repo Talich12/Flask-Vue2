@@ -24,6 +24,16 @@ def get_index():
     output = post_schema.dump(posts)
     return jsonify(output)
 
+@app.route('/posts', methods=['GET'])
+def get_posts():
+    login = 'denis'
+    post_schema = PostSchema(many=True)
+    find_user = User.query.filter_by(username=login).first()
+    posts = Post.query.filter_by(author_id=find_user.id).all()
+    print(posts)
+    output = post_schema.dump(posts)
+    return jsonify(output)
+
 
 @app.route('/registration', methods=['POST'])
 def post_register():
