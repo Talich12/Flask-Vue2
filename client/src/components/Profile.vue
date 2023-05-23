@@ -9,12 +9,17 @@
                     </vs-avatar>
                 </div>
                 <div class="profile__user-name">
-                    <span class="username">{{  }}</span>
+                    <span class="username">{{ $route.params.username }}</span>
                 </div>
                 <div class="profile-rank-cog">
                     <div class="profile__user-rank">
                         <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
                             Рейтинг
+                        </vs-button>
+                    </div>
+                    <div class="profile__user-rank">
+                        <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
+                            Подписаться
                         </vs-button>
                     </div>
                     <div class="profile__cog">
@@ -26,7 +31,7 @@
 
             </div>
             <div class="profile__writer">
-                <vs-button danger size="large" shadow upload to="storyadd" class="write-history">
+                <vs-button danger size="large" shadow upload to="/storyadd" class="write-history">
                     Написать Историю
                 </vs-button>
             </div>
@@ -41,7 +46,7 @@
                         <vs-navbar-item :active="active == 'achievements'" id="achievements" style="font-size: 1vw;"> Достижения </vs-navbar-item>
                         
                     </vs-navbar>
-                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s;">
+                    <div class="square">
                         <div v-if="active == 'post'">
                             <div class="containerProfile">
                             <vs-row justify="space-around" style="margin-top: 6%;">
@@ -57,16 +62,6 @@
                                     <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
                                     </template>
                                 </card>
-                                </vs-col>
-                            </vs-row>
-                        </div>
-                        </div>
-
-                        <div v-if="active == 'subscribers'">
-                            <div class="containerProfile">
-                            <vs-row justify="space-around" style="margin-top: 6%;">
-                                <vs-col v-for="post in Data" offset="1" w="5">
-                                <p>d</p>
                                 </vs-col>
                             </vs-row>
                         </div>

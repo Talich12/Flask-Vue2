@@ -15,10 +15,10 @@ import 'boxicons';
 Vue.use(Router);
 Vue.use(Vuesax, {
   colors: {
-    primary: '#2A2A35',
-    dark: '#30303A',
-    success: '#EEEFF9',
-    danger: '#6A4E93',
+    primary:'rgb(42, 42, 53)',
+    dark:'rgb(48, 48, 58)',
+    success:'rgb(238, 239, 249)',
+    danger:'rgb(106, 78, 147)',
   }
 })
  
@@ -51,7 +51,7 @@ export default new Router({
       component: About,
     },
     {
-      path: '/profile',
+      path: '/profile/:username',
       name: 'Profile',
       component: Profile,
     },
