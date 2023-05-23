@@ -1,3 +1,4 @@
+import math
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
@@ -17,12 +18,25 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def get_index():
+    data = request.get_json(silent=True)
+    print(data)
+    if data is None:
+        page = 1
+    else:
+        page = data['page']
     post_schema = PostSchema(many=True)
-    posts = Post.query.all()
+    posts = Post.query.paginate(page=page,per_page=app.config['POSTS_PER_PAGE'],error_out=False)
     output = post_schema.dump(posts)
     return jsonify(output)
+
+@app.route('/get_len', methods=['GET', 'POST'])
+def get_len():
+    len = Post.query.count()
+    len =  math.ceil(len/app.config['POSTS_PER_PAGE'])
+    return jsonify({'len': len})
+
 
 @app.route('/posts', methods=['GET'])
 def get_posts():
