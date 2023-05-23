@@ -19,6 +19,8 @@ import Pagination from './components/Pagination';
 import About from './components/About';
 import CardRecommendations from './components/CardRecommendations';
 import ButtonToTop from './components/ButtonToTop';
+import Subscribers from './components/Subscribers';
+Vue.component('subscriber', Subscribers);
 Vue.component('totop', ButtonToTop);
 Vue.component('cardrecs', CardRecommendations);
 Vue.component('about', About);

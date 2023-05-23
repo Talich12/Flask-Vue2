@@ -41,7 +41,7 @@
                         <vs-navbar-item :active="active == 'achievements'" id="achievements" style="font-size: 1vw;"> Достижения </vs-navbar-item>
                         
                     </vs-navbar>
-                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s;">
+                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s; width: 84%;">
                         <div v-if="active == 'post'">
                             <div class="containerProfile">
                             <vs-row justify="space-around" style="margin-top: 6%;">
@@ -59,17 +59,12 @@
                                 </card>
                                 </vs-col>
                             </vs-row>
+                            </div>
                         </div>
-                        </div>
-
                         <div v-if="active == 'subscribers'">
-                            <div class="containerProfile">
-                            <vs-row justify="space-around" style="margin-top: 6%;">
-                                <vs-col v-for="post in Data" offset="1" w="5">
-                                <p>d</p>
-                                </vs-col>
-                            </vs-row>
-                        </div>
+                            <div class="containerSubscribers">
+                                <subscriber></subscriber>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,6 +162,11 @@ export default {
   min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
   margin-left: 16%;
   margin-right: 7%;
+}
+.containerSubscribers {
+  width: 90%;
+  padding-top: 6%;
+  padding-left: 14%;
 }
 
 </style>
