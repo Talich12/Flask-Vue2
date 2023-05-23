@@ -9,12 +9,17 @@
                     </vs-avatar>
                 </div>
                 <div class="profile__user-name">
-                    <span class="username">{{  }}</span>
+                    <span class="username">{{ $route.params.username }}</span>
                 </div>
                 <div class="profile-rank-cog">
                     <div class="profile__user-rank">
                         <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
                             Рейтинг
+                        </vs-button>
+                    </div>
+                    <div class="profile__user-rank">
+                        <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
+                            Подписаться
                         </vs-button>
                     </div>
                     <div class="profile__cog">
@@ -26,7 +31,7 @@
 
             </div>
             <div class="profile__writer">
-                <vs-button danger size="large" shadow upload to="storyadd" class="write-history">
+                <vs-button danger size="large" shadow upload to="/storyadd" class="write-history">
                     Написать Историю
                 </vs-button>
             </div>

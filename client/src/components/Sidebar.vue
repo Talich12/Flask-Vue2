@@ -138,7 +138,7 @@
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
       
-      <vs-sidebar-item to="about" id="help">
+      <vs-sidebar-item to="/about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
         </template>
@@ -147,7 +147,7 @@
       
       <template #footer>
         <vs-row space-between>
-        <router-link v-model="active" to="/profile">
+        <router-link :to="ProfileUrl">
           <div class="center con-avatars">
           <vs-avatar @click="active = ''">
             <img src="../assets/img/load/sample1.jpg" alt="">
@@ -161,9 +161,12 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookies'
+
 export default {
   data: () => ({
     active: '',
+    ProfileUrl: '/profile/'+ $cookies.get("login"),
   }),
 };
 </script>
