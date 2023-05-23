@@ -38,6 +38,24 @@
       <div class="footer">
         <!-- Ваш код футера -->
       </div>
+      <vue-particles
+        color="#EEEFF9"
+        :particleOpacity="0.7"
+        :particlesNumber="110"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#EEEFF9"
+        :linesWidth="1.2"
+        :lineLinked="true"
+        :lineOpacity="0.5"
+        :linesDistance="140"
+        :moveSpeed="2"
+        :hoverEffect="false"
+        hoverMode=""
+        :clickEffect="false"
+        clickMode=""
+        style="position:absolute; z-index: -10; height: 80%; width: 100vw; left: 0%; top: 8%;"
+      > </vue-particles>
     </div>
   </template>
   

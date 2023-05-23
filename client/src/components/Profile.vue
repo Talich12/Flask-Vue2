@@ -61,6 +61,16 @@
                             </vs-row>
                         </div>
                         </div>
+
+                        <div v-if="active == 'subscribers'">
+                            <div class="containerProfile">
+                            <vs-row justify="space-around" style="margin-top: 6%;">
+                                <vs-col v-for="post in Data" offset="1" w="5">
+                                <p>d</p>
+                                </vs-col>
+                            </vs-row>
+                        </div>
+                        </div>
                     </div>
                 </div>
         </div>

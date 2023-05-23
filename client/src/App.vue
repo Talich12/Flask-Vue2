@@ -5,7 +5,7 @@
       </sidebar>
       <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
     <router-view/>
-    <myfooter style="z-index: 10;"></myfooter>
+    <myfooter style="z-index: 10; position: relative; bottom: 0;"></myfooter>
   </div>
 </template>
 

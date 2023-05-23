@@ -1,11 +1,11 @@
 <template>
       <vs-card-group style="margin-left: 8%; margin-top: 2%;">
-    <vs-card v-for="card in 6">
+    <vs-card v-for="post in Data">
       <template #title>
         <h3>Демо</h3>
       </template>
       <template #img>
-        <img :src="require('@/assets/img/load/sample1.jpg')" alt="">
+        <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
       </template>
       <template #text>
         <p>
