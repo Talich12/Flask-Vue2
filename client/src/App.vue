@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
-      <sidebar style="z-index: 10;">
+      <sidebar style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
       </sidebar>
-      <logoheader/>
+      <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
     <router-view/>
     <myfooter style="z-index: 10;"></myfooter>
   </div>
@@ -21,7 +21,6 @@ export default {
 #app {
   background-color: #2A2A35;
   font-family: 'Unbounded';
-  scroll-behavior: smooth;
 }
 
 body {
@@ -39,5 +38,9 @@ body {
   height: 100vh;
   overflow-y: auto;
   scrollbar-color: rgb(106, 78, 147) rgb(68, 68, 78);
+}
+
+.vs-sidebar__item {
+  font-family: 'Unbounded';
 }
 </style>

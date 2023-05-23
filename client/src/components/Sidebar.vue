@@ -12,7 +12,7 @@
       <template #logo>
         <!-- ...img logo -->
       </template>
-      <vs-sidebar-item id="main" to="main">
+      <vs-sidebar-item id="main" to="/">
         <template #icon>
           <i class='bx bxs-home' style="font-size: 1vw;"></i>
         </template>

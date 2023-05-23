@@ -14,7 +14,7 @@
         <input type="email" class="newsletter-input" placeholder="Ваш адрес электронной почты">
         <button class="newsletter-button">Подписаться</button>
       </form>
-        <vs-alert :color="color">
+        <vs-alert :color="color" style="height: 14vh;">
       <template #icon>
         <i class='bx bxs-info-circle' style="font-size: 3vh;"></i>
       </template>
@@ -23,7 +23,7 @@
         ThrillTogether
         </p>
       </template>
-      <p style="text-align: left;">
+      <p style="text-align: left; font-size: 2vh;">
       Приветствуем! Сайт разработан тремя студентами ДВФУ обучающимися на направлении Б9121-09.03.03пикд в ходе обучения на втором курсе в рамках дисциплины "Программная инженерия". Больше о сайте можно прочитать во вкладке "О нас". Вся необходимая информация дана ниже.
       </p>
     </vs-alert>
@@ -92,6 +92,7 @@ export default {
 
 <style>
 .footer {
+  z-index: 20;
   background-color: #25252f;
   margin-top: 2%;
   margin-left: 16%;

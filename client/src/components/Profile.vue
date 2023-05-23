@@ -9,7 +9,7 @@
                     </vs-avatar>
                 </div>
                 <div class="profile__user-name">
-                    <span class="username">Имя пользователя</span>
+                    <span class="username">{{  }}</span>
                 </div>
                 <div class="profile-rank-cog">
                     <div class="profile__user-rank">
@@ -41,7 +41,7 @@
                         <vs-navbar-item :active="active == 'achievements'" id="achievements" style="font-size: 1vw;"> Достижения </vs-navbar-item>
                         
                     </vs-navbar>
-                    <div class="square">
+                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s;">
                         <div v-if="active == 'post'">
                             <div class="containerProfile">
                             <vs-row justify="space-around" style="margin-top: 6%;">

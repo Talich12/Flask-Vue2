@@ -1,5 +1,5 @@
 <template>
-    <div class="containerInfo">
+    <div class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
         <vs-row justify="space-around">
         <vs-alert :page.sync="page" shadow color="success" style="margin-left: 8%; z-index: 0;">
         <template #title>
@@ -25,6 +25,24 @@
         </video>
       </div>
     </vs-row>
+    <vue-particles
+        color="#6A4E93"
+        :particleOpacity="0.7"
+        :particlesNumber="130"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#6A4E93"
+        :linesWidth="1.2"
+        :lineLinked="true"
+        :lineOpacity="0.5"
+        :linesDistance="160"
+        :moveSpeed="2"
+        :hoverEffect="false"
+        hoverMode="grab"
+        :clickEffect="false"
+        clickMode="push"
+        style="position:absolute; z-index: -10; height: 80%; width: 100vw; left: 0%; top: 8%;"
+      > </vue-particles>
     </div>
 </template>
 
@@ -41,13 +59,13 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin-left: 16%;
-  margin-right: 7%;
-  margin-top: 8%;
+  padding-left: 16%;
+  padding-right: 7%;
+  padding-top: 8%;
 }
 .videoContainer {
-  margin-left: 8%;
-  margin-top: 4%;
+  padding-left: 8%;
+  padding-top: 4%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -3,9 +3,11 @@ import VueCookies from 'vue-cookies'
 import App from './App';
 import Vuesax from 'vuesax';
 import router from './router';
+import VueParticles from 'vue-particles'
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons/css/boxicons.min.css';
+import 'animate.css';
 
 import Card from './components/Card';
 import Cookie from './components/Cookie'
@@ -16,6 +18,8 @@ import Information from './components/Information';
 import Pagination from './components/Pagination';
 import About from './components/About';
 import CardRecommendations from './components/CardRecommendations';
+import ButtonToTop from './components/ButtonToTop';
+Vue.component('totop', ButtonToTop);
 Vue.component('cardrecs', CardRecommendations);
 Vue.component('about', About);
 Vue.component('pagination', Pagination);
@@ -29,6 +33,7 @@ Vue.component('information', Information);
 Vue.component('profile', Profile);
 
 Vue.use(VueCookies);
+Vue.use(VueParticles);
 
 Vue.config.productionTip = false;
 

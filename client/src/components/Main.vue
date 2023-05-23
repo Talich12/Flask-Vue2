@@ -1,5 +1,5 @@
 <template>
-    <div class="containerMain">
+    <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
       <vs-row justify="space-around">
         <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
           <template #title>
@@ -10,6 +10,7 @@
           </template>
         </information>
         <cookie></cookie>
+        <totop></totop>
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>
@@ -78,12 +79,12 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
-  margin-left: 16%;
-  margin-right: 7%;
-  margin-top: 12vh;
+  padding-left: 16%;
+  padding-right: 7%;
+  padding-top: 12vh;
 }
 
 .footer {
-  margin-top: auto; /* Расположение футера внизу контейнера */
+  padding-top: 0; /* Расположение футера внизу контейнера */
 }
 </style>
