@@ -1,7 +1,7 @@
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
-from app.models import User, Post,Genre, RevokedTokenModel, PostSchema, GenreSchema
+from app.models import User, Post,Genre, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, followers
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 import os
@@ -34,6 +34,14 @@ def get_posts():
     output = post_schema.dump(posts)
     return jsonify(output)
 
+
+@app.route('/profile/<username>', methods=['GET'])
+def get_profile(username):
+    login = 'denis'
+    if login == username:
+        return jsonify({"status" : "It's your profile"})
+    else:
+        return jsonify({"status" : "It's not your profile"})
 
 @app.route('/registration', methods=['POST'])
 def post_register():
@@ -68,6 +76,16 @@ def post_login():
         "access_token" : access_token,
         "refresh_token" : refresh_token
         })
+
+@app.route('/followers', methods=['GET'])
+def get_followers():
+    user_schema = UserSchema(many=True)
+    login = 'denis'
+    find_user = User.query.filter_by(username=login).first()
+    find_followers = User.query.join(followers, (followers.c.follower_id == User.id)).filter(
+                followers.c.followed_id == find_user.id)
+    output = user_schema.dump(find_followers)
+    return jsonify(output)
 
 
 @app.route('/upload', methods=['POST'])
