@@ -3,9 +3,8 @@
         <div class="profile-header__content">
             <div class="profile__user">
                 <div class="profile__user-avatar">
-                    
-                    <vs-avatar  size="70" class="avatar">
-                        <img src="../assets/img/load/sample1.jpg" alt="">
+                    <vs-avatar :loading = "loading" size="70" class="avatar">
+                        <img :src="UserIcon" alt="">
                     </vs-avatar>
                 </div>
                 <div class="profile__user-name">
@@ -89,8 +88,11 @@ import axios from 'axios';
 export default {
     data() {
         return {
+            loading: false,
             active: 'post',
             Data: [],
+            User: [],
+            UserIcon: require(`@/assets/img/load/sample1.jpg`),
             Users: [],
         };
     },
@@ -130,10 +132,26 @@ export default {
                 .catch((error) => {
                 console.log(error);
             });
+        },
+        GetUserData(){
+            const path = "http://localhost:3000/profile/" + $cookies.get("login");
+            axios.get(path)
+                .then((response) => {
+                console.log(response.data);
+                const data = response.data;
+                this.User = data;
+                this.UserIcon = require(`@/assets/img/load/${data.avatar}`)
+            })
+                .catch((error) => {
+                console.log(error);
+            });
         }
     },
     created() {
+        this.loading = true
         this.Get();
+        this.GetUserData();
+        this.loading = false
     },
 }
 </script>
