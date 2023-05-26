@@ -41,8 +41,8 @@
                     <vs-navbar dark text-white square left-collapsed v-model="active">
                         
                         <vs-navbar-item @click="Get" :active="active == 'post'" id="post" style="font-size: 1vw;"> Мои истории </vs-navbar-item>
-                        <vs-navbar-item :active="active == 'subscribers'" id="subscribers" style="font-size: 1vw;"> Подписчики </vs-navbar-item>
-                        <vs-navbar-item :active="active == 'subscription'" id="subscription" style="font-size: 1vw;"> Подписки </vs-navbar-item>
+                        <vs-navbar-item @click="GetFollowers()" :active="active == 'subscribers'" id="subscribers" style="font-size: 1vw;"> Подписчики </vs-navbar-item>
+                        <vs-navbar-item @click="GetFollowed()" :active="active == 'subscription'" id="subscription" style="font-size: 1vw;"> Подписки </vs-navbar-item>
                         <vs-navbar-item :active="active == 'achievements'" id="achievements" style="font-size: 1vw;"> Достижения </vs-navbar-item>
                         
                     </vs-navbar>
@@ -68,7 +68,12 @@
                         </div>
                         <div v-if="active == 'subscribers'">
                             <div class="containerSubscribers">
-                                <subscriber></subscriber>
+                                <subscriber :users="Users"></subscriber>
+                            </div>
+                        </div>
+                        <div v-if="active == 'subscription'">
+                            <div class="containerSubscribers">
+                                <subscriber :users="Users"></subscriber>
                             </div>
                         </div>
                     </div>
@@ -85,7 +90,8 @@ export default {
     data() {
         return {
             active: 'post',
-            Data: []
+            Data: [],
+            Users: [],
         };
     },
     methods: {
@@ -101,6 +107,30 @@ export default {
                 console.log(error);
             });
         },
+        GetFollowers(){
+            const path = "http://localhost:3000/followers";
+            axios.get(path)
+                .then((response) => {
+                console.log(response.data);
+                const data = response.data;
+                this.Users = data;
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+        },
+        GetFollowed(){
+            const path = "http://localhost:3000/followed";
+            axios.get(path)
+                .then((response) => {
+                console.log(response.data);
+                const data = response.data;
+                this.Users = data;
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+        }
     },
     created() {
         this.Get();
