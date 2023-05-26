@@ -25,7 +25,7 @@
             :data="tr"
           >
             <vs-td> 
-                <vs-avatar size="35"><img src="../assets/img/load/sample3.jpg" alt="" style="transform: 0;"></vs-avatar> {{ tr.username }}
+                <vs-avatar size="35"><img :src="require(`@/assets/img/load/${tr.avatar}`)" alt="" style="transform: 0;"></vs-avatar> {{ tr.username }}
             </vs-td>
             <vs-td>
             {{ tr.email }}

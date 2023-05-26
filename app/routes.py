@@ -22,19 +22,19 @@ def allowed_file(filename):
 def get_index():
     data = request.get_json(silent=True)
     print(data)
-    if data is None:
-        page = 1
-    else:
-        page = data['page']
+    value = int(data['value'])
+    page = data['page']
     post_schema = PostSchema(many=True)
-    posts = Post.query.paginate(page=page,per_page=app.config['POSTS_PER_PAGE'],error_out=False)
+    posts = Post.query.paginate(page=page,per_page=value,error_out=False)
     output = post_schema.dump(posts)
     return jsonify(output)
 
 @app.route('/get_len', methods=['GET', 'POST'])
 def get_len():
+    data = request.get_json(silent=True)
+    value = int(data['value'])
     len = Post.query.count()
-    len =  math.ceil(len/app.config['POSTS_PER_PAGE'])
+    len =  math.ceil(len/value)
     return jsonify({'len': len})
 
 
@@ -51,11 +51,11 @@ def get_posts():
 
 @app.route('/profile/<username>', methods=['GET'])
 def get_profile(username):
-    login = 'denis'
-    if login == username:
-        return jsonify({"status" : "It's your profile"})
-    else:
-        return jsonify({"status" : "It's not your profile"})
+    user_schema = UserSchema(many=False)
+    find_user = User.query.filter_by(username=username).first()
+    output = user_schema.dump(find_user)
+    return jsonify(output)
+
 
 @app.route('/registration', methods=['POST'])
 def post_register():
