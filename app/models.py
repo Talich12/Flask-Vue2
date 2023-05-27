@@ -17,6 +17,8 @@ followers = db.Table('followers',
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
+    email = db.Column(db.String(64))
+    avatar = db.Column(db.String(64), default="sample1.jpg")
     password_hash = db.Column(db.String(128))
     rating = db.Column(db.Integer, default=0)
     followed = db.relationship(
@@ -107,7 +109,8 @@ class UserSchema(ma.SQLAlchemySchema):
 
     id = ma.auto_field()
     username = ma.auto_field()
-
+    email = ma.auto_field()
+    avatar = ma.auto_field()
 
 class PostSchema(ma.SQLAlchemySchema):
     class Meta:

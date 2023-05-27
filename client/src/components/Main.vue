@@ -32,7 +32,7 @@
         </template>
       </information>
       <cardrecs></cardrecs>
-      <pagination :len="len" @page="onPage" style="margin-left: 9%;"></pagination>
+      <pagination :len="len" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
     <div class="footer">
       <!-- Ваш код футера -->
@@ -69,12 +69,14 @@ export default {
       return {
           Data: [],
           len: 1,
+          page: 1,
+          value: 4,
       };
   },
   methods: {
       Get() {
           const path = "http://localhost:3000/";
-          axios.get(path)
+          axios.post(path, {page: this.page, value: this.value})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data;
@@ -82,20 +84,36 @@ export default {
               .catch((error) => {
               console.log(error);
           });
-          const path2 = "http://localhost:3000/get_len";
-          axios.get(path2)
+      },
+      GetLen(){
+          const path = "http://localhost:3000/get_len";
+            axios.post(path, {value: this.value})
+                .then((response) => {
+                console.log(response.data);
+                this.len = response.data.len;
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+      },
+      onPage(data){
+        this.page = data.page
+        const path = "http://localhost:3000/";
+          axios.post(path, {page: data.page, value: this.value})
               .then((response) => {
               console.log(response.data);
-              this.len = response.data.len;
+              this.Data = response.data;
           })
               .catch((error) => {
               console.log(error);
           });
       },
-      onPage(data){
+      onValue(data){
+        this.value = data.value
         const path = "http://localhost:3000/";
-          axios.post(path, {page: data.page})
+          axios.post(path, {value: data.value, page: this.page})
               .then((response) => {
+              this.GetLen()
               console.log(response.data);
               this.Data = response.data;
           })
@@ -106,6 +124,7 @@ export default {
   },
   created() {
       this.Get();
+      this.GetLen()
   },
   components: { Information }
 };
