@@ -16,8 +16,8 @@
                             Рейтинг
                         </vs-button>
                     </div>
-                    <div v-if="User.access == true"   class="profile__user-rank">
-                        <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
+                    <div v-if="User.access == false"   class="profile__user-rank">
+                        <vs-button @click="onFollow" danger size="large" shadow class="rank">
                             Подписаться
                         </vs-button>
                     </div>
@@ -148,6 +148,16 @@ export default {
         },
         onRoute(data){
             console.log(data)
+        },
+        onFollow(){
+          const path = "http://localhost:3000"+this.$route.path +"/follow";
+          axios.post(path, {page: this.page, value: this.value})
+              .then((response) => {
+              console.log(response.data);
+          })
+              .catch((error) => {
+              console.log(error);
+          });
         }
     },
     watch:{

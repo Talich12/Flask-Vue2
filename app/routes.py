@@ -27,6 +27,7 @@ def get_index():
     post_schema = PostSchema(many=True)
     posts = Post.query.paginate(page=page,per_page=value,error_out=False)
     output = post_schema.dump(posts)
+    
     return jsonify(output)
 
 @app.route('/get_len', methods=['GET', 'POST'])
@@ -36,6 +37,38 @@ def get_len():
     len = Post.query.count()
     len =  math.ceil(len/value)
     return jsonify({'len': len})
+
+
+@app.route('/profile/<username>/follow', methods=['POST'])
+def user_follow(username):
+    login = "Lera"
+    find_user = User.query.filter_by(username=login).first()
+    follow_user =  User.query.filter_by(username=username).first()
+
+    find_user.follow(follow_user)
+
+    return jsonify({'Status': "success"})
+
+
+@app.route('/profile/<username>/followers', methods=['GET'])
+def get_followers(username):
+    user_schema = UserSchema(many=True)
+    login = username
+    find_user = User.query.filter_by(username=login).first()
+    find_followers = User.query.join(followers, (followers.c.follower_id == User.id)).filter(
+                followers.c.followed_id == find_user.id)
+    output = user_schema.dump(find_followers)
+    return jsonify(output)
+
+@app.route('/profile/<username>/followed', methods=['GET'])
+def get_followed(username):
+    user_schema = UserSchema(many=True)
+    login = username
+    find_user = User.query.filter_by(username=login).first()
+    find_followers = User.query.join(followers, (followers.c.followed_id == User.id)).filter(
+                followers.c.follower_id == find_user.id)
+    output = user_schema.dump(find_followers)
+    return jsonify(output)
 
 
 @app.route('/profile/<username>/posts', methods=['GET'])
@@ -95,26 +128,6 @@ def post_login():
         "access_token" : access_token,
         "refresh_token" : refresh_token
         })
-
-@app.route('/profile/<username>/followers', methods=['GET'])
-def get_followers(username):
-    user_schema = UserSchema(many=True)
-    login = username
-    find_user = User.query.filter_by(username=login).first()
-    find_followers = User.query.join(followers, (followers.c.follower_id == User.id)).filter(
-                followers.c.followed_id == find_user.id)
-    output = user_schema.dump(find_followers)
-    return jsonify(output)
-
-@app.route('/profile/<username>/followed', methods=['GET'])
-def get_followed(username):
-    user_schema = UserSchema(many=True)
-    login = username
-    find_user = User.query.filter_by(username=login).first()
-    find_followers = User.query.join(followers, (followers.c.followed_id == User.id)).filter(
-                followers.c.follower_id == find_user.id)
-    output = user_schema.dump(find_followers)
-    return jsonify(output)
 
 
 @app.route('/upload', methods=['POST'])

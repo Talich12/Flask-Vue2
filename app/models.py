@@ -30,10 +30,12 @@ class User(db.Model):
     def follow(self, user):
         if not self.is_following(user):
             self.followed.append(user)
+            db.session.commit()
 
     def unfollow(self, user):
         if self.is_following(user):
             self.followed.remove(user)
+            db.session.commit()
 
     def is_following(self, user):
         return self.followed.filter(
