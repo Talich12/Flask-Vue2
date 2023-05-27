@@ -1,5 +1,5 @@
 <template>
-  <div class="containerMain">
+  <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
     <vs-row justify="space-around">
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
@@ -37,6 +37,24 @@
     <div class="footer">
       <!-- Ваш код футера -->
     </div>
+    <vue-particles
+        color="#EEEFF9"
+        :particleOpacity="0.7"
+        :particlesNumber="80"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#EEEFF9"
+        :linesWidth="1.2"
+        :lineLinked="true"
+        :lineOpacity="0.5"
+        :linesDistance="140"
+        :moveSpeed="2"
+        :hoverEffect="false"
+        hoverMode="grab"
+        :clickEffect="false"
+        clickMode="push"
+        style="position:absolute; z-index: -10; height: 100%; width: 100vw; left: 0%; top: 8%;"
+      > </vue-particles>
   </div>
 </template>
 
@@ -105,5 +123,17 @@ margin-top: 12vh;
 
 .footer {
 margin-top: auto; /* Расположение футера внизу контейнера */
+}
+.vs-card__group .vs-card__group-prev .vs-icon-arrow::after {
+  background: rgb(238, 239, 249);
+}
+.vs-card__group .vs-card__group-prev .vs-icon-arrow::before {
+  background: rgb(238, 239, 249);
+}
+.vs-card__group .vs-card__group-next .vs-icon-arrow::before {
+  background: rgb(238, 239, 249);
+}
+.vs-card__group .vs-card__group-next .vs-icon-arrow::after {
+  background: rgb(238, 239, 249);
 }
 </style>
