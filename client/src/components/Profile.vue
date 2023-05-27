@@ -16,12 +16,12 @@
                             Рейтинг
                         </vs-button>
                     </div>
-                    <div v-if="User.access = true"   class="profile__user-rank">
+                    <div v-if="User.access == true"   class="profile__user-rank">
                         <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
                             Подписаться
                         </vs-button>
                     </div>
-                    <div v-if="User.access = true"  class="profile__cog">
+                    <div v-if="User.access == true"  class="profile__cog">
                         <vs-button icon color="danger" shadow :active="active == 0" @click="active = 0" class="cog">
                             <i class='bx bxs-cog'></i>
                         </vs-button>
@@ -29,7 +29,7 @@
                 </div>
 
             </div>
-            <div v-if="User.access = true"  class="profile__writer">
+            <div v-if="User.access == true"  class="profile__writer">
                 <vs-button danger size="large" shadow upload to="/storyadd" class="write-history">
                     Написать Историю
                 </vs-button>
@@ -98,7 +98,7 @@ export default {
     },
     methods: {
         Get() {
-            const path = "http://localhost:3000/posts";
+            const path = "http://localhost:3000"+this.$route.path+ "/posts";
             axios.get(path)
                 .then((response) => {
                 console.log(response.data);
@@ -110,7 +110,7 @@ export default {
             });
         },
         GetFollowers(){
-            const path = "http://localhost:3000/followers";
+            const path = "http://localhost:3000"+this.$route.path+"/followers";
             axios.get(path)
                 .then((response) => {
                 console.log(response.data);
@@ -122,7 +122,7 @@ export default {
             });
         },
         GetFollowed(){
-            const path = "http://localhost:3000/followed";
+            const path = "http://localhost:3000"+this.$route.path+"/followed";
             axios.get(path)
                 .then((response) => {
                 console.log(response.data);
@@ -152,7 +152,11 @@ export default {
     },
     watch:{
         '$route' (to, from){
-            console.log(to.path)
+            this.loading = true
+            this.active = "post"
+            this.Get();
+            this.GetUserData();
+            this.loading = false
         }
     },
     created() {

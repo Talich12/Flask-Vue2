@@ -38,9 +38,9 @@ def get_len():
     return jsonify({'len': len})
 
 
-@app.route('/posts', methods=['GET'])
-def get_posts():
-    login = 'Lera'
+@app.route('/profile/<username>/posts', methods=['GET'])
+def get_posts(username):
+    login = username
     post_schema = PostSchema(many=True)
     find_user = User.query.filter_by(username=login).first()
     posts = Post.query.filter_by(author_id=find_user.id).all()
@@ -96,20 +96,20 @@ def post_login():
         "refresh_token" : refresh_token
         })
 
-@app.route('/followers', methods=['GET'])
-def get_followers():
+@app.route('/profile/<username>/followers', methods=['GET'])
+def get_followers(username):
     user_schema = UserSchema(many=True)
-    login = 'Lera'
+    login = username
     find_user = User.query.filter_by(username=login).first()
     find_followers = User.query.join(followers, (followers.c.follower_id == User.id)).filter(
                 followers.c.followed_id == find_user.id)
     output = user_schema.dump(find_followers)
     return jsonify(output)
 
-@app.route('/followed', methods=['GET'])
-def get_followed():
+@app.route('/profile/<username>/followed', methods=['GET'])
+def get_followed(username):
     user_schema = UserSchema(many=True)
-    login = 'Lera'
+    login = username
     find_user = User.query.filter_by(username=login).first()
     find_followers = User.query.join(followers, (followers.c.followed_id == User.id)).filter(
                 followers.c.follower_id == find_user.id)
