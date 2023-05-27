@@ -16,12 +16,12 @@
                             Рейтинг
                         </vs-button>
                     </div>
-                    <div class="profile__user-rank">
+                    <div v-if="User.access = true"   class="profile__user-rank">
                         <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
                             Подписаться
                         </vs-button>
                     </div>
-                    <div class="profile__cog">
+                    <div v-if="User.access = true"  class="profile__cog">
                         <vs-button icon color="danger" shadow :active="active == 0" @click="active = 0" class="cog">
                             <i class='bx bxs-cog'></i>
                         </vs-button>
@@ -29,7 +29,7 @@
                 </div>
 
             </div>
-            <div class="profile__writer">
+            <div v-if="User.access = true"  class="profile__writer">
                 <vs-button danger size="large" shadow upload to="/storyadd" class="write-history">
                     Написать Историю
                 </vs-button>
@@ -72,7 +72,7 @@
                         </div>
                         <div v-if="active == 'subscription'">
                             <div class="containerSubscribers">
-                                <subscriber :users="Users"></subscriber>
+                                <subscriber @route="onRoute()" :users="Users"></subscriber>
                             </div>
                         </div>
                     </div>
@@ -145,6 +145,9 @@ export default {
                 .catch((error) => {
                 console.log(error);
             });
+        },
+        onRoute(data){
+            console.log(data)
         }
     },
     created() {

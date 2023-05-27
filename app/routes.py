@@ -51,9 +51,14 @@ def get_posts():
 
 @app.route('/profile/<username>', methods=['GET'])
 def get_profile(username):
+    login = "Lera"
+    access = False
+    if username == login:
+        access = True
     user_schema = UserSchema(many=False)
     find_user = User.query.filter_by(username=username).first()
     output = user_schema.dump(find_user)
+    output['access'] = access
     return jsonify(output)
 
 
