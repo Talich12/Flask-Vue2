@@ -72,7 +72,7 @@
                         </div>
                         <div v-if="active == 'subscription'">
                             <div class="containerSubscribers">
-                                <subscriber @route="onRoute()" :users="Users"></subscriber>
+                                <subscriber @path="onRoute" :users="Users"></subscriber>
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ export default {
             });
         },
         GetUserData(){
-            const path = "http://localhost:3000/profile/" + $cookies.get("login");
+            const path = "http://localhost:3000"+this.$route.path;
             axios.get(path)
                 .then((response) => {
                 console.log(response.data);
@@ -148,6 +148,11 @@ export default {
         },
         onRoute(data){
             console.log(data)
+        }
+    },
+    watch:{
+        '$route' (to, from){
+            console.log(to.path)
         }
     },
     created() {

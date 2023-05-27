@@ -26,7 +26,7 @@
           >
             <router-link :to="ProfileUrl+tr.username">
               <vs-td> 
-                  <vs-avatar size="35"><img @click="onRoute()" :src="require(`@/assets/img/load/${tr.avatar}`)" alt="" style="transform: 0;"></vs-avatar> {{ tr.username }}
+                  <vs-avatar size="35"><img :src="require(`@/assets/img/load/${tr.avatar}`)" alt="" style="transform: 0;"></vs-avatar> {{ tr.username }}
               </vs-td>
             </router-link>
             <vs-td>
@@ -44,15 +44,10 @@
     export default {
       props :['users'],
       data:() => ({
-        Route: this.$route,
+        route: "url",
         ProfileUrl: '/profile/',
         search: '',
       }),
-      methods: {
-        onRoute(){
-        console.log("vadfasd")
-      }
-      }
     }
     </script>
 
