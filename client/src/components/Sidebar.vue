@@ -1,14 +1,7 @@
 <template>
   <div class="hidden" style="position: sticky; top: 0px;">
-    <vs-sidebar
-      background="dark"
-      text-white
-      absolute
-      v-model="active"
-      open
-      square
-      style="width: 16%; max-width: 100%; height: 100vh;"
-    >
+    <vs-sidebar background="dark" text-white absolute v-model="active" open square
+      style="width: 16%; max-width: 100%; height: 100vh;">
       <template #logo>
         <!-- ...img logo -->
       </template>
@@ -42,19 +35,19 @@
             Фильтр по медиа
           </vs-sidebar-item>
         </template>
-      <vs-sidebar-item>
-        <template #icon>
-          <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
-        </template>
-        <vs-switch danger style="background-color: black;">С озвучкой</vs-switch>
-      </vs-sidebar-item>
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch danger style="background-color: black;">С озвучкой</vs-switch>
+        </vs-sidebar-item>
 
-      <vs-sidebar-item>
-        <template #icon>
-          <i class='bx bxs-film' style="font-size: 1vw;"></i>
-        </template>
-        <vs-switch danger style="background-color: black;">С видео</vs-switch>
-      </vs-sidebar-item>
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-film' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch danger style="background-color: black;">С видео</vs-switch>
+        </vs-sidebar-item>
       </vs-sidebar-group>
 
       <vs-sidebar-group>
@@ -68,22 +61,22 @@
         </template>
 
         <vs-sidebar-item id="authors">
-        <template #icon>
-          <i class='bx bxs-user' style="font-size: 1vw;"></i>
-        </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Авторы</p>
-      </vs-sidebar-item>
-      <vs-tooltip right danger>
-      <vs-sidebar-item id="genresubs">
-        <template #icon>
-          <i class='bx bxs-book-heart' style="font-size: 1vw;"></i>
-        </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Жанры</p>
-      </vs-sidebar-item>
-      <template #tooltip>
-          Кнопка быстрого доступа к вашим любимым жанрам!
-        </template>
-      </vs-tooltip>
+          <template #icon>
+            <i class='bx bxs-user' style="font-size: 1vw;"></i>
+          </template>
+          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Авторы</p>
+        </vs-sidebar-item>
+        <vs-tooltip right danger>
+          <vs-sidebar-item id="genresubs">
+            <template #icon>
+              <i class='bx bxs-book-heart' style="font-size: 1vw;"></i>
+            </template>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Жанры</p>
+          </vs-sidebar-item>
+          <template #tooltip>
+            Кнопка быстрого доступа к вашим любимым жанрам!
+          </template>
+        </vs-tooltip>
       </vs-sidebar-group>
 
       <vs-sidebar-group>
@@ -97,37 +90,37 @@
         </template>
 
         <vs-sidebar-item id="genre">
-        <template #icon>
-          <i class='bx bxs-book' style="font-size: 1vw;"></i>
-        </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По жанрам</p>
-      </vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-book' style="font-size: 1vw;"></i>
+          </template>
+          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По жанрам</p>
+        </vs-sidebar-item>
 
-      <vs-sidebar-item id="winners">
-        <template #icon>
-          <i class='bx bxs-trophy' style="font-size: 1vw;"></i>
-        </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Победители</p>
-      </vs-sidebar-item>
-      
-      <vs-tooltip right danger>
-      <vs-sidebar-item id="admin">
-        <template #icon>
-          <i class='bx bxs-quote-right' style="font-size: 1vw;"></i>
-        </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">От редакции</p>
-      </vs-sidebar-item>
-      <template #tooltip>
-          Истории отобранные администрацией
-        </template>
-      </vs-tooltip>
+        <vs-sidebar-item id="winners">
+          <template #icon>
+            <i class='bx bxs-trophy' style="font-size: 1vw;"></i>
+          </template>
+          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Победители</p>
+        </vs-sidebar-item>
 
-      <vs-sidebar-item id="likes">
-        <template #icon>
-          <i class='bx bxs-like' style="font-size: 1vw;"></i>
-        </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По лайкам</p>
-      </vs-sidebar-item>
+        <vs-tooltip right danger>
+          <vs-sidebar-item id="admin">
+            <template #icon>
+              <i class='bx bxs-quote-right' style="font-size: 1vw;"></i>
+            </template>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">От редакции</p>
+          </vs-sidebar-item>
+          <template #tooltip>
+            Истории отобранные администрацией
+          </template>
+        </vs-tooltip>
+
+        <vs-sidebar-item id="likes">
+          <template #icon>
+            <i class='bx bxs-like' style="font-size: 1vw;"></i>
+          </template>
+          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По лайкам</p>
+        </vs-sidebar-item>
 
       </vs-sidebar-group>
 
@@ -137,24 +130,33 @@
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
-      
+
       <vs-sidebar-item to="about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">О нас</p>
       </vs-sidebar-item>
-      
+
       <template #footer>
-        <vs-row space-between>
-        <router-link v-model="active" to="/profile">
-          <div class="center con-avatars">
-          <vs-avatar @click="active = ''">
-            <img src="../assets/img/load/sample1.jpg" alt="">
-          </vs-avatar>
-        </div>
-        </router-link>
-      </vs-row>
+        <vs-row justify="space-between">
+          <router-link v-model="active" to="/profile">
+            <div class="center con-avatars">
+              <vs-avatar @click="active = ''">
+                <img src="../assets/img/load/sample1.jpg" alt="">
+              </vs-avatar>
+
+            </div>
+          </router-link>
+          <router-link v-model="active" to="/notification" style="text-decoration: none;">
+            <div class="center con-avatars">
+              <vs-avatar badge-color="dark" badge-position="top-right">
+                <i class='bx bx-bell' style="color: #6A4E93;"></i>
+              </vs-avatar>
+            </div>
+
+          </router-link>
+        </vs-row>
       </template>
     </vs-sidebar>
   </div>

@@ -8,6 +8,7 @@ import Main from '@/components/Main';
 import StoryAdd from '@/components/StoryAdd';
 import About from '@/components/About';
 import Profile from '@/components/Profile';
+import Notification from '@/components/Notification';
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
@@ -54,6 +55,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile,
+    },
+    {
+      path: '/notification',
+      name: 'Notification',
+      component: Notification,
     },
   ],
 });

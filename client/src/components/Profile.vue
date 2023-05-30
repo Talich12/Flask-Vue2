@@ -17,11 +17,13 @@
                             Рейтинг
                         </vs-button>
                     </div>
+                    
                     <div class="profile__cog">
                         <vs-button icon color="danger" shadow :active="active == 0" @click="active = 0" class="cog">
                             <i class='bx bxs-cog'></i>
                         </vs-button>
                     </div>
+                    
                 </div>
 
             </div>
