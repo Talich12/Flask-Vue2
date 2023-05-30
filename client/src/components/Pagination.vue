@@ -23,9 +23,8 @@
 
 <script>
 export default {
-    props: ['len'],
+    props: ['len', 'page'],
     data:() => ({
-        page: 1,
         value: '4',
     }),
     watch: {

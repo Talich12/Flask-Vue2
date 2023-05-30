@@ -32,7 +32,7 @@
         </template>
       </information>
       <cardrecs></cardrecs>
-      <pagination :len="len" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
+      <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
     <div class="footer">
       <!-- Ваш код футера -->
@@ -110,6 +110,7 @@ export default {
       },
       onValue(data){
         this.value = data.value
+        this.page = 1
         const path = "http://localhost:3000/";
           axios.post(path, {value: data.value, page: this.page})
               .then((response) => {
