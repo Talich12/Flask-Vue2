@@ -1,3 +1,4 @@
+import math
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
@@ -17,16 +18,62 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def get_index():
+    data = request.get_json(silent=True)
+    print(data)
+    value = int(data['value'])
+    page = data['page']
     post_schema = PostSchema(many=True)
-    posts = Post.query.all()
+    posts = Post.query.paginate(page=page,per_page=value,error_out=False)
     output = post_schema.dump(posts)
+    
     return jsonify(output)
 
-@app.route('/posts', methods=['GET'])
-def get_posts():
-    login = 'denis'
+@app.route('/get_len', methods=['GET', 'POST'])
+def get_len():
+    data = request.get_json(silent=True)
+    value = int(data['value'])
+    len = Post.query.count()
+    len =  math.ceil(len/value)
+    return jsonify({'len': len})
+
+
+@app.route('/profile/<username>/follow', methods=['POST'])
+def user_follow(username):
+    login = "Lera"
+    find_user = User.query.filter_by(username=login).first()
+    follow_user =  User.query.filter_by(username=username).first()
+
+    find_user.follow(follow_user)
+
+    return jsonify({'Status': "success"})
+
+
+@app.route('/profile/<username>/followers', methods=['GET'])
+def get_followers(username):
+    user_schema = UserSchema(many=True)
+    login = username
+    find_user = User.query.filter_by(username=login).first()
+    find_followers = User.query.join(followers, (followers.c.follower_id == User.id)).filter(
+                followers.c.followed_id == find_user.id)
+    output = user_schema.dump(find_followers)
+    return jsonify(output)
+
+@app.route('/profile/<username>/followed', methods=['GET'])
+def get_followed(username):
+    user_schema = UserSchema(many=True)
+    login = username
+    find_user = User.query.filter_by(username=login).first()
+    find_followers = User.query.join(followers, (followers.c.followed_id == User.id)).filter(
+                followers.c.follower_id == find_user.id)
+    output = user_schema.dump(find_followers)
+    return jsonify(output)
+
+
+@app.route('/profile/<username>/posts', methods=['GET'])
+def get_posts(username):
+    login = username
     post_schema = PostSchema(many=True)
     find_user = User.query.filter_by(username=login).first()
     posts = Post.query.filter_by(author_id=find_user.id).all()
@@ -37,11 +84,16 @@ def get_posts():
 
 @app.route('/profile/<username>', methods=['GET'])
 def get_profile(username):
-    login = 'denis'
-    if login == username:
-        return jsonify({"status" : "It's your profile"})
-    else:
-        return jsonify({"status" : "It's not your profile"})
+    login = "Lera"
+    access = False
+    if username == login:
+        access = True
+    user_schema = UserSchema(many=False)
+    find_user = User.query.filter_by(username=username).first()
+    output = user_schema.dump(find_user)
+    output['access'] = access
+    return jsonify(output)
+
 
 @app.route('/registration', methods=['POST'])
 def post_register():
@@ -76,16 +128,6 @@ def post_login():
         "access_token" : access_token,
         "refresh_token" : refresh_token
         })
-
-@app.route('/followers', methods=['GET'])
-def get_followers():
-    user_schema = UserSchema(many=True)
-    login = 'denis'
-    find_user = User.query.filter_by(username=login).first()
-    find_followers = User.query.join(followers, (followers.c.follower_id == User.id)).filter(
-                followers.c.followed_id == find_user.id)
-    output = user_schema.dump(find_followers)
-    return jsonify(output)
 
 
 @app.route('/upload', methods=['POST'])

@@ -28,7 +28,7 @@
     <vue-particles
         color="#6A4E93"
         :particleOpacity="0.7"
-        :particlesNumber="110"
+        :particlesNumber="80"
         shapeType="circle"
         :particleSize="4"
         linesColor="#6A4E93"
@@ -37,7 +37,11 @@
         :lineOpacity="0.5"
         :linesDistance="140"
         :moveSpeed="2"
-        style="position:absolute; z-index: -10; height: 80%; width: 100vw; left: 0%; top: 8%;"
+        :hoverEffect="false"
+        hoverMode="grab"
+        :clickEffect="false"
+        clickMode="push"
+        style="position:absolute; z-index: -10; height: 100%; width: 100vw; left: 0%; top: 8%;"
       > </vue-particles>
     </div>
 </template>

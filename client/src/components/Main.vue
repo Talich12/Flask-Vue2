@@ -1,47 +1,46 @@
 <template>
-    <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
-      <vs-row justify="space-around">
-        <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+  <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
+    <vs-row justify="space-around">
+      <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+        <template #title>
+          Подборка самых популярных историй на сегодня
+        </template>
+        <template #text>
+          Описание подобрки
+        </template>
+      </information>
+      <cookie></cookie>
+      <vs-col v-for="post in Data" offset="1" w="5">
+        <card>
           <template #title>
-            Подборка самых популярных историй на сегодня
+            {{ post.title }}
           </template>
           <template #text>
-            Описание подобрки
+            {{ post.body }}
           </template>
-        </information>
-        <cookie></cookie>
-        <totop></totop>
-        <vs-col v-for="post in Data" offset="1" w="5">
-          <card>
-            <template #title>
-              {{ post.title }}
-            </template>
-            <template #text>
-              {{ post.body }}
-            </template>
-            <template #img>
-              <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
-            </template>
-          </card>
-        </vs-col>
-        <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
-          <template #title>
-            Рекомендации на сегодня
+          <template #img>
+            <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
           </template>
-          <template #text>
-            Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
-          </template>
-        </information>
-        <cardrecs></cardrecs>
-        <pagination style="margin-left: 9%;"></pagination>
-      </vs-row>
-      <div class="footer">
-        <!-- Ваш код футера -->
-      </div>
-      <vue-particles
+        </card>
+      </vs-col>
+      <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+        <template #title>
+          Рекомендации на сегодня
+        </template>
+        <template #text>
+          Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+        </template>
+      </information>
+      <cardrecs></cardrecs>
+      <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
+    </vs-row>
+    <div class="footer">
+      <!-- Ваш код футера -->
+    </div>
+    <vue-particles
         color="#EEEFF9"
         :particleOpacity="0.7"
-        :particlesNumber="110"
+        :particlesNumber="80"
         shapeType="circle"
         :particleSize="4"
         linesColor="#EEEFF9"
@@ -51,58 +50,110 @@
         :linesDistance="140"
         :moveSpeed="2"
         :hoverEffect="false"
-        hoverMode=""
+        hoverMode="grab"
         :clickEffect="false"
-        clickMode=""
-        style="position:absolute; z-index: -10; height: 80%; width: 100vw; left: 0%; top: 8%;"
+        clickMode="push"
+        style="position:absolute; z-index: -10; height: 100%; width: 100vw; left: 0%; top: 8%;"
       > </vue-particles>
-    </div>
-  </template>
-  
-  
+  </div>
+</template>
+
+
 <script>
 import axios from 'axios';
 import Information from './Information.vue';
 
 export default {
-    name: "index",
-    data() {
-        return {
-            Data: []
-        };
-    },
-    methods: {
-        Get() {
-            const path = "http://localhost:3000/";
-            axios.get(path)
+  name: "index",
+  data() {
+      return {
+          Data: [],
+          len: 1,
+          page: 1,
+          value: 4,
+      };
+  },
+  methods: {
+      Get() {
+          const path = "http://localhost:3000/";
+          axios.post(path, {page: this.page, value: this.value})
+              .then((response) => {
+              console.log(response.data);
+              this.Data = response.data;
+          })
+              .catch((error) => {
+              console.log(error);
+          });
+      },
+      GetLen(){
+          const path = "http://localhost:3000/get_len";
+            axios.post(path, {value: this.value})
                 .then((response) => {
                 console.log(response.data);
-                const data = response.data;
-                this.Data = data;
+                this.len = response.data.len;
             })
                 .catch((error) => {
                 console.log(error);
             });
-        },
-    },
-    created() {
-        this.Get();
-    },
-    components: { Information }
+      },
+      onPage(data){
+        this.page = data.page
+        const path = "http://localhost:3000/";
+          axios.post(path, {page: data.page, value: this.value})
+              .then((response) => {
+              console.log(response.data);
+              this.Data = response.data;
+          })
+              .catch((error) => {
+              console.log(error);
+          });
+      },
+      onValue(data){
+        this.value = data.value
+        this.page = 1
+        const path = "http://localhost:3000/";
+          axios.post(path, {value: data.value, page: this.page})
+              .then((response) => {
+              this.GetLen()
+              console.log(response.data);
+              this.Data = response.data;
+          })
+              .catch((error) => {
+              console.log(error);
+          });
+      }
+  },
+  created() {
+      this.Get();
+      this.GetLen()
+  },
+  components: { Information }
 };
 </script>
 
 <style>
 .containerMain {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
-  padding-left: 16%;
-  padding-right: 7%;
-  padding-top: 12vh;
+display: flex;
+flex-direction: column;
+min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
+margin-left: 16%;
+margin-right: 7%;
+margin-top: 12vh;
 }
 
 .footer {
-  padding-top: 0; /* Расположение футера внизу контейнера */
+margin-top: auto; /* Расположение футера внизу контейнера */
+}
+.vs-card__group .vs-card__group-prev .vs-icon-arrow::after {
+  background: rgb(238, 239, 249);
+}
+.vs-card__group .vs-card__group-prev .vs-icon-arrow::before {
+  background: rgb(238, 239, 249);
+}
+.vs-card__group .vs-card__group-next .vs-icon-arrow::before {
+  background: rgb(238, 239, 249);
+}
+.vs-card__group .vs-card__group-next .vs-icon-arrow::after {
+  background: rgb(238, 239, 249);
 }
 </style>

@@ -44,6 +44,7 @@
              this.$cookies.set("refresh_token", data.refresh_token)
              console.log(response)
              if (response.data.status == 'Success'){
+                this.$cookies.set("login", this.Login)
                 this.$router.push({name: 'Index'})
              }
          })

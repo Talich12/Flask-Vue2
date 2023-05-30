@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="display: flex; margin-left: 16%; margin-right: 8.33%;">
+    <div class="container" style="display: flex; margin-left: 16%; margin-right: 8.33;">
       <vs-col offset="1" style="margin-top: 11%;">
         <vs-row>
           <vs-select placeholder="Select" v-model="value">
@@ -83,4 +83,3 @@
     },
   }
 </script>
-

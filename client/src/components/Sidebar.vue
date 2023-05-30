@@ -130,8 +130,8 @@
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
-
-      <vs-sidebar-item to="about" id="help">
+      
+      <vs-sidebar-item to="/about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
         </template>
@@ -163,9 +163,12 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookies'
+
 export default {
   data: () => ({
     active: '',
+    ProfileUrl: '/profile/'+ $cookies.get("login"),
   }),
 };
 </script>
