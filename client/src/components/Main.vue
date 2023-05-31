@@ -71,6 +71,7 @@ export default {
           len: 1,
           page: 1,
           value: 4,
+          UserIcon: require(`@/assets/img/load/sample1.jpg`),
       };
   },
   methods: {

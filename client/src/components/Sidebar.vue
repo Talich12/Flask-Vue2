@@ -135,24 +135,19 @@
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
         </template>
-        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">О нас</p>
-      </vs-sidebar-item>
-
-      <vs-sidebar-item to="/login" id="login">
-        
-        <Login></Login>
+        <p style="font-size: 1vw; font-family: 'cUnbounded'; font-weight: bolder;">О нас</p>
       </vs-sidebar-item>
 
       <template #footer>
         <vs-row justify="space-between">
-          <router-link v-model="active" to="/profile">
+          <router-link v-if="$cookies.isKey('access_token')" v-model="active" :to="ProfileUrl">
             <div class="center con-avatars">
-              <vs-avatar @click="active = ''">
-                <img src="../assets/img/load/sample1.jpg" alt="">
+              <vs-avatar  @click="active = ''">
+                <img :src="UserIcon" alt="">
               </vs-avatar>
-
             </div>
           </router-link>
+          <Login v-if="!$cookies.isKey('access_token')"></Login>
           <router-link v-model="active" to="/notification" style="text-decoration: none;">
             <div class="center con-avatars">
               <vs-avatar badge-color="dark" badge-position="top-right">
@@ -170,7 +165,7 @@
 <script>
 import VueCookies from 'vue-cookies'
 import Login from './Login.vue'
-
+import axios from 'axios';
 export default {
   components: {
         Login
@@ -178,6 +173,28 @@ export default {
   data: () => ({
     active: '',
     ProfileUrl: '/profile/'+ $cookies.get("login"),
+    User: [],
+    UserIcon: require(`@/assets/img/load/sample1.jpg`),
   }),
+  methods :{
+    GetUserData(){
+            const path = "http://localhost:3000/profile/"+this.$cookies.get('login');
+            axios.get(path)
+                .then((response) => {
+                console.log(response.data);
+                const data = response.data;
+                this.User = data;
+                this.UserIcon = require(`@/assets/img/load/${data.avatar}`)
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+        },
+  },
+  created(){
+    this.GetUserData()
+    console.log(this.$cookies.get('access_token'))
+    console.log(this.$cookies.get('login'))
+  }
 };
 </script>

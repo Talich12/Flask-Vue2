@@ -1,44 +1,3 @@
-<!--
- <script>
-     import axios from 'axios';
-  
-     export default {
-     name: 'Login',
-     data() {
-         return {
-         Login: '',
-         Password: '',
-         data: [],
-         };
- 
-     },
-     methods: {
-         Done() {
-         const path = 'http://localhost:3000/login';
-         axios.post(path, {login: this.Login, password: this.Password})
-         .then((response) => {
-             console.log(response.data)
-             const data = response.data;
-             this.data = data;
-             this.$cookies.set("access_token", data.access_token)
-             this.$cookies.set("refresh_token", data.refresh_token)
-             console.log(response)
-             if (response.data.status == 'Success'){
-                this.$cookies.set("login", this.Login)
-                this.$router.push({name: 'Index'})
-             }
-         })
-         .catch((error) =>{
-             console.log(error)
-         })
-         },
-
- 
-     },
-  
-     };
- </script>
--->
 <template>
     <div class="center">
 
@@ -55,25 +14,21 @@
 
 
             <div class="con-form">
-                <vs-input v-model="input1" placeholder="Email">
+                <vs-input v-model="Login" placeholder="">
                     <template #icon>
                         @
                     </template>
                 </vs-input>
-                <vs-input type="password" v-model="input2" placeholder="Пароль">
+                <vs-input type="password" v-model="Password" placeholder="Пароль">
                     <template #icon>
                         <i class='bx bxs-lock'></i>
                     </template>
                 </vs-input>
-                <div class="flex">
-                    <vs-checkbox v-model="checkbox1">Запомнить меня</vs-checkbox>
-                    <a href="#">Забыли пароль?</a>
-                </div>
             </div>
 
             <template #footer>
                 <div class="footer-dialog">
-                    <vs-button block>
+                    <vs-button @click="Done()" block>
                         Войти
                     </vs-button>
                     <div class="new">
@@ -86,13 +41,35 @@
 </template>
 <script>
 import Registration from './Registration.vue'
+import axios from 'axios';
 export default {
     data: () => ({
         active: false,
-        input1: '',
-        input2: '',
-        checkbox1: false
+        Login: '',
+        Password: '',
     }),
+    methods: {
+         Done() {
+         const path = 'http://localhost:3000/login';
+         axios.post(path, {login: this.Login, password: this.Password})
+         .then((response) => {
+             console.log(response.data)
+             const data = response.data;
+             this.data = data;
+             this.$cookies.set("access_token", data.access_token)
+             this.$cookies.set("refresh_token", data.refresh_token)
+             this.$cookies.set("login", this.Login)
+             console.log($cookies.get('login'))
+             console.log(response)
+             if (response.data.status == 'Success'){
+                this.active = false
+             }
+         })
+         .catch((error) =>{
+             console.log(error)
+         })
+         }, 
+     },
     components: {
         Registration
     }

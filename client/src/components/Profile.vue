@@ -21,6 +21,11 @@
                             Подписаться
                         </vs-button>
                     </div>
+                    <div class="profile__user-rank">
+                        <vs-button @click="Exit" danger size="large" shadow class="rank">
+                            Выйти
+                        </vs-button>
+                    </div>
                     <div v-if="User.access == true"  class="profile__cog">
                         <vs-button icon color="danger" shadow :active="active == 0" @click="active = 0" class="cog">
                             <i class='bx bxs-cog'></i>
@@ -159,6 +164,12 @@ export default {
               .catch((error) => {
               console.log(error);
           });
+        },
+        Exit(){
+            this.$cookies.remove('access_token')
+            this.$cookies.remove('refresh_token')
+            this.$cookies.remove('login')
+            this.$router.push({name: 'Main'})
         }
     },
     watch:{
