@@ -14,16 +14,20 @@
 
 
             <div class="con-form">
-                <vs-input v-model="Login" placeholder="">
+                <vs-input  danger border v-model="Login" placeholder="Логин">
                     <template #icon>
-                        @
+                        <i class='bx bxs-user'></i>
                     </template>
                 </vs-input>
-                <vs-input type="password" v-model="Password" placeholder="Пароль">
+                <vs-input @click="Error()" danger border type="password" v-model="Password" placeholder="Пароль">
+                    <template v-if="error" #message-danger >
+                        неправильно введен логин или пароль
+                    </template>
                     <template #icon>
                         <i class='bx bxs-lock'></i>
                     </template>
                 </vs-input>
+                
             </div>
 
             <template #footer>
@@ -32,7 +36,8 @@
                         Войти
                     </vs-button>
                     <div class="new">
-                        <p>Нет аккаунта?</p> <Registration></Registration>
+                        <p>Нет аккаунта?</p>
+                        <Registration></Registration>
                     </div>
                 </div>
             </template>
@@ -47,29 +52,33 @@ export default {
         active: false,
         Login: '',
         Password: '',
+        error: false,
     }),
     methods: {
-         Done() {
-         const path = 'http://localhost:3000/login';
-         axios.post(path, {login: this.Login, password: this.Password})
-         .then((response) => {
-             console.log(response.data)
-             const data = response.data;
-             this.data = data;
-             this.$cookies.set("access_token", data.access_token)
-             this.$cookies.set("refresh_token", data.refresh_token)
-             this.$cookies.set("login", this.Login)
-             console.log($cookies.get('login'))
-             console.log(response)
-             if (response.data.status == 'Success'){
-                this.active = false
-             }
-         })
-         .catch((error) =>{
-             console.log(error)
-         })
-         }, 
-     },
+        Done() {
+            const path = 'http://localhost:3000/login';
+            axios.post(path, { login: this.Login, password: this.Password })
+                .then((response) => {
+                    console.log(response.data)
+                    const data = response.data;
+                    this.data = data;
+                    this.$cookies.set("access_token", data.access_token)
+                    this.$cookies.set("refresh_token", data.refresh_token)
+                    this.$cookies.set("login", this.Login)
+                    console.log($cookies.get('login'))
+                    console.log(response)
+                    if (response.data.status == 'Success') {
+                        this.active = false
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
+        Error() {
+            this.error = true
+        }
+    },
     components: {
         Registration
     }
@@ -129,7 +138,7 @@ export default {
     justify-content: center;
     margin-top: 20px;
     font-size: 0.7rem;
-    
+
 }
 
 

@@ -14,17 +14,17 @@
 
 
       <div class="con-form">
-        <vs-input v-model="Login" placeholder="Логин">
+        <vs-input danger border v-model="Login" placeholder="Логин">
           <template #icon>
-            @
+            <i class='bx bxs-user'></i>
           </template>
         </vs-input>
-        <vs-input type="password" v-model="Password" placeholder="Пароль">
+        <vs-input danger border type="password" v-model="Password" placeholder="Пароль">
           <template #icon>
             <i class='bx bxs-lock'></i>
           </template>
         </vs-input>
-        <vs-input type="password" v-model="RepeatPassword" placeholder="Повторите пароль">
+        <vs-input danger border type="password" v-model="RepeatPassword" placeholder="Повторите пароль">
           <template #icon>
             <i class='bx bxs-lock'></i>
           </template>
