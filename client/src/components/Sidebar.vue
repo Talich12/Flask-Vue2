@@ -138,6 +138,11 @@
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">О нас</p>
       </vs-sidebar-item>
 
+      <vs-sidebar-item to="/login" id="login">
+        
+        <Login></Login>
+      </vs-sidebar-item>
+
       <template #footer>
         <vs-row justify="space-between">
           <router-link v-model="active" to="/profile">
@@ -164,8 +169,12 @@
 
 <script>
 import VueCookies from 'vue-cookies'
+import Login from './Login.vue'
 
 export default {
+  components: {
+        Login
+    },
   data: () => ({
     active: '',
     ProfileUrl: '/profile/'+ $cookies.get("login"),
