@@ -12,7 +12,7 @@
         <p style="font-size:1vw; font-family: 'Unbounded'; font-weight: bolder;">Главная страница</p>
       </vs-sidebar-item>
 
-      <vs-sidebar-item id="search">
+      <vs-sidebar-item id="search" to="/search">
         <template #icon>
           <i class='bx bxs-search' style="font-size: 1vw;"></i>
         </template>

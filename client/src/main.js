@@ -21,8 +21,11 @@ import CardRecommendations from './components/CardRecommendations';
 import ButtonToTop from './components/ButtonToTop';
 import Profile from './components/Profile';
 import Notification from './components/Notification';
+import Search from './components/Search'
 
 import Subscribers from './components/Subscribers';
+
+Vue.component('search', Search)
 Vue.component('subscriber', Subscribers);
 Vue.component('totop', ButtonToTop);
 Vue.component('cardrecs', CardRecommendations);
