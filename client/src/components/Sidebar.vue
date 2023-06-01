@@ -179,7 +179,12 @@ export default {
   methods :{
     GetUserData(){
             const path = "http://localhost:3000/profile/"+this.$cookies.get('login');
-            axios.get(path)
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
                 .then((response) => {
                 console.log(response.data);
                 const data = response.data;

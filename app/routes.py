@@ -40,6 +40,7 @@ def get_len():
 
 
 @app.route('/profile/<username>/follow', methods=['POST'])
+@jwt_required(refresh=False)
 def user_follow(username):
     login = "Lera"
     find_user = User.query.filter_by(username=login).first()
@@ -51,6 +52,7 @@ def user_follow(username):
 
 
 @app.route('/profile/<username>/followers', methods=['GET'])
+@jwt_required(refresh=False)
 def get_followers(username):
     user_schema = UserSchema(many=True)
     login = username
@@ -61,6 +63,7 @@ def get_followers(username):
     return jsonify(output)
 
 @app.route('/profile/<username>/followed', methods=['GET'])
+@jwt_required(refresh=False)
 def get_followed(username):
     user_schema = UserSchema(many=True)
     login = username
@@ -72,6 +75,7 @@ def get_followed(username):
 
 
 @app.route('/profile/<username>/posts', methods=['GET'])
+@jwt_required(refresh=False)
 def get_posts(username):
     login = username
     post_schema = PostSchema(many=True)
@@ -83,6 +87,7 @@ def get_posts(username):
 
 
 @app.route('/profile/<username>', methods=['GET'])
+@jwt_required(refresh=False)
 def get_profile(username):
     login = "Lera"
     access = False
@@ -100,9 +105,6 @@ def post_register():
     data = request.get_json()
     login = data['login']
     password = data['password']
-    repeat_password = data['repeat_password']
-    if password != repeat_password:
-        return jsonify({"status" : "Password not equal"})
     find_user = User.query.filter_by(username=login).count()
     if find_user > 0:
         return jsonify({"status" : "Invalid username"})
@@ -131,6 +133,7 @@ def post_login():
 
 
 @app.route('/upload', methods=['POST'])
+@jwt_required(refresh=False)
 def upload():
     data = request.form
     file = request.files['file']

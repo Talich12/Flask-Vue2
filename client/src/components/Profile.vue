@@ -105,7 +105,12 @@ export default {
     methods: {
         Get() {
             const path = "http://localhost:3000"+this.$route.path+ "/posts";
-            axios.get(path)
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
                 .then((response) => {
                 console.log(response.data);
                 const data = response.data;
@@ -117,7 +122,12 @@ export default {
         },
         GetFollowers(){
             const path = "http://localhost:3000"+this.$route.path+"/followers";
-            axios.get(path)
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
                 .then((response) => {
                 console.log(response.data);
                 const data = response.data;
@@ -129,7 +139,12 @@ export default {
         },
         GetFollowed(){
             const path = "http://localhost:3000"+this.$route.path+"/followed";
-            axios.get(path)
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
                 .then((response) => {
                 console.log(response.data);
                 const data = response.data;
@@ -141,7 +156,12 @@ export default {
         },
         GetUserData(){
             const path = "http://localhost:3000"+this.$route.path;
-            axios.get(path)
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
                 .then((response) => {
                 console.log(response.data);
                 const data = response.data;
@@ -166,6 +186,35 @@ export default {
           });
         },
         Exit(){
+            const path = 'http://localhost:3000/LogoutAccess'; 
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) =>{
+                console.log(error)
+            })
+            const path2 = 'http://localhost:3000/LogoutRefresh'
+            axios.get(path2,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
+            .then((response) => {
+                console.log(response.data)
+                
+            })
+            .catch((error) =>{
+                console.log(error)
+
+            })
+
             this.$cookies.remove('access_token')
             this.$cookies.remove('refresh_token')
             this.$cookies.remove('login')

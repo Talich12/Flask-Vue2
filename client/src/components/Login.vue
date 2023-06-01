@@ -19,15 +19,14 @@
                         <i class='bx bxs-user'></i>
                     </template>
                 </vs-input>
-                <vs-input @click="Error()" danger border type="password" v-model="Password" placeholder="Пароль">
+                <vs-input danger border type="password" v-model="Password" placeholder="Пароль">
                     <template v-if="error" #message-danger >
-                        неправильно введен логин или пароль
+                        Неправильно введен логин или пароль
                     </template>
                     <template #icon>
                         <i class='bx bxs-lock'></i>
                     </template>
                 </vs-input>
-                
             </div>
 
             <template #footer>
@@ -70,14 +69,14 @@ export default {
                     if (response.data.status == 'Success') {
                         this.active = false
                     }
+                    else {
+                        this.error = true
+                    }
                 })
                 .catch((error) => {
                     console.log(error)
                 })
         },
-        Error() {
-            this.error = true
-        }
     },
     components: {
         Registration

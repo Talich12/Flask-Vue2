@@ -15,6 +15,9 @@
 
       <div class="con-form">
         <vs-input danger border v-model="Login" placeholder="Логин">
+          <template v-if="error1" #message-danger >
+              Данный логин уже занят
+          </template>
           <template #icon>
             <i class='bx bxs-user'></i>
           </template>
@@ -25,6 +28,9 @@
           </template>
         </vs-input>
         <vs-input danger border type="password" v-model="RepeatPassword" placeholder="Повторите пароль">
+          <template v-if="error2" #message-danger >
+              Пароли не совпадают
+          </template>
           <template #icon>
             <i class='bx bxs-lock'></i>
           </template>
@@ -49,26 +55,43 @@ export default {
     Login: '',
     Password: '',
     RepeatPassword: '',
-    data: []
+    data: [],
+    error1: false,
+    error2: false,
   }),
   methods: {
       Done() {
         const path = 'http://localhost:3000/registration';
-        axios.post(path, { login: this.Login, password: this.Password, repeat_password: this.RepeatPassword })
-          .then((response) => {
-            console.log(response.data);
-            const data = response.data;
-            this.data = data;
-            console.log(response);
-            if (response.data.status == 'Success') {
-                this.active = false
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        if (!this.error2){
+          axios.post(path, { login: this.Login, password: this.Password})
+            .then((response) => {
+              console.log(response.data);
+              const data = response.data;
+              this.data = data;
+              console.log(response);
+              if (response.data.status == 'Success') {
+                  this.active = false
+              }
+              else {
+                  this.error1 = true
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       },
     },
+  watch:{
+    RepeatPassword: function(){
+            if (this.Password != this.RepeatPassword){
+              this.error2 = true
+            }
+            else {
+              this.error2 = false
+            }
+        },
+  }
 }
 </script>
 
