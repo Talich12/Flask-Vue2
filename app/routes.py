@@ -21,22 +21,47 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def get_index():
     data = request.get_json(silent=True)
-    print(data)
+    output = {}
     value = int(data['value'])
     page = data['page']
     post_schema = PostSchema(many=True)
     posts = Post.query.paginate(page=page,per_page=value,error_out=False)
-    output = post_schema.dump(posts)
+    output_query = post_schema.dump(posts)
+    len = Post.query.count()
+    len =  math.ceil(len/value)
+    output["data"] = output_query
+    output["len"] = len
+    print(output)
+    return jsonify(output)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    output = {}
+    data = request.get_json(silent=True)
+
+    search = data['search']
+    value = int(data['value'])
+    page = data['page']
+
+    if search == "":
+        posts_request = Post.query
+    else:
+        posts_request = Post.query.filter(Post.title.ilike(f'%{search}%'))
+
+    posts = posts_request.paginate(page=page,per_page=value,error_out=False)
+
+    post_schema = PostSchema(many=True)
+    output_query = post_schema.dump(posts)
+
+    len = posts_request.count()
+    len =  math.ceil(len/value)
+
+    output["data"] = output_query
+    output["len"] = len
     
     return jsonify(output)
 
-@app.route('/get_len', methods=['GET', 'POST'])
-def get_len():
-    data = request.get_json(silent=True)
-    value = int(data['value'])
-    len = Post.query.count()
-    len =  math.ceil(len/value)
-    return jsonify({'len': len})
 
 
 @app.route('/profile/<username>/follow', methods=['POST'])

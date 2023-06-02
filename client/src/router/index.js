@@ -9,6 +9,7 @@ import StoryAdd from '@/components/StoryAdd';
 import About from '@/components/About';
 import Profile from '@/components/Profile';
 import Notification from '@/components/Notification';
+import Search from '@/components/Search';
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
@@ -63,5 +64,10 @@ export default new Router({
       name: 'Notification',
       component: Notification,
     },
+    {
+      path: '/search',
+      Name: 'search',
+      component: Search,
+    }
   ],
 });

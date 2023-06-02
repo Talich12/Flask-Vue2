@@ -80,22 +80,12 @@ export default {
           axios.post(path, {page: this.page, value: this.value})
               .then((response) => {
               console.log(response.data);
-              this.Data = response.data;
+              this.Data = response.data.data;
+              this.len = response.data.len
           })
               .catch((error) => {
               console.log(error);
           });
-      },
-      GetLen(){
-          const path = "http://localhost:3000/get_len";
-            axios.post(path, {value: this.value})
-                .then((response) => {
-                console.log(response.data);
-                this.len = response.data.len;
-            })
-                .catch((error) => {
-                console.log(error);
-            });
       },
       onPage(data){
         this.page = data.page
@@ -103,7 +93,7 @@ export default {
           axios.post(path, {page: data.page, value: this.value})
               .then((response) => {
               console.log(response.data);
-              this.Data = response.data;
+              this.Data = response.data.data;
           })
               .catch((error) => {
               console.log(error);
@@ -115,9 +105,9 @@ export default {
         const path = "http://localhost:3000/";
           axios.post(path, {value: data.value, page: this.page})
               .then((response) => {
-              this.GetLen()
               console.log(response.data);
-              this.Data = response.data;
+              this.Data = response.data.data;
+              this.len = response.data.len
           })
               .catch((error) => {
               console.log(error);
@@ -126,7 +116,6 @@ export default {
   },
   created() {
       this.Get();
-      this.GetLen()
   },
   components: { Information }
 };
