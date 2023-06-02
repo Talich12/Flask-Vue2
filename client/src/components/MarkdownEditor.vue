@@ -20,7 +20,12 @@
     computed: {
       compiledMarkdown() {
         return marked(this.input, { sanitize: true });
-      }
+      },
+    },
+    watch: {
+      input: function(){
+            this.$emit('body', {body: this.input})
+      },
     },
     methods: {
       update: _.debounce(function(e) {

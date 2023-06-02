@@ -157,7 +157,7 @@ def post_login():
         })
 
 
-@app.route('/upload', methods=['POST'])
+@app.route('/storyadd', methods=['POST'])
 @jwt_required(refresh=False)
 def upload():
     data = request.form
@@ -166,7 +166,7 @@ def upload():
     body = data['body']
     genre_id = data['genre_id']
     print(body)
-    username = 'denis'
+    username = 'Denis'
     filename = secure_filename(file.filename)
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
