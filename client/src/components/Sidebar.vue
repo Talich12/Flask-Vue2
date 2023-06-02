@@ -30,9 +30,9 @@
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
             <template #icon>
-              <i class='bx bxs-folder-plus'></i>
+              <i class='bx bxs-folder-plus' style="font-size: 1vw;"></i>
             </template>
-            Фильтр по медиа
+            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
           </vs-sidebar-item>
         </template>
         <vs-sidebar-item>
@@ -54,9 +54,9 @@
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
             <template #icon>
-              <i class='bx bxs-plus-circle'></i>
+              <i class='bx bxs-plus-circle' style="font-size: 1vw;"></i>
             </template>
-            Подписки
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Подписки</p>
           </vs-sidebar-item>
         </template>
 
@@ -83,9 +83,9 @@
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
             <template #icon>
-              <i class='bx bxs-spreadsheet'></i>
+              <i class='bx bxs-spreadsheet' style="font-size: 1vw;"></i>
             </template>
-            Подборки
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Подборки</p>
           </vs-sidebar-item>
         </template>
 
@@ -135,7 +135,7 @@
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
         </template>
-        <p style="font-size: 1vw; font-family: 'cUnbounded'; font-weight: bolder;">О нас</p>
+        <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">О нас</p>
       </vs-sidebar-item>
 
       <template #footer>

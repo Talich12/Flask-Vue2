@@ -1,7 +1,7 @@
 <template> 
     <div class="center con-pagination" style="margin-top: 7vh;">
-        <vs-pagination not-margin color="danger" progress v-model="page" :length="len" />
-        <vs-select placeholder="Кол-во на странице" v-model="value">
+        <vs-pagination not-margin color="danger" progress v-model="page" :length="len" style=""/>
+        <vs-select placeholder="Кол-во на странице" v-model="value" style="min-width: 4vw; max-width: 4vw; justify-content: center; margin: 0 auto; margin-top: 2vh;">
         <vs-option label="4" value="4">
           4
         </vs-option>
@@ -40,7 +40,12 @@ export default {
 </script>
 
 <style>
-button{
+button {
     font-family: 'Unbounded';
+    color: rgb(106, 78, 147);
+}
+
+input { 
+  font-family: 'Unbounded';
 }
 </style>

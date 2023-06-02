@@ -27,8 +27,8 @@
     </vs-row>
     <vue-particles
         color="#6A4E93"
-        :particleOpacity="0.7"
-        :particlesNumber="80"
+        :particleOpacity="0.5"
+        :particlesNumber="70"
         shapeType="circle"
         :particleSize="4"
         linesColor="#6A4E93"
@@ -36,7 +36,7 @@
         :lineLinked="true"
         :lineOpacity="0.5"
         :linesDistance="140"
-        :moveSpeed="2"
+        :moveSpeed="1.5"
         :hoverEffect="false"
         hoverMode="grab"
         :clickEffect="false"

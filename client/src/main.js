@@ -7,6 +7,8 @@ import VueParticles from 'vue-particles'
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons/css/boxicons.min.css';
+import marked from 'marked';
+import _ from 'lodash';
 import 'animate.css';
 
 import Card from './components/Card';
@@ -21,7 +23,7 @@ import CardRecommendations from './components/CardRecommendations';
 import ButtonToTop from './components/ButtonToTop';
 import Profile from './components/Profile';
 import Notification from './components/Notification';
-
+import MarkdownEditor from './components/MarkdownEditor';
 import Subscribers from './components/Subscribers';
 Vue.component('subscriber', Subscribers);
 Vue.component('totop', ButtonToTop);
@@ -29,7 +31,7 @@ Vue.component('cardrecs', CardRecommendations);
 Vue.component('about', About);
 Vue.component('pagination', Pagination);
 Vue.component('cookie', Cookie);
-
+Vue.component('mdeditor', MarkdownEditor);
 Vue.component('logoheader', Header);
 Vue.component('sidebar', Sidebar);
 Vue.component('card', Card);

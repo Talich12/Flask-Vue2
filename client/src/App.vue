@@ -24,6 +24,7 @@ export default {
 }
 
 body {
+  overflow-y: hidden;
   background-color: #2A2A35;
   font-family: 'Unbounded';
 }

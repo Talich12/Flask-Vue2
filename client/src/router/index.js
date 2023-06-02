@@ -12,6 +12,8 @@ import Notification from '@/components/Notification';
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
+import marked from 'marked';
+import _ from 'lodash';
 
 Vue.use(Router);
 Vue.use(Vuesax, {
