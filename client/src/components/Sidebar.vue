@@ -178,6 +178,9 @@ export default {
   }),
   methods :{
     GetUserData(){
+            if (!this.$cookies.isKey('login')){
+              return
+            }
             const path = "http://localhost:3000/profile/"+this.$cookies.get('login');
             axios.get(path,{
                 headers: {

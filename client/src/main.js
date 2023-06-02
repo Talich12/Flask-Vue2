@@ -4,6 +4,7 @@ import App from './App';
 import Vuesax from 'vuesax';
 import router from './router';
 import VueParticles from 'vue-particles'
+import axios from 'axios';
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons/css/boxicons.min.css';
@@ -52,3 +53,29 @@ new Vue({
   components: { App },
   template: '<App/>',
 });
+
+
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response.status === 401) {
+      const path = 'http://localhost:3000/TokenRefresh';
+      axios.get(path)
+      .then((response) => {
+          console.log(response.data)
+          if (response.data.access_token) {
+            this.$cookies.set("access_token", response.data.access_token)
+            router.go(0)
+          }
+      })
+      .catch((error) => {
+          console.log(error)
+          router.push('/')
+      })
+    }
+    else if (error.response.status === 422){
+      router.push('/');
+    }
+    return Promise.reject(error);
+  }
+);
