@@ -16,7 +16,7 @@
             {{ post.title }}
           </template>
           <template #text>
-            {{ post.body }}
+            {{ post.author.username }}
           </template>
           <template #img>
             <img :src="require(`@/assets/img/load/${post.img}`)" alt="">

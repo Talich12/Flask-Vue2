@@ -212,5 +212,3 @@ def genre():
     genres = Genre.query.all()
     output = genre_schema.dump(genres)
     return jsonify(output)
-
-

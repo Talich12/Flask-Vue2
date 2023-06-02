@@ -57,25 +57,25 @@ export default {
         Done() {
             const path = 'http://localhost:3000/login';
             axios.post(path, { login: this.Login, password: this.Password })
-                .then((response) => {
-                    console.log(response.data)
-                    const data = response.data;
-                    this.data = data;
-                    this.$cookies.set("access_token", data.access_token)
-                    this.$cookies.set("refresh_token", data.refresh_token)
-                    this.$cookies.set("login", this.Login)
-                    console.log($cookies.get('login'))
-                    console.log(response)
-                    if (response.data.status == 'Success') {
-                        this.active = false
-                    }
-                    else {
-                        this.error = true
-                    }
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
+            .then((response) => {
+                console.log(response.data)
+                const data = response.data;
+                this.data = data;
+                this.$cookies.set("access_token", data.access_token)
+                this.$cookies.set("refresh_token", data.refresh_token)
+                this.$cookies.set("login", this.Login)
+                console.log($cookies.get('login'))
+                console.log(response)
+                if (response.data.status == 'Success') {
+                    this.active = false
+                }
+                else {
+                    this.error = true
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
         },
     },
     components: {

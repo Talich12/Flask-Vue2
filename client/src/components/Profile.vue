@@ -231,6 +231,10 @@ export default {
         }
     },
     created() {
+        if (!this.$cookies.isKey('login')){
+            this.$router.push({name: 'Main'})
+            return
+        }
         this.loading = true
         this.Get();
         this.GetUserData();
