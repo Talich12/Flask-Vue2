@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="display: flex; margin-left: 16%; margin-right: 7%;">
+  <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
       <mdeditor/>
       <vs-row>
