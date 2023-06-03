@@ -2,7 +2,7 @@ import math
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
-from app.models import User, Post, Genre, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, followers
+from app.models import User, Post, Genre, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, SavedPostSchema, followers
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 import os
@@ -68,7 +68,7 @@ def get_saved():
     find_user = User.query.filter_by(username = login).first
     posts_request = SavedPost.query.filter_by(user_id = 2).all()
 
-    post_schema = PostSchema
+    post_schema = SavedPostSchema(many=True)
     output = post_schema.dump(posts_request)
     return jsonify(output)
 

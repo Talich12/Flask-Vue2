@@ -135,6 +135,13 @@ class PostSchema(ma.SQLAlchemySchema):
     img = auto_field() 
 
     genre = fields.Nested(GenreSchema)
-    author = fields.Nested(UserSchema) 
+    author = fields.Nested(UserSchema)
 
+class SavedPostSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = SavedPost
+        load_instance = True
+
+    user = fields.Nested(UserSchema)
+    post = fields.Nested(PostSchema)
     
