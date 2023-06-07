@@ -9,7 +9,6 @@
           Описание подобрки
         </template>
       </information>
-      <cookie></cookie>
       <vs-col v-for="post in Data" offset="1" w="5">
         <card>
           <template #title>

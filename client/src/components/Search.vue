@@ -5,7 +5,6 @@
         <vs-button @click="Search()" block>
             Найти
         </vs-button>
-        <cookie></cookie>
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>

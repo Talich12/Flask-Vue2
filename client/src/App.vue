@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <cookie></cookie>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
       <sidebar style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
       </sidebar>

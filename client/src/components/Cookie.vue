@@ -5,6 +5,11 @@
 <script>
 import AcceptCookie from './AcceptCookie.vue'
     export default {
+    data() {
+      return {
+        active: false
+      };
+    },
     created() {
         this.openNotification();
     },

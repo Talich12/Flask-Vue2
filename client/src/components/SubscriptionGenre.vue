@@ -9,7 +9,6 @@
             Тут вы можете просмотреть сохраненные на потом истории! Чтобы сохранить на потом используйте кнопку с иконкой закладки.
           </template>
         </information>
-        <cookie></cookie>
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>
