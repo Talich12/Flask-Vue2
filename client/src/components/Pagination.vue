@@ -33,10 +33,24 @@ export default {
     watch: {
         page: function(){
             this.$emit('page', {page: this.page})
+            this.openLoading();
         },
         value: function(){
             this.$emit('value', {value: this.value})
+            this.openLoading();
         }
+    },
+    methods: {
+      openLoading() {
+        const loading = this.$vs.loading({
+          background: 'dark',
+          color: 'danger',
+          type: 'points'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 600);
+      },
     }
 }   
 
