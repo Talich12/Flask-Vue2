@@ -11,6 +11,7 @@ import Notification from '@/components/Notification';
 import Search from '@/components/Search';
 import SubscriptionGenre from '@/components/SubscriptionGenre';
 import Bookmarks from '@/components/Bookmarks';
+import StoryPage from '@/components/StoryPage';
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
 import marked from 'marked';
@@ -78,6 +79,9 @@ export default new Router({
       path: '/subscriptiongenre',
       name: 'subscriptiongenre',
       component: SubscriptionGenre,
+    },
+    {
+      
     }
   ],
 });

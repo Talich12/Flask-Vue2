@@ -29,9 +29,11 @@
       <vs-select
         class="genrestory"
         label="Жанры"
+        filter
         state="danger"
         multiple
-        placeholder="Filter"
+        placeholder="Выберите"
+        collapse-chips
         v-model="value"
         style="margin-right: 5px;"
       >
@@ -47,7 +49,7 @@
           style="margin-right: 5px;"
         />
         <vs-input label="Обложка истории" id="inputstoryimg" state="danger" type="file" @change="OnFileSelected"/>
-        <vs-button border success @click="onUpload">Загрузить</vs-button>
+        <vs-button border danger @click="onUpload" style="height: 33.2px;">Загрузить</vs-button>
       </div>
       <mdeditor @body="onBody" style="margin-right: 0%;"/>
     </vs-col>
