@@ -43,6 +43,7 @@ Vue.component('notification', Notification);
 
 Vue.use(VueCookies);
 Vue.use(VueParticles);
+Vue.use(axios)
 
 Vue.config.productionTip = false;
 
@@ -53,3 +54,35 @@ new Vue({
   components: { App },
   template: '<App/>',
 });
+
+
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response.status === 401) {
+      const path = 'http://localhost:3000/TokenRefresh';
+      axios.get(path, {
+        headers: {
+            'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
+            'Access-Control-Allow-Origin': 'http//localhost:8081'
+        }
+    })
+      .then((response) => {
+          console.log(response.data)
+          if (response.data.access_token) {
+            this.$cookies.set("access_token", response.data.access_token)
+            router.go(0)
+          }
+      })
+      .catch((error) => {
+          console.log(error)
+          router.push('/')
+      })
+    }
+    else if (error.response.status === 422){
+      router.push('/');
+    }
+    return Promise.reject(error);
+  }
+);
+

@@ -6,7 +6,7 @@ from hashlib import md5
 import base64
 from datetime import datetime, timedelta
 import os
-
+from sqlalchemy_json import MutableJson
 
 
 
@@ -75,8 +75,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="books")
-    genre_id = db.Column(db.Integer, db.ForeignKey('genre.id'))
-    genre = db.relationship("Genre", backref="Posts")
+    genre = db.Column(db.String())
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
@@ -133,8 +132,7 @@ class PostSchema(ma.SQLAlchemySchema):
     title = auto_field()
     body = auto_field()  
     img = auto_field() 
-
-    genre = fields.Nested(GenreSchema)
+    genre = auto_field()
     author = fields.Nested(UserSchema)
 
 class SavedPostSchema(ma.SQLAlchemySchema):
@@ -142,6 +140,5 @@ class SavedPostSchema(ma.SQLAlchemySchema):
         model = SavedPost
         load_instance = True
 
-    user = fields.Nested(UserSchema)
     post = fields.Nested(PostSchema)
     

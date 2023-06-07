@@ -4,11 +4,16 @@
     <vs-col offset="1" style="margin-top: 11%;">
       <mdeditor @body="onBody" style="margin-right: 0%;"/>
       <vs-row>
-        <vs-select placeholder="Select" v-model="value">
-          <vs-option v-for="(name, id) in Data" :label="name" :value="id">
-            {{ name.name }}
-          </vs-option>
-        </vs-select>
+        <vs-select
+        label="Жанры"
+        multiple
+        placeholder="Filter"
+        v-model="value"
+      >
+        <vs-option v-for="genre in Data" :label="genre.name" :value="genre.name">
+          {{genre.name}}
+        </vs-option>
+      </vs-select>
       </vs-row>
 
       <vs-row>
@@ -59,7 +64,7 @@ export default {
     return {
       title: '',
       body: '',
-      value: '',
+      value: [],
       file: null,
       Data: []
     }
@@ -71,7 +76,7 @@ export default {
     },
     onUpload() {
       const fd = new FormData();
-      fd.append('genre_id', this.value)
+      fd.append('genre', this.value)
       fd.append('file', this.file)
       fd.append('title', this.title)
       fd.append('body', this.body)
@@ -92,7 +97,7 @@ export default {
       console.log(this.body)
     },
     GetGenre() {
-      const path = "http://localhost:3000/Genre";
+      const path = "http://localhost:3000/genre";
       axios.get(path)
         .then((response) => {
           console.log(response.data);
@@ -103,6 +108,11 @@ export default {
           console.log(error);
         });
     },
+  },
+  watch:{
+    value: function(){
+      console.log(this.value)
+    }
   },
   created() {
     this.GetGenre();
