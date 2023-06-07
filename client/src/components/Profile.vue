@@ -51,10 +51,10 @@
                         <vs-navbar-item :active="active == 'achievements'" id="achievements" style="font-size: 1vw;"> Достижения </vs-navbar-item>
                         
                     </vs-navbar>
-                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s; width: 84%;">
+                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s; width: 100%;">
                         <div v-if="active == 'post'">
                             <div class="containerProfile">
-                            <vs-row justify="space-around" style="margin-top: 6%;">
+                            <vs-row justify="space-around" style="margin-top: 8vh;">
                                 <vs-col v-for="post in Data" offset="1" w="5">
                                 <card>
                                     <template #title>
@@ -286,7 +286,7 @@ export default {
     z-index: 1;
 }
 .vs-navbar-content{
-    margin-left: 7%;
+    margin-left: 8%;
 }
 .center{
     display: flex;

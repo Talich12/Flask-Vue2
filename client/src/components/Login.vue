@@ -1,9 +1,19 @@
 <template>
     <div class="center">
 
-        <button @click="active = !active"
+        <button id="logbtn" @click="active = !active"
             style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder; border: none; background-color: transparent; cursor: pointer; color: rgb(255, 255, 255)">
-            Вход
+            <vs-button
+        gradient
+        style="min-width: 44px; min-height: 44px; margin: 0;"
+        danger
+        animation-type="scale"
+      >
+      <i class='bx bx-log-in'></i>
+        <template #animate >
+          Вход
+        </template>
+      </vs-button>
         </button>
         <vs-dialog blur v-model="active">
             <template #header>
@@ -137,9 +147,11 @@ export default {
     justify-content: center;
     margin-top: 20px;
     font-size: 0.7rem;
-
 }
 
+#logbtn {
+    padding: 0;
+}
 
 .footer-dialog .new a:hover {
     text-decoration: underline;

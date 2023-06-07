@@ -1,6 +1,6 @@
 <template>
   <div class="center">
-    <vs-button danger size="large" shadow upload @click="active = !active">
+    <vs-button danger size="large" shadow @click="active = !active">
       <i class='bx bxs-wrench'></i> Настройки уведомлений
     </vs-button>
     <vs-dialog blur v-model="active">

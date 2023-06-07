@@ -43,9 +43,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding-left: 16%;
-    padding-top: 6%;
+    padding-left: 16vw;
+    padding-top: 16vh;
+    padding-right: 4vw;
 }
 
 .notification-username {
