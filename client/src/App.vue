@@ -54,4 +54,7 @@ body {
   height: 105%;
   width: 105%;
 }
+#vs-input--inputstoryimg {
+  min-width: 250px;
+}
 </style>

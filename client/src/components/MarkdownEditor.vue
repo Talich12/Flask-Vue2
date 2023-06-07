@@ -68,6 +68,7 @@
   color: #333;
   z-index: 3;
   margin-top: 0px;
+  opacity: 0.85;
 }
 
 textarea,

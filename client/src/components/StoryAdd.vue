@@ -2,10 +2,33 @@
   <div class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
-      <mdeditor @body="onBody" style="margin-right: 0%;"/>
-      <vs-row>
-        <vs-select
+      <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
+      <vs-input color="#FF0000" state="success" type="video" icon-after v-model="value3" label-placeholder="youtube">
+        <template #icon>
+          <i class='bx bxl-youtube' ></i>
+        </template>
+      </vs-input>
+      <vs-input danger type="audio" state="success" icon-after v-model="value3" label-placeholder="audioboom">
+        <template #icon>
+          <i class='bx bxs-microphone-alt' ></i>
+        </template>
+      </vs-input>
+      <vs-button
+      flat
+        style="min-width: 200px"
+        success
+        animation-type="scale"
+      >
+        <i class='bx bxl-markdown'></i>
+        <template #animate >
+          Markdown подсказка
+        </template>
+      </vs-button>
+      </div>
+      <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
+      <vs-select
         label="Жанры"
+        state="danger"
         multiple
         placeholder="Filter"
         v-model="value"
@@ -14,21 +37,16 @@
           {{genre.name}}
         </vs-option>
       </vs-select>
-      </vs-row>
-
-      <vs-row>
-        <vs-input
-          label="title"
+      <vs-input
+          state="danger"
+          label="Название"
           v-model="title"
-          placeholder="title"
+          placeholder="В чёрном чёрном..."
         />
-      </vs-row>
-      
-      
-      <vs-row>
-        <vs-input type="file" @change="OnFileSelected" />
-        <button @click="onUpload">UpLoad</button>
-      </vs-row>
+        <vs-input id="inputstoryimg" state="danger" type="file" @change="OnFileSelected"/>
+        <vs-button border success @click="onUpload">Загрузить</vs-button>
+      </div>
+      <mdeditor @body="onBody" style="margin-right: 0%;"/>
     </vs-col>
     <vue-particles
         color="#EEEFF9"
