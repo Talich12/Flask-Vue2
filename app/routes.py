@@ -43,7 +43,7 @@ def search():
 
     search = data['search']
     value = int(data['value'])
-    page = data['page']
+    page = int(data['page'])
 
     if search == "":
         posts_request = Post.query
@@ -63,14 +63,28 @@ def search():
     
     return jsonify(output)
 
-@app.route('/saved', methods=['GET'])
+@app.route('/saved', methods=['POST'])
 def get_saved():
+    output = {}
     login = "Denis"
-    find_user = User.query.filter_by(username = login).first
-    posts_request = SavedPost.query.filter_by(user_id = 2).all()
+
+    data = request.get_json(silent=True)
+    value = int(data['value'])
+    page = int(data['page'])
+
+    find_user = User.query.filter_by(username = login).first()
+
+    posts_request = SavedPost.query.filter_by(user_id = find_user.id).paginate(page=page,per_page=value,error_out=False)
+
+    len = SavedPost.query.filter_by(user_id = find_user.id).count()
+    len =  math.ceil(len/value)
 
     post_schema = SavedPostSchema(many=True)
-    output = post_schema.dump(posts_request)
+    output_query = post_schema.dump(posts_request)
+
+    output['data'] = output_query
+    output['len'] = len
+
     return jsonify(output)
 
 

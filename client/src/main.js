@@ -43,6 +43,7 @@ Vue.component('notification', Notification);
 
 Vue.use(VueCookies);
 Vue.use(VueParticles);
+Vue.use(axios)
 
 Vue.config.productionTip = false;
 
@@ -84,3 +85,4 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+

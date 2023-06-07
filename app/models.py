@@ -142,6 +142,5 @@ class SavedPostSchema(ma.SQLAlchemySchema):
         model = SavedPost
         load_instance = True
 
-    user = fields.Nested(UserSchema)
     post = fields.Nested(PostSchema)
     

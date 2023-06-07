@@ -12,13 +12,13 @@
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>
-              {{ post.title }}
+              {{ post.post.title }}
             </template>
             <template #text>
-              {{ post.author.username }}
+              {{ post.post.author.username }}
             </template>
             <template #img>
-              <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
+              <img :src="require(`@/assets/img/load/${post.post.img}`)" alt="">
             </template>
           </card>
         </vs-col>
@@ -66,7 +66,7 @@
     },
     methods: {
         Get() {
-            const path = "http://localhost:3000/";
+            const path = "http://localhost:3000/saved";
             axios.post(path, {page: this.page, value: this.value})
                 .then((response) => {
                 console.log(response.data);
@@ -79,7 +79,7 @@
         },
         onPage(data){
           this.page = data.page
-          const path = "http://localhost:3000/";
+          const path = "http://localhost:3000/saved";
             axios.post(path, {page: data.page, value: this.value})
                 .then((response) => {
                 console.log(response.data);
@@ -92,7 +92,7 @@
         onValue(data){
           this.value = data.value
           this.page = 1
-          const path = "http://localhost:3000/";
+          const path = "http://localhost:3000/saved";
             axios.post(path, {value: data.value, page: this.page})
                 .then((response) => {
                 console.log(response.data);
