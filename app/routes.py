@@ -22,14 +22,24 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def get_index():
+    post_schema = PostSchema(many=True)
     data = request.get_json(silent=True)
     output = {}
+
     value = int(data['value'])
     page = data['page']
-    post_schema = PostSchema(many=True)
-    posts = Post.query.paginate(page=page,per_page=value,error_out=False)
+    video = data['video']
+    audio = data['audio']
+
+    if not audio and not video:
+        req = Post.query
+    else:
+        req = Post.query.filter_by(has_audio = audio, has_video = video)
+
+
+    posts = req.paginate(page=page,per_page=value,error_out=False)
     output_query = post_schema.dump(posts)
-    len = Post.query.count()
+    len = req.count()
     len =  math.ceil(len/value)
     output["data"] = output_query
     output["len"] = len

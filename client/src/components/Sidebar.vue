@@ -39,14 +39,14 @@
           <template #icon>
             <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
           </template>
-          <vs-switch danger style="background-color: black;">С озвучкой</vs-switch>
+          <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
         </vs-sidebar-item>
 
         <vs-sidebar-item>
           <template #icon>
             <i class='bx bxs-film' style="font-size: 1vw;"></i>
           </template>
-          <vs-switch danger style="background-color: black;">С видео</vs-switch>
+          <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
         </vs-sidebar-item>
       </vs-sidebar-group>
 
@@ -171,6 +171,8 @@ export default {
         Login
     },
   data: () => ({
+    audio: false,
+    video: false,
     active: '',
     ProfileUrl: '/profile/'+ $cookies.get("login"),
     User: [],
@@ -197,6 +199,14 @@ export default {
                 console.log(error);
             });
         },
+  },
+  watch:{
+    audio: function(){
+      this.$emit('audio', {audio: this.audio})
+    },
+    video: function(){
+      this.$emit('video', {video: this.video})
+    }
   },
   created(){
     this.GetUserData()
