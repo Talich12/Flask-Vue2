@@ -24,6 +24,9 @@
           Your browser does not support the video tag.
         </video>
       </div>
+      <div>
+        <youtube video-id="mJ-nm-o07zQ" ref="youtube" @playing="playing"></youtube>
+     </div>
     </vs-row>
     <vue-particles
         color="#6A4E93"
@@ -50,8 +53,21 @@
     export default {
       data:() => ({
         page: 1
-      })
-    }
+      }),
+      methods:{
+        playVideo() {
+        this.player.playVideo()
+        },
+        playing() {
+          console.log('\o/ we are watching!!!')
+          }
+        },
+        computed: {
+          player() {
+            return this.$refs.youtube.player
+          }
+        }
+      }
   </script>
 
 <style>

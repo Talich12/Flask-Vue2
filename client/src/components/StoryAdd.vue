@@ -3,12 +3,12 @@
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
-      <vs-input color="#FF0000" state="success" type="video" v-model="value2" label-placeholder="youtube" style="margin-right: 5px;">
+      <vs-input color="#FF0000" state="success" type="video" v-model="video" label-placeholder="youtube" style="margin-right: 5px;">
         <template #icon>
           <i class='bx bxl-youtube' ></i>
         </template>
       </vs-input>
-      <vs-input danger type="audio" state="success" v-model="value3" label-placeholder="audioboom">
+      <vs-input danger type="audio" state="success" v-model="audio" label-placeholder="audioboom">
         <template #icon>
           <i class='bx bxs-microphone-alt' ></i>
         </template>
@@ -85,6 +85,8 @@ export default {
   },
   data() {
     return {
+      video: '',
+      audio: '',
       title: '',
       body: '',
       value: [],
@@ -103,6 +105,8 @@ export default {
       fd.append('file', this.file)
       fd.append('title', this.title)
       fd.append('body', this.body)
+      fd.append('audio', this.audio)
+      fd.append('video', this.video)
       console.log(fd)
       axios.post('http://localhost:3000/storyadd', fd,{
           headers: {

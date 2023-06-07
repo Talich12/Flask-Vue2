@@ -5,6 +5,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token, jwt_re
 from app.models import User, Post, Genre, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, SavedPostSchema, followers
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
+from urllib.parse import urlparse, parse_qs
 import os
 import time
 import json
@@ -198,6 +199,19 @@ def upload():
     file = request.files['file']
     title = data['title']
     body = data['body']
+    audio = data['audio']
+    video = data['video']
+
+    has_video = False
+    has_audio = False
+
+    if video != '':
+        has_video = True
+        url_data =urlparse(video)
+        video_id = parse_qs(url_data.query)['v'][0]
+    if audio != '':
+        has_audio = True
+
     genre = str(data['genre'])
 
     print(genre)
@@ -206,7 +220,7 @@ def upload():
 
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
-    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre)
+    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre, video = video_id, has_video = has_video, audio = audio, has_audio = has_audio)
     db.session.add(post)
     db.session.commit()
     return jsonify({'status': "ok"})

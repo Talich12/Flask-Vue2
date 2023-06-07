@@ -12,6 +12,8 @@ import marked from 'marked';
 import _ from 'lodash';
 import 'animate.css';
 
+import VueYoutube from 'vue-youtube'
+
 import Card from './components/Card';
 import Cookie from './components/Cookie'
 import Sidebar from './components/Sidebar';
@@ -44,6 +46,9 @@ Vue.component('notification', Notification);
 Vue.use(VueCookies);
 Vue.use(VueParticles);
 Vue.use(axios)
+Vue.use(VueYoutube)
+
+
 
 Vue.config.productionTip = false;
 

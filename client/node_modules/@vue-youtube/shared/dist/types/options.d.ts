@@ -1,0 +1,50 @@
+import type { Events } from './events';
+export declare type ListType = 'search' | 'user_uploads' | 'playlist';
+export declare type ProgressBarColor = 'red' | 'white';
+export declare type ModestBrandingOption = 0 | 1;
+export declare type RelatedVideosOption = 0 | 1;
+export declare type ControlsOption = 0 | 1 | 2;
+export declare type AutohideOption = 0 | 1 | 2;
+export declare type CCLoadPolicyOption = 0 | 1;
+export declare type PlaysInlineOption = 0 | 1;
+export declare type FullscreenOption = 0 | 1;
+export declare type KeyboardOptions = 0 | 1;
+export declare type AutoplayOption = 0 | 1;
+export declare type IVPolicyOption = 1 | 3;
+export declare type ShowInfoOption = 0 | 1;
+export declare type JSAPIOptions = 0 | 1;
+export declare type MuteOption = 0 | 1;
+export declare type LoopOption = 0 | 1;
+export interface PlayerOptions {
+    width?: string | number | undefined;
+    height?: string | number | undefined;
+    videoId?: string | undefined;
+    playerVars?: PlayerVars | undefined;
+    events?: Events | undefined;
+    host?: string | undefined;
+}
+export interface PlayerVars {
+    autohide?: AutohideOption | undefined;
+    autoplay?: AutoplayOption | undefined;
+    cc_load_policy?: CCLoadPolicyOption | undefined;
+    cc_lang_pref?: string | undefined;
+    color?: ProgressBarColor | undefined;
+    controls?: ControlsOption | undefined;
+    disablekb?: KeyboardOptions | undefined;
+    enablejsapi?: JSAPIOptions | undefined;
+    end?: number | undefined;
+    fs?: FullscreenOption | undefined;
+    hl?: string | undefined;
+    iv_load_policy?: IVPolicyOption | undefined;
+    list?: string | undefined;
+    listType?: ListType | undefined;
+    loop?: LoopOption | undefined;
+    modestbranding?: ModestBrandingOption | undefined;
+    mute?: MuteOption | undefined;
+    origin?: string | undefined;
+    playlist?: string | undefined;
+    playsinline?: PlaysInlineOption | undefined;
+    rel?: RelatedVideosOption | undefined;
+    showinfo?: ShowInfoOption | undefined;
+    start?: number | undefined;
+}

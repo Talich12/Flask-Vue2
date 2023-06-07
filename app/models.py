@@ -14,14 +14,38 @@ followers = db.Table('followers',
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 )
 
+class Comments(db.Model):
+    __tablename__ = 'comments'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    user = db.relationship("User", backref="comments")
+    post = db.relationship("Post", backref="comments")
+
+
+class Likes(db.Model):
+    __tablename__ = 'likes'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    
+    user = db.relationship("User", backref="likes")
+    post = db.relationship("Post", backref="likes")
+
 
 class SavedPost(db.Model):
     __tablename__ = 'saved_posts'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+
     user = db.relationship("User", backref="saved_posts")
     post = db.relationship("Post", backref="saved_posts")
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -75,7 +99,9 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="books")
     genre = db.Column(db.String())
+    video = db.Column(db.String())
     has_video = db.Column(db.Boolean(), default=False)
+    audio = db.Column(db.String())
     has_audio = db.Column(db.Boolean(), default=False)
 
     def __repr__(self):
