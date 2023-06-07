@@ -2,7 +2,7 @@
   <div class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
-      <mdeditor style="margin-right: 0%;"/>
+      <mdeditor @body="onBody" style="margin-right: 0%;"/>
       <vs-row>
         <vs-select placeholder="Select" v-model="value">
           <vs-option v-for="(name, id) in Data" :label="name" :value="id">
@@ -18,14 +18,7 @@
           placeholder="title"
         />
       </vs-row>
-        
-      <vs-row>
-        <vs-input
-          label="body"
-          v-model="body"
-          placeholder="body"
-        />
-      </vs-row>
+      
       
       <vs-row>
         <vs-input type="file" @change="OnFileSelected" />
@@ -83,12 +76,20 @@ export default {
       fd.append('title', this.title)
       fd.append('body', this.body)
       console.log(fd)
-      axios.post('http://localhost:3000/upload', fd)
+      axios.post('http://localhost:3000/storyadd', fd,{
+          headers: {
+              'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+          }
+      })
         .then((response) => {
           console.log(this.value)
           console.log(response)
           this.$router.push({ name: 'Main' })
         })
+    },
+    onBody(data){
+      this.body = data.body
+      console.log(this.body)
     },
     GetGenre() {
       const path = "http://localhost:3000/Genre";

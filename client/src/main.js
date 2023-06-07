@@ -60,7 +60,12 @@ axios.interceptors.response.use(
   error => {
     if (error.response.status === 401) {
       const path = 'http://localhost:3000/TokenRefresh';
-      axios.get(path)
+      axios.get(path, {
+        headers: {
+            'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
+            'Access-Control-Allow-Origin': 'http//localhost:8081'
+        }
+    })
       .then((response) => {
           console.log(response.data)
           if (response.data.access_token) {

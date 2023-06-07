@@ -9,15 +9,20 @@ import os
 
 
 
-saved = db.Table('saved',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
-)
 
 followers = db.Table('followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 )
+
+
+class SavedPost(db.Model):
+    __tablename__ = 'saved_posts'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    user = db.relationship("User", backref="saved_posts")
+    post = db.relationship("Post", backref="saved_posts")
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -130,6 +135,13 @@ class PostSchema(ma.SQLAlchemySchema):
     img = auto_field() 
 
     genre = fields.Nested(GenreSchema)
-    author = fields.Nested(UserSchema) 
+    author = fields.Nested(UserSchema)
 
+class SavedPostSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = SavedPost
+        load_instance = True
+
+    user = fields.Nested(UserSchema)
+    post = fields.Nested(PostSchema)
     

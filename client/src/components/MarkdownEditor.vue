@@ -5,28 +5,33 @@
         <span v-html="compiledMarkdown"></span>
       </div>
     </div>
-</template>
-
-<script>
-import marked from 'marked';
-import _ from 'lodash';
-
-export default {
-  data() {
-    return {
-      input: '# Ваша история начинается тут! \nМы используем [markdown](https://www.youtube.com/watch?v=8owG83ozHYw), это просто и удобно. \nВам всегда доступна кнопка с подсказками ;)'    
-    };
-  },
-  computed: {
-    compiledMarkdown() {
-      return marked(this.input, { sanitize: true });
+  </template>
+  
+  <script>
+  import marked from 'marked';
+  import _ from 'lodash';
+  
+  export default {
+    data() {
+      return {
+        input: '# Ваша история начинается тут'
+      };
+    },
+    computed: {
+      compiledMarkdown() {
+        return marked(this.input, { sanitize: true });
+      },
+    },
+    watch: {
+      input: function(){
+            this.$emit('body', {body: this.input})
+      },
+    },
+    methods: {
+      update: _.debounce(function(e) {
+        this.input = e.target.value;
+      }, 300)
     }
-  },
-  methods: {
-    update: _.debounce(function(e) {
-      this.input = e.target.value;
-    }, 300)
-  }
 };
 </script>
 
