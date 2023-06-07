@@ -20,9 +20,9 @@ import _ from 'lodash';
 Vue.use(Router);
 Vue.use(Vuesax, {
   colors: {
-    primary:'rgb(42, 42, 53)',
+    primary:'#2A2A35',
     dark:'rgb(48, 48, 58)',
-    success:'rgb(238, 239, 249)',
+    success:'#EEEFF9',
     danger:'rgb(106, 78, 147)',
   },
 })
@@ -81,7 +81,9 @@ export default new Router({
       component: SubscriptionGenre,
     },
     {
-      
+      path: '/storypage',
+      name: 'storypage',
+      component: StoryPage,
     }
   ],
 });
