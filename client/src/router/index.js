@@ -79,9 +79,6 @@ export default new Router({
       path: '/subscriptiongenre',
       name: 'subscriptiongenre',
       component: SubscriptionGenre,
-    },
-    {
-      
     }
   ],
 });
