@@ -6,6 +6,7 @@ from app.models import User, Post, Genre, SavedPost, RevokedTokenModel, PostSche
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 import os
+import time
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -177,7 +178,8 @@ def upload():
     genre_id = data['genre_id']
     print(body)
     username = 'Denis'
-    filename = secure_filename(file.filename)
+    filename = str(time.time()) + "_" + secure_filename(file.filename)
+
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
     find_genre = Genre.query.filter_by(id=genre_id).first()
