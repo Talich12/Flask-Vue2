@@ -2,10 +2,10 @@
   <div id="app">
     <cookie></cookie>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
-      <sidebar style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
+      <sidebar @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
       </sidebar>
       <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
-    <router-view/>
+    <router-view  :audio="audio" :video="video" />
     <myfooter style="z-index: 10; position: relative; bottom: 0;"></myfooter>
   </div>
 </template>
@@ -13,6 +13,18 @@
 <script>
 export default {
   name: 'App',
+  data: () => ({
+    audio: false,
+    video: false,
+  }),
+  methods:{
+    onVideo(data){
+      this.video = data.video
+    },
+    onAudio(data){
+      this.audio = data.audio
+    }
+  }
 };
 </script>
 

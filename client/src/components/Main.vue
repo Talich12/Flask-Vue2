@@ -64,6 +64,7 @@ import Information from './Information.vue';
 
 export default {
   name: "index",
+  props:['video', 'audio'],
   data() {
       return {
           Data: [],
@@ -76,7 +77,7 @@ export default {
   methods: {
       Get() {
           const path = "http://localhost:3000/";
-          axios.post(path, {page: this.page, value: this.value})
+          axios.post(path, {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
@@ -89,7 +90,7 @@ export default {
       onPage(data){
         this.page = data.page
         const path = "http://localhost:3000/";
-          axios.post(path, {page: data.page, value: this.value})
+          axios.post(path, {page: data.page, value: this.value, video: this.$props.video, audio: this.$props.audio})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
@@ -102,7 +103,7 @@ export default {
         this.value = data.value
         this.page = 1
         const path = "http://localhost:3000/";
-          axios.post(path, {value: data.value, page: this.page})
+          axios.post(path, {value: data.value, page: this.page, video: this.$props.video, audio: this.$props.audio})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
@@ -113,8 +114,19 @@ export default {
           });
       }
   },
+  watch:{
+    video: function(){
+      this.page = 1
+      this.Get()
+    },
+    audio: function(){
+      this.page = 1
+      this.Get()
+    }
+  },
   created() {
       this.Get();
+      console.log(this.$props.audio)
   },
   components: { Information }
 };

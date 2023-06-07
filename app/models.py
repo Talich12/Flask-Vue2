@@ -76,6 +76,8 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="books")
     genre = db.Column(db.String())
+    has_video = db.Column(db.Boolean(), default=False)
+    has_audio = db.Column(db.Boolean(), default=False)
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
