@@ -198,6 +198,17 @@ def upload():
     file = request.files['file']
     title = data['title']
     body = data['body']
+    audio = data['audio']
+    video = data['video']
+
+    has_video = False
+    has_audio = False
+
+    if video != '':
+        has_video = True
+    if audio != '':
+        has_audio = True
+
     genre = str(data['genre'])
 
     print(genre)
@@ -206,7 +217,7 @@ def upload():
 
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
-    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre)
+    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre, video = video, has_video = has_video, audio = audio, has_audio = has_audio)
     db.session.add(post)
     db.session.commit()
     return jsonify({'status': "ok"})
