@@ -61,4 +61,9 @@ body {
 :root {
   --vs-shadow-opacity: 0.35; /* Set the desired value for --vs-shadow-opacity */
 }
+
+.vs-avatar img {
+  height: 105%;
+  width: 105%;
+}
 </style>
