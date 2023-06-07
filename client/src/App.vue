@@ -67,6 +67,12 @@ body {
   width: 105%;
 }
 #vs-input--inputstoryimg {
-  min-width: 250px;
+  min-width: 200px;
+}
+::-webkit-file-upload-button {
+   display: none;
+}
+::file-selector-button {
+  display: none;
 }
 </style>

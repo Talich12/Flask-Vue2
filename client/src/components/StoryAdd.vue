@@ -3,12 +3,12 @@
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
-      <vs-input color="#FF0000" state="success" type="video" icon-after v-model="value3" label-placeholder="youtube">
+      <vs-input color="#FF0000" state="success" type="video" v-model="value2" label-placeholder="youtube" style="margin-right: 5px;">
         <template #icon>
           <i class='bx bxl-youtube' ></i>
         </template>
       </vs-input>
-      <vs-input danger type="audio" state="success" icon-after v-model="value3" label-placeholder="audioboom">
+      <vs-input danger type="audio" state="success" v-model="value3" label-placeholder="audioboom">
         <template #icon>
           <i class='bx bxs-microphone-alt' ></i>
         </template>
@@ -27,11 +27,13 @@
       </div>
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
       <vs-select
+        class="genrestory"
         label="Жанры"
         state="danger"
         multiple
         placeholder="Filter"
         v-model="value"
+        style="margin-right: 5px;"
       >
         <vs-option v-for="genre in Data" :label="genre.name" :value="genre.name">
           {{genre.name}}
@@ -42,8 +44,9 @@
           label="Название"
           v-model="title"
           placeholder="В чёрном чёрном..."
+          style="margin-right: 5px;"
         />
-        <vs-input id="inputstoryimg" state="danger" type="file" @change="OnFileSelected"/>
+        <vs-input label="Обложка истории" id="inputstoryimg" state="danger" type="file" @change="OnFileSelected"/>
         <vs-button border success @click="onUpload">Загрузить</vs-button>
       </div>
       <mdeditor @body="onBody" style="margin-right: 0%;"/>
