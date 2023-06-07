@@ -3,10 +3,12 @@ from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
 from app.models import User, Post, Genre, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, SavedPostSchema, followers
+from sqlalchemy_json import MutableJson
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 import os
 import time
+import json
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -32,7 +34,6 @@ def get_index():
     len =  math.ceil(len/value)
     output["data"] = output_query
     output["len"] = len
-    print(output)
     return jsonify(output)
 
 
@@ -130,7 +131,6 @@ def get_posts(username):
     post_schema = PostSchema(many=True)
     find_user = User.query.filter_by(username=login).first()
     posts = Post.query.filter_by(author_id=find_user.id).all()
-    print(posts)
     output = post_schema.dump(posts)
     return jsonify(output)
 
@@ -189,18 +189,26 @@ def upload():
     file = request.files['file']
     title = data['title']
     body = data['body']
-    genre_id = data['genre_id']
-    print(body)
+    genre = str(data['genre'])
+
+    print(genre)
     username = 'Denis'
     filename = str(time.time()) + "_" + secure_filename(file.filename)
 
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
-    find_genre = Genre.query.filter_by(id=genre_id).first()
-    post = Post(title=title, body=body, author_id= find_user.id ,author=find_user, img=filename, genre_id=genre_id, genre=find_genre)
+    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre)
     db.session.add(post)
     db.session.commit()
     return jsonify({'status': "ok"})
+
+
+@app.route('/genre', methods=['GET'])
+def genre():
+    genre_schema = GenreSchema(many=True)
+    genres = Genre.query.all()
+    output = genre_schema.dump(genres)
+    return jsonify(output)
 
 
 @app.route('/secret', methods=['GET'])
@@ -230,11 +238,3 @@ def logout_refresh():
     revoked_token = RevokedTokenModel(jti = jti)
     revoked_token.add()
     return jsonify({"msg": "successsss"})
-
-
-@app.route('/Genre', methods=['GET'])
-def genre():
-    genre_schema = GenreSchema(many=True)
-    genres = Genre.query.all()
-    output = genre_schema.dump(genres)
-    return jsonify(output)
