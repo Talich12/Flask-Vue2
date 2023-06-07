@@ -6,18 +6,9 @@
         transparent
         :active="active == 5"
         @click="active = 5"
-        style="width: 45%;"
+        style="width: 100%;"
       >
         Согласен
-      </vs-button>
-      <vs-button
-        color="rgb(210, 61, 61)"
-        default
-        :active="active == 5"
-        @click="active = 5"
-        style="width: 45%;"
-      >
-        Не согласен
       </vs-button>
       </div>
 </template>

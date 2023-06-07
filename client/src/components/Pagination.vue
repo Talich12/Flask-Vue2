@@ -1,20 +1,23 @@
 <template> 
     <div class="center con-pagination" style="margin-top: 7vh;">
         <vs-pagination not-margin color="danger" progress v-model="page" :length="len" style=""/>
-        <vs-select placeholder="Кол-во на странице" v-model="value" style="min-width: 4vw; max-width: 4vw; justify-content: center; margin: 0 auto; margin-top: 2vh;">
-        <vs-option label="4" value="4">
+        <vs-select placeholder="Кол-во на странице" v-model="value" style="min-width: 8vw; max-width: 8vw; justify-content: center; align-content: center; margin: 0 auto; margin-top: 2vh;">
+        <template #message-success>
+          На странице
+        </template>
+        <vs-option label="4 поста" value="4">
           4
         </vs-option>
-        <vs-option label="6" value="6">
+        <vs-option label="6 постов" value="6">
           6
         </vs-option>
-        <vs-option label="8" value="8">
+        <vs-option label="8 постов" value="8">
           8
         </vs-option>
-        <vs-option label="10" value="10">
+        <vs-option label="10 постов" value="10">
           10
         </vs-option>
-        <vs-option label="12" value="12">
+        <vs-option label="12 постов" value="12">
           12
         </vs-option>
       </vs-select>

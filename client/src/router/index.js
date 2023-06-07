@@ -3,14 +3,14 @@ import Vuesax from 'vuesax';
 import Router from 'vue-router';
 import Registration from '@/components/Registration';
 import Login from '@/components/Login';
-import Index from '@/components/Index';
 import Main from '@/components/Main';
 import StoryAdd from '@/components/StoryAdd';
 import About from '@/components/About';
 import Profile from '@/components/Profile';
 import Notification from '@/components/Notification';
 import Search from '@/components/Search';
-
+import SubscriptionGenre from '@/components/SubscriptionGenre';
+import Bookmarks from '@/components/Bookmarks';
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
 import marked from 'marked';
@@ -23,7 +23,7 @@ Vue.use(Vuesax, {
     dark:'rgb(48, 48, 58)',
     success:'rgb(238, 239, 249)',
     danger:'rgb(106, 78, 147)',
-  }
+  },
 })
  
 export default new Router({
@@ -66,8 +66,18 @@ export default new Router({
     },
     {
       path: '/search',
-      Name: 'search',
+      name: 'search',
       component: Search,
+    },
+    {
+      path: '/bookmarks',
+      name: 'bookmarks',
+      component: Bookmarks,
+    },
+    {
+      path: '/subscriptiongenre',
+      name: 'subscriptiongenre',
+      component: SubscriptionGenre,
     }
   ],
 });

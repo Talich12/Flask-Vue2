@@ -44,4 +44,8 @@ body {
 .vs-sidebar__item {
   font-family: 'Unbounded';
 }
+
+:root {
+  --vs-shadow-opacity: 0.35; /* Set the desired value for --vs-shadow-opacity */
+}
 </style>

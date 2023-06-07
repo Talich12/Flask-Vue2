@@ -39,15 +39,15 @@
     </div>
     <vue-particles
         color="#EEEFF9"
-        :particleOpacity="0.5"
-        :particlesNumber="70"
+        :particleOpacity="0.4"
+        :particlesNumber="50"
         shapeType="circle"
         :particleSize="4"
         linesColor="#EEEFF9"
         :linesWidth="1.2"
         :lineLinked="true"
         :lineOpacity="0.5"
-        :linesDistance="140"
+        :linesDistance="180"
         :moveSpeed="1.5"
         :hoverEffect="false"
         hoverMode="grab"

@@ -66,17 +66,18 @@
           </template>
           <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Авторы</p>
         </vs-sidebar-item>
-        <vs-tooltip right danger>
-          <vs-sidebar-item id="genresubs">
+        
+          <vs-sidebar-item to="subscriptiongenre" id="genresubs">
             <template #icon>
               <i class='bx bxs-book-heart' style="font-size: 1vw;"></i>
             </template>
+            <vs-tooltip right danger>
             <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Жанры</p>
-          </vs-sidebar-item>
-          <template #tooltip>
+            <template #tooltip>
             Кнопка быстрого доступа к вашим любимым жанрам!
           </template>
         </vs-tooltip>
+          </vs-sidebar-item>
       </vs-sidebar-group>
 
       <vs-sidebar-group>
@@ -124,7 +125,7 @@
 
       </vs-sidebar-group>
 
-      <vs-sidebar-item id="bookmarks">
+      <vs-sidebar-item to="/bookmarks" id="bookmarks">
         <template #icon>
           <i class='bx bxs-bookmark' style="font-size: 1vw;"></i>
         </template>

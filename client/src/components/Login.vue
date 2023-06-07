@@ -21,7 +21,7 @@
                 </vs-input>
                 <vs-input danger border type="password" v-model="Password" placeholder="Пароль">
                     <template v-if="error" #message-danger >
-                        Неправильно введен логин или пароль
+                        Неправильно введён логин или пароль
                     </template>
                     <template #icon>
                         <i class='bx bxs-lock'></i>

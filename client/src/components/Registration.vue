@@ -3,7 +3,7 @@
 
 
     <vs-button danger transparent :active="active == true" @click="active = true">
-      Зарегестрируйтесь!
+      Зарегистрируйтесь!
     </vs-button>
     <vs-dialog blur v-model="active">
       <template #header>

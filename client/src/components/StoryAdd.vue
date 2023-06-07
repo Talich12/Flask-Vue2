@@ -1,7 +1,8 @@
 <template>
+  <div class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
-      <mdeditor/>
+      <mdeditor style="margin-right: 0%;"/>
       <vs-row>
         <vs-select placeholder="Select" v-model="value">
           <vs-option v-for="(name, id) in Data" :label="name" :value="id">
@@ -31,6 +32,25 @@
         <button @click="onUpload">UpLoad</button>
       </vs-row>
     </vs-col>
+    <vue-particles
+        color="#EEEFF9"
+        :particleOpacity="0.4"
+        :particlesNumber="50"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#EEEFF9"
+        :linesWidth="1.2"
+        :lineLinked="true"
+        :lineOpacity="0.5"
+        :linesDistance="180"
+        :moveSpeed="1.5"
+        :hoverEffect="false"
+        hoverMode="grab"
+        :clickEffect="false"
+        clickMode="push"
+        style="position:absolute; z-index: -1; height: 100%; width: 100vw; left: 0%; top: 8%;"
+      > </vue-particles>
+    </div>
   </div>
 </template>
 
