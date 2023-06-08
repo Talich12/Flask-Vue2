@@ -1,9 +1,27 @@
 <template>
+  <div>
+    <div style="display: flex; justify-content:space-between;">
+    <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bxs-pen' style="margin-right: 0.5vw;"></i>Всего слов написано: {{ wordCount }}</p>
+    <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bx-time-five' style="margin-right: 0.5vw;"></i>Примерное время чтения: {{ readingTime }} {{ minutesText }}</p>
+    </div>
     <div id="editor" class="container">
       <textarea :value="input" @input="update"></textarea>
       <div id="markdown-output" class="markdown-scroll">
         <span v-html="compiledMarkdown"></span>
       </div>
+    </div>
+    <vs-button
+        size="xl"
+        success
+        icon
+        border
+        upload
+        :active="active == 0"
+        @click="active = 0"
+        style="position: relative; margin: 0 auto;"
+      >
+      <i class='bx bx-check'></i>Моя история готова
+      </vs-button>
     </div>
   </template>
   
@@ -14,23 +32,45 @@
   export default {
     data() {
       return {
-        input: '# Ваша история начинается тут'
+        input: '**Ваша история начинается тут**',
+        wordCount: 4
       };
     },
     computed: {
       compiledMarkdown() {
         return marked(this.input, { sanitize: true });
       },
+      readingTime() {
+      const words = this.input.trim().split(/\s+/).length;
+      const readingSpeed = 190; // words per minute
+      const readingTimeMinutes = Math.ceil(words / readingSpeed);
+      return readingTimeMinutes;
+    },
+    minutesText() {
+      const readingTime = this.readingTime;
+      if (readingTime === 1) {
+        return 'минута';
+      } else if (readingTime >= 2 && readingTime <= 4) {
+        return 'минуты';
+      } else {
+        return 'минут';
+      }
+    }
     },
     watch: {
       input: function(){
-            this.$emit('body', {body: this.input})
+            this.$emit('body', {body: this.input});
+            this.updateWordCount();
       },
     },
     methods: {
       update: _.debounce(function(e) {
         this.input = e.target.value;
-      }, 300)
+      }, 300),
+      updateWordCount() {
+        const words = this.input.trim().split(/\s+/);
+        this.wordCount = words.length;
+      },
     }
 };
 </script>
@@ -63,7 +103,7 @@
 
 #editor {
   margin: 0;
-  height: 100vh;
+  height: 78vh;
   font-family: "Helvetica Neue", Arial, sans-serif;
   color: #333;
   z-index: 3;
