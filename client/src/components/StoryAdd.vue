@@ -2,6 +2,20 @@
   <div class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
+      <div style="display: flex; justify-content: center; margin-bottom: 2vh; opacity: 0.8;">
+          <vs-checkbox danger v-model="option1">
+            <p style="color: #EEEFF9; font-size: 1vw;">Нецензурная лексика</p>
+          <template #icon>
+            <i class='bx bx-angry'></i>
+          </template>
+        </vs-checkbox>
+        <vs-checkbox danger v-model="option1" style="margin-left: 2vw;">
+            <p style="color: #EEEFF9; font-size: 1vw;">Кровь/Насилие</p>
+          <template #icon>
+            <i class='bx bx-knife'></i>
+          </template>
+        </vs-checkbox>
+      </div>
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
       <vs-input color="#FF0000" state="success" type="video" v-model="video" label-placeholder="youtube" style="margin-right: 5px;">
         <template #icon>

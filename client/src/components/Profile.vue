@@ -300,9 +300,9 @@ export default {
   margin-right: 7%;
 }
 .containerSubscribers {
-  width: 89%;
   padding-top: 6%;
-  padding-left: 15%;
+  margin-left: 22.33%;
+  margin-right: 7%;
 }
 
 </style>

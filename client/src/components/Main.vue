@@ -3,10 +3,19 @@
     <vs-row justify="space-around">
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
+          Рекомендации на сегодня
+        </template>
+        <template #text>
+          Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+        </template>
+      </information>
+      <cardrecs></cardrecs>
+      <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+        <template #title>
           Подборка самых популярных историй на сегодня
         </template>
         <template #text>
-          Описание подобрки
+          Эти истории заслужили самое большое внимание наших читателей за последнее время!
         </template>
       </information>
       <vs-col v-for="post in Data" offset="1" w="5">
@@ -22,15 +31,6 @@
           </template>
         </card>
       </vs-col>
-      <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
-        <template #title>
-          Рекомендации на сегодня
-        </template>
-        <template #text>
-          Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
-        </template>
-      </information>
-      <cardrecs></cardrecs>
       <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
     <div class="footer">

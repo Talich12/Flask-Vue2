@@ -181,4 +181,8 @@ hr {
   border-top: 1px solid #f66;
   margin: 1em 0;
 }
+img {
+    max-width: 100%;
+    height: auto;
+}
 </style>
