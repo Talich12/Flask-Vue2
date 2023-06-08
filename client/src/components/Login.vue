@@ -4,7 +4,7 @@
         <button id="logbtn" @click="active = !active"
             style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder; border: none; background-color: transparent; cursor: pointer; color: rgb(255, 255, 255)">
             <vs-button
-        gradient
+        relief
         style="min-width: 44px; min-height: 44px; margin: 0;"
         danger
         animation-type="scale"

@@ -23,7 +23,7 @@
   }
   .image {
     height: 80%;
-    margin-left: 14%;
+    margin-left: 10%;
   }
   .mask {
     height: 80%;

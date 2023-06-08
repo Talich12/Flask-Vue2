@@ -1,94 +1,98 @@
 <template>
-    <div class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
-        <vs-row justify="space-around">
-        <vs-alert :page.sync="page" shadow color="success" style="margin-left: 8%; z-index: 0;">
+  <div class="containerInfoAbout animate__animated animate__fadeIn" style="animation-duration: 1s;">
+    <vs-row justify="space-around">
+      <vs-alert shadow color="success" style="margin-left: 8%; z-index: 0;">
         <template #title>
-            ThrillTogether с точки зрения проектной деятельности
+          О сайте ThrillTogether
         </template>
-        
-        <template #page-1>
-        Задача этого сайта - применение наших навыков на деле, оттачивание знаний и практика работы в команде.
-      </template>
-
-      <template #page-2>
-        Идея сайта позволяет полностью реализовать наши навыки: как в работе с бэкендом так и с фронтендом.
-      </template>
-
-      <template #page-3>
-        В ходе работы над сайтом получен экспириенс работы в команде.
-      </template>
+        Информацию о разработчиках можно получить внизу страницы. На этой вкладке будет описано как пользоваться различным функционалом сайта и какую информацию можно получить из различных элементов. Запустите ознакомление ниже.
       </vs-alert>
-      <div class="videoContainer">
-        <video controls class="video">
-          <source src="../assets/video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <div>
-        <youtube video-id="mJ-nm-o07zQ" ref="youtube" @playing="playing"></youtube>
-     </div>
+      <vs-button
+        size="xl"
+        success
+        border
+        style="margin-top: 3vh;"
+        @click="openNotifications"
+      >
+        <i class='bx bx-message-square-detail' style="margin-right: 0.5vw;"></i> Запустить ознакомительную часть
+      </vs-button>
     </vs-row>
     <vue-particles
-        color="#6A4E93"
-        :particleOpacity="0.4"
-        :particlesNumber="50"
-        shapeType="circle"
-        :particleSize="4"
-        linesColor="#6A4E93"
-        :linesWidth="1.2"
-        :lineLinked="true"
-        :lineOpacity="0.5"
-        :linesDistance="180"
-        :moveSpeed="1.5"
-        :hoverEffect="false"
-        hoverMode="grab"
-        :clickEffect="false"
-        clickMode="push"
-        style="position:absolute; z-index: -10; height: 100%; width: 100vw; left: 0%; top: 8%;"
-      > </vue-particles>
-    </div>
+      color="#6A4E93"
+      :particleOpacity="0.4"
+      :particlesNumber="50"
+      shapeType="circle"
+      :particleSize="4"
+      linesColor="#6A4E93"
+      :linesWidth="1.2"
+      :lineLinked="true"
+      :lineOpacity="0.5"
+      :linesDistance="180"
+      :moveSpeed="1.5"
+      :hoverEffect="false"
+      hoverMode="grab"
+      :clickEffect="false"
+      clickMode="push"
+      style="position:absolute; z-index: -10; height: 100%; width: 100vw; left: 0%; top: 8%;"
+    ></vue-particles>
+  </div>
 </template>
 
 <script>
-    export default {
-      data:() => ({
-        page: 1
-      }),
-      methods:{
-        playVideo() {
-        this.player.playVideo()
-        },
-        playing() {
-          console.log('\o/ we are watching!!!')
-          }
-        },
-        computed: {
-          player() {
-            return this.$refs.youtube.player
-          }
-        }
+export default {
+  methods: {
+    openNotifications() {
+      const icons = [
+        "<i class='bx bxs-happy-beaming'></i>",
+        "<i class='bx bxs-sleepy'></i>",
+        "<i class='bx bxs-happy-alt'></i>",
+        "<i class='bx bxs-tired'></i>"
+      ];
+
+      const positions = [
+        "bottom-right",
+        "top-right",
+        "top-center",
+        "top-left"
+      ];
+
+      const titles = ["1", "2", "3", "4"];
+
+      const texts = [
+        "one",
+        "two",
+        "three",
+        "four"
+      ];
+
+      let delay = 0;
+      for (let i = 0; i < icons.length; i++) {
+        setTimeout(() => {
+          const noti = this.$vs.notification({
+            icon: icons[i],
+            duration: 10000,
+            color: "dark",
+            border: "danger",
+            progress: 'auto',
+            position: positions[i % positions.length],
+            title: titles[i],
+            text: texts[i]
+          });
+        }, delay);
+        delay += 10000;
       }
-  </script>
+    }
+  }
+};
+</script>
 
 <style>
-.containerInfo {
+.containerInfoAbout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding-left: 16%;
   padding-right: 7%;
   padding-top: 8%;
-}
-.videoContainer {
-  padding-left: 8%;
-  padding-top: 4%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.video {
-  max-width: 100%;
-  height: auto;
 }
 </style>
