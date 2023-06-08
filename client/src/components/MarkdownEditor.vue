@@ -2,7 +2,12 @@
   <div>
     <div style="display: flex; justify-content:space-between;">
     <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bxs-pen' style="margin-right: 0.5vw;"></i>Всего слов написано: {{ wordCount }}</p>
+    <vs-tooltip border>
     <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bx-time-five' style="margin-right: 0.5vw;"></i>Примерное время чтения: {{ readingTime }} {{ minutesText }}</p>
+    <template #tooltip>
+          При средней скорости чтения 180 слов в минуту
+        </template>
+      </vs-tooltip>
     </div>
     <div id="editor" class="container">
       <textarea :value="input" @input="update"></textarea>
@@ -42,7 +47,7 @@
       },
       readingTime() {
       const words = this.input.trim().split(/\s+/).length;
-      const readingSpeed = 190; // words per minute
+      const readingSpeed = 180; // words per minute
       const readingTimeMinutes = Math.ceil(words / readingSpeed);
       return readingTimeMinutes;
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
+  <div :key="componentKey" class="containerInfo animate__animated animate__fadeIn" style="animation-duration: 1s;">
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
       <div style="display: flex; justify-content: center; margin-bottom: 2vh; opacity: 0.8;">

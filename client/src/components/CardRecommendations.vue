@@ -15,6 +15,9 @@
       <template #interactions>
         <vs-button danger icon>
           <i class='bx bx-heart'></i>
+          <span class="span">
+            54
+          </span>
         </vs-button>
         <vs-button class="btn-chat" shadow primary>
           <i class='bx bx-chat' ></i>
