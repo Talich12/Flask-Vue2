@@ -3,10 +3,10 @@
       <div class="social-media" style="padding-top: 1%;">
         <p style="margin-bottom: 1%;">Мы в социальных сетях:</p>
         <div class="social-icons">
-            <a class="social-icon" href="#"><i class="bx bxl-instagram"></i></a>
-            <a class="social-icon" href="#"><i class="bx bxl-telegram"></i></a>
-            <a class="social-icon" href="#"><i class="bx bxl-vk"></i></a>
-            <a class="social-icon" href="#"><i class="bx bxl-github"></i></a>
+            <a class="social-icon" href="https://www.instagram.com/aaaaavgust/"><i class="bx bxl-instagram"></i></a>
+            <a class="social-icon" href="https://t.me/sawmassacre"><i class="bx bxl-telegram"></i></a>
+            <a class="social-icon" href="https://vk.com/talich_mashina_nahoy"><i class="bx bxl-vk"></i></a>
+            <a class="social-icon" href="https://github.com/Talich12/ThrillTogether"><i class="bx bxl-github"></i></a>
         </div>
       </div>
       <form class="newsletter-form">
@@ -34,37 +34,37 @@
         <div class="footer-column">
           <h5 class="footer-heading">Оказать помощь ресурсу</h5>
           <ul class="footer-list">
-            <li><a href="#" class="footer-link">Криптовалюта</a></li>
-            <li><a href="#" class="footer-link">Перевод</a></li>
-            <li><a href="#" class="footer-link">Boosty</a></li>
-            <li><a href="#" class="footer-link">Предложить идею</a></li>
+            <li><a href="https://www.binance.com/ru" class="footer-link">Криптовалюта</a></li>
+            <li><a href="https://online.sberbank.ru/CSAFront/index.do" class="footer-link">Перевод</a></li>
+            <li><a href="https://boosty.to/" class="footer-link">Boosty</a></li>
+            <li><a href="https://t.me/sawmassacre" class="footer-link">Предложить идею</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h5 class="footer-heading">Контактная информация</h5>
           <ul class="footer-list">
-            <li><a href="#" class="footer-link">VKontakte</a></li>
-            <li><a href="#" class="footer-link">Telegram</a></li>
-            <li><a href="#" class="footer-link">Instagram</a></li>
-            <li><a href="#" class="footer-link">Mail</a></li>
+            <li><a href="https://vk.com/talich_mashina_nahoy" class="footer-link">VKontakte</a></li>
+            <li><a href="https://t.me/sawmassacre" class="footer-link">Telegram</a></li>
+            <li><a href="https://www.instagram.com/aaaaavgust/" class="footer-link">Instagram</a></li>
+            <li><a href="https://e.mail.ru/inbox/?back=1" class="footer-link">Mail</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h5 class="footer-heading">Для разработчиков</h5>
           <ul class="footer-list">
-            <li><a href="#" class="footer-link">Наша команда</a></li>
-            <li><a href="#" class="footer-link">Работать с нами</a></li>
-            <li><a href="#" class="footer-link">Сообщить об ошибке</a></li>
-            <li><a href="#" class="footer-link">Github</a></li>
+            <li><a href="https://github.com/Talich12/ThrillTogether" class="footer-link">Наша команда</a></li>
+            <li><a href="https://t.me/sawmassacre" class="footer-link">Работать с нами</a></li>
+            <li><a href="https://t.me/sawmassacre" class="footer-link">Сообщить об ошибке</a></li>
+            <li><a href="https://github.com/Talich12/ThrillTogether" class="footer-link">Github</a></li>
         </ul>
 </div>
 <div class="footer-column">
   <h5 class="footer-heading">Часто задаваемые вопросы</h5>
   <ul class="footer-list">
-    <li><a href="#" class="footer-link">О нас</a></li>
-    <li><a href="#" class="footer-link">Как стать автором?</a></li>
-    <li><a href="#" class="footer-link">Интро сайта</a></li>
-    <li><a href="#" class="footer-link">Удалить аккаунт</a></li>
+    <li><a href="https://www.youtube.com/" class="footer-link">О нас</a></li>
+    <li><a href="https://t.me/sawmassacre" class="footer-link">Как стать автором?</a></li>
+    <li><a href="https://www.youtube.com/" class="footer-link">Интро сайта</a></li>
+    <li><a href="https://t.me/sawmassacre" class="footer-link">Удалить аккаунт</a></li>
   </ul>
 </div>
 </div>
