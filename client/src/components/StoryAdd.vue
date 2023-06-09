@@ -49,7 +49,7 @@
         placeholder="Выберите"
         collapse-chips
         v-model="value"
-        style="margin-right: 5px;"
+        style="margin-right: 5px; margin-top: 2.3px; height: 34px;"
       >
         <vs-option v-for="genre in Data" :label="genre.name" :value="genre.name">
           {{genre.name}}
