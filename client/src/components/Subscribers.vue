@@ -1,7 +1,7 @@
 
 <template>
     <div class="center">
-      <vs-table>
+      <vs-table class="custom-table">
         <template #header>
           <vs-input v-model="search" border placeholder="Search" />
         </template>
@@ -51,48 +51,54 @@
     }
     </script>
 
-    <style>
-        .vs-table__tr:hover .vs-table__td {
-            background:#30303A;
-            color:#6A4E93;
-        }
-        .vs-table__tr .vs-table__td {
-            color:#EEEFF9; 
-        }
-        .vs-table__header {
-            color: #EEEFF9;
-            background: #30303A;
-        }
-        .vs-input-parent--border .vs-input-content .vs-input {
-            color: #EEEFF9;
-        }
-        .vs-table_not-found tr td {
-            color:#6A4E93;
-        }
-        .vs-table table {
-            background: #30303A;
-        }
-        .vs-avatar {
-            background: #30303A;
-        }
-        .vs-table__header ~ .vs-table .vs-table__th:first-child, .vs-table__thead .vs-table__th {
-            background: #6A4E93;
-        }
-        .vs-table__header ~ .vs-table .vs-table__th:first-child, .vs-table__thead .vs-table__th {
-            color: #EEEFF9;
-        }
-        .vs-table__th.sort:hover {
-            background: #30303A;
-            color: #EEEFF9;
-        }
-        .vs-table__th.sort:hover:first-child {
-            background: #30303A;
-            color: #EEEFF9;
-        }
-        .vs-icon-arrow::after {
-            background: #EEEFF9;
-        }
-        .vs-icon-arrow::before {
-            background: #EEEFF9;
-        }
-    </style>
+<style scoped>
+.custom-table .vs-table__tr:hover .vs-table__td {
+  background: #30303A;
+  color: #6A4E93;
+}
+
+.custom-table .vs-table__tr .vs-table__td {
+  color: #EEEFF9;
+}
+
+.custom-table .vs-table__header {
+  color: #EEEFF9;
+  background: #30303A;
+}
+
+.custom-table .vs-input-parent--border .vs-input-content .vs-input {
+  color: #EEEFF9;
+}
+.custom-table .vs-table__header {
+  background: #30303A;
+}
+
+.custom-table .vs-table_not-found tr td {
+  color: #6A4E93;
+}
+
+.custom-table .vs-table table {
+  background: #30303A;
+}
+
+.custom-table .vs-avatar {
+  background: #30303A;
+}
+
+.custom-table .vs-table__header ~ .vs-table .vs-table__th:first-child,
+.custom-table .vs-table__thead .vs-table__th {
+  background: #6A4E93;
+  color: #EEEFF9;
+}
+
+.custom-table .vs-table__th.sort:hover,
+.custom-table .vs-table__th.sort:hover:first-child {
+  background: #30303A;
+  color: #EEEFF9;
+}
+
+.custom-table .vs-icon-arrow::after,
+.custom-table .vs-icon-arrow::before {
+  background: #EEEFF9;
+}
+</style>

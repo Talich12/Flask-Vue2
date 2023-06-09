@@ -1,7 +1,7 @@
 
 <template>
     <div class="center" style="height: 100%;">
-      <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0;">
+      <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0; overflow-y: hidden;">
         <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
           <vs-avatar>
           <img :src="require(`@/assets/img/load/${post_data.author.avatar}`)" alt="">
@@ -30,11 +30,11 @@
         </vs-button>
         </div>
         <div style="display: flex; flex-direction: column; margin: 1vh; padding: 0.5vh; align-items: center;">
-          <hr class="rounded2" style="margin-top: -1vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
+          <hr class="rounded2" style="margin-top: -1vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
           <p>Жанры: </p>
-          <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
+          <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 18vw;">
           <p>История написана:</p>
-          <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
+          <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
         </div>
         <template #header>
           <h2>
@@ -44,13 +44,15 @@
         <div class="con-content" style="margin-bottom: 2vh;">
              <div v-html="markdownToHtml"></div>
         </div>
-        <div style="display: flex;">
+        <hr class="rounded2" style="margin: 7vh auto 1vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
+        <div style="display: flex; justify-content: center;">
           <vs-button
             color="#FF0000"
             floating
             icon
             border
           >
+          <p>500</p>
             <i class='bx bxs-heart' ></i>
           </vs-button>
           <vs-button
@@ -60,6 +62,30 @@
             border
           >
             <i class='bx bxs-bookmark' ></i>
+          </vs-button>
+          <vs-button
+            success
+            floating
+            icon
+            border
+          >
+            <i class='bx bx-share' ></i>
+          </vs-button>
+          <vs-button
+            warn
+            floating
+            icon
+            border
+          >
+            <i class='bx bx-error' ></i>
+          </vs-button>
+          <vs-button
+            success
+            floating
+            icon
+            border
+          >
+            <i class='bx bxs-user-plus' ></i>Подписаться на автора
           </vs-button>
         </div>
       </vs-dialog>

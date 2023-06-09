@@ -151,7 +151,7 @@
           <Login v-if="!$cookies.isKey('access_token')"></Login>
           <router-link v-model="active" to="/notification" style="text-decoration: none;">
             <div class="center con-avatars">
-              <vs-avatar badge-color="dark" badge-position="top-right" style="padding-top: 4;">
+              <vs-avatar badge-color="dark" badge-position="top-right" style="padding-top: 4; background: #EEEFF9;">
                 <i class='bx bx-bell' style="color: #6A4E93;" @click="active = ''"></i>
               </vs-avatar>
             </div>

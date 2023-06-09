@@ -93,4 +93,13 @@ body {
 .newsletter-button {
   font-family: 'Unbounded';
 }
+.custom-table .vs-table__header {
+  background: #30303A;
+}
+.vs-input-parent--border .vs-input-content .vs-input {
+  color: #EEEFF9;
+}
+.vs-navbar__item {
+  font-family: 'Unbounded';
+}
 </style>
