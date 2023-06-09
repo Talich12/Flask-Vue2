@@ -53,25 +53,27 @@ Vue.use(VueYoutube)
 axios.interceptors.response.use(
   response => response,
   error => {
-    if (error.response.status === 422) {
-        if (window.$cookies.isKey('refresh_token')){
-          const path = 'http://localhost:3000/TokenRefresh'; 
-            axios.get(path,{
-                headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
-                    'Access-Control-Allow-Origin': 'http//localhost:8081'
-                }
-            })
-            .then((response) => {
-                window.$cookies.set("refresh_token", response.data.refresh_token)
-            })
-            .catch((error) =>{
-                console.log(error)
-            })
-        }
-        else{
-          router.push({name: 'Main'})
-        }
+    if (error.response.status === 401) {
+      console.log("PIZDEC")
+      const path = 'http://localhost:3000/TokenRefresh'; 
+      axios.get(path,{
+          headers: {
+              'Authorization': 'Bearer ' + window.$cookies.get("refresh_token"),
+              'Access-Control-Allow-Origin': 'http//localhost:8081'
+          }
+      })
+      .then((response) => {
+          window.$cookies.set("access_token", response.data.access_token)
+      })
+      .catch((error) =>{
+        this.$cookies.remove('access_token')
+        this.$cookies.remove('refresh_token')
+        this.$cookies.remove('login')
+        this.$router.push({name: 'Main'})
+      })
+    }
+    else if (error.response.status === 422){
+      router.push({name: 'Main'})
     }
     return Promise.reject(error)
   }
