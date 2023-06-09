@@ -58,12 +58,12 @@ axios.interceptors.response.use(
       const path = 'http://localhost:3000/TokenRefresh'; 
       axios.get(path,{
           headers: {
-              'Authorization': 'Bearer ' + window.$cookies.get("refresh_token"),
-              'Access-Control-Allow-Origin': 'http//localhost:8081'
+              'Authorization': 'Bearer ' + window.$cookies.get("refresh_token")
           }
       })
       .then((response) => {
           window.$cookies.set("access_token", response.data.access_token)
+          console.log(response.data)
       })
       .catch((error) =>{
         this.$cookies.remove('access_token')

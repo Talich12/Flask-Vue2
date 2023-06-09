@@ -220,7 +220,7 @@ def upload():
     genre = str(data['genre'])
 
     print(genre)
-    username = 'Denis'
+    username = get_jwt_identity()
     filename = str(time.time()) + "_" + secure_filename(file.filename)
 
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))

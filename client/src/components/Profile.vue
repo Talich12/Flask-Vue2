@@ -186,7 +186,6 @@ export default {
             axios.get(path,{
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
-                    'Access-Control-Allow-Origin': 'http//localhost:8081'
                 }
             })
             .then((response) => {
@@ -199,7 +198,6 @@ export default {
             axios.get(path2,{
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
-                    'Access-Control-Allow-Origin': 'http//localhost:8081'
                 }
             })
             .then((response) => {
