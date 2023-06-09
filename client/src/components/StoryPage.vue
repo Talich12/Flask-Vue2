@@ -82,6 +82,7 @@
             <i class='bx bx-error' ></i>
           </vs-button>
           <vs-button
+            @click="addFollow()"
             success
             floating
             icon
@@ -159,6 +160,20 @@ import marked from 'marked';
       addSave(){
         const path = "http://localhost:3000/post/save";
         axios.post(path, {post_id: this.$props.post_data.post.id},{
+            headers: {
+                'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+            }
+        })
+            .then((response) => {
+              console.log(response.data);
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      },
+      addFollow(){
+        const path = "http://localhost:3000/post/follow";
+        axios.post(path, {user_id: this.$props.post_data.post.author.id},{
             headers: {
                 'Authorization': 'Bearer ' + this.$cookies.get("access_token")
             }

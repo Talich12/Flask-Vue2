@@ -127,6 +127,20 @@ def post_save():
 
     return jsonify({'Status': "add_save"})
 
+@app.route('/post/follow', methods=['POST'])
+@jwt_required(refresh=False)
+def post_follow():
+    data = request.get_json()
+    user_id = int(data['user_id'])
+    login = get_jwt_identity()
+
+    find_user = User.query.filter_by(username = login).first()
+    find_follow = User.query.filter_by(id = user_id).first()
+
+    find_user.follow(find_follow)
+
+    return jsonify({'Status': "add_follow"})
+
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
