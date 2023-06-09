@@ -222,7 +222,7 @@ export default {
   border-radius: 15px;
   width: 8vw;
   margin: auto;
-  margin-top: 4vh;
+  margin-top: 2.5vh;
   margin-bottom: 0vh;
 }
 </style>

@@ -44,7 +44,7 @@
         <div class="con-content" style="margin-bottom: 2vh;">
              <div v-html="markdownToHtml"></div>
         </div>
-        <hr class="rounded2" style="margin: 7vh auto 1vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
+        <hr class="rounded2" style="margin: 7vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
         <div style="display: flex; justify-content: center;">
           <vs-button
             @click="addLike()"
@@ -89,6 +89,10 @@
             <i class='bx bxs-user-plus' ></i>Подписаться на автора
           </vs-button>
         </div>
+        <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
+        <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
+        <usercomment></usercomment>
+        <usercomment></usercomment>
       </vs-dialog>
     </div>
   </template>
