@@ -5,6 +5,7 @@
       <template #logo>
         <!-- ...img logo -->
       </template>
+      <hr class="rounded" style="margin-top: 2vh;">
       <vs-sidebar-item id="main" to="/">
         <template #icon>
           <i class='bx bxs-home' style="font-size: 1vw;"></i>
@@ -99,7 +100,7 @@
           <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По лайкам</p>
         </vs-sidebar-item>
       </vs-sidebar-group>
-      <hr class="rounded">
+        <hr class="rounded">
       <vs-sidebar-group>
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
@@ -217,11 +218,11 @@ export default {
 
 <style>
   hr.rounded {
-  border-top: 0.05vh solid #6A4E93;
+  border-top: 0.2vh solid #6A4E93;
   border-radius: 15px;
-  width: 13vw;
+  width: 8vw;
   margin: auto;
-  margin-top: 0.3vh;
-  margin-bottom: 0.3vh;
+  margin-top: 4vh;
+  margin-bottom: 0vh;
 }
 </style>
