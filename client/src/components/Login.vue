@@ -41,7 +41,7 @@
 
             <template #footer>
                 <div class="footer-dialog">
-                    <vs-button @click="Done()" block>
+                    <vs-button @click="Done()" block relief danger>
                         Войти
                     </vs-button>
                     <div class="new">
@@ -76,6 +76,7 @@ export default {
                     this.$cookies.set("access_token", data.access_token)
                     this.$cookies.set("refresh_token", data.refresh_token)
                     this.$cookies.set("login", this.Login)
+                    window.location.reload(); // Refresh the page
                 }
                 else {
                     this.error = true

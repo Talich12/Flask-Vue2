@@ -39,7 +39,7 @@
 
       <template #footer>
         <div class="footer-dialog">
-          <vs-button @click="Done()" block>
+          <vs-button @click="Done()" block relief danger>
             Зарегистрироваться
           </vs-button>
         </div>
