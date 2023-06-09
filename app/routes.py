@@ -2,7 +2,7 @@ import math
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
-from app.models import User, Post, Genre, Likes, Comments, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, SavedPostSchema, followers
+from app.models import User, Post, Genre, Likes, Comments, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, SavedPostSchema, CommentsSchema,followers
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 from urllib.parse import urlparse, parse_qs
@@ -49,11 +49,84 @@ def get_index():
 
 @app.route('/post/<id>', methods=['GET'])
 def get_post(id):
-    post_schema = PostSchema(many=False)
+    output = {}
+    post_schema = PostSchema(many= False)
+    comments_schema = CommentsSchema(many = True)
     post = Post.query.filter_by(id=id).first()
-    output = post_schema.dump(post)
+
+    comments = Comments.query.filter_by(post_id = id).order_by(Comments.timestamp.desc())
+    output['post'] = post_schema.dump(post)
+    output['comments'] = comments_schema.dump(comments)
 
     return jsonify(output)
+
+
+@app.route('/post/like', methods=['POST'])
+@jwt_required(refresh=False)
+def post_like():
+    data = request.get_json()
+    post_id = int(data['post_id'])
+    login = get_jwt_identity()
+
+    find_user = User.query.filter_by(username = login).first()
+    find_post = Post.query.filter_by(id = post_id).first()
+
+    find_like = Likes.query.filter_by(user_id = find_user.id, post_id = post_id).first()
+
+    if find_like != None:
+        db.session.delete(find_like)
+        find_post.like_count -= 1
+        db.session.commit()
+        return jsonify({"Status" : "delete_like"})
+
+    like = Likes(user_id = find_user.id, post_id = post_id, user = find_user, post = find_post)
+    find_post.like_count += 1
+
+    db.session.add(like)
+    db.session.commit()
+
+
+    return jsonify({'Status': "add_like"})
+
+@app.route('/post/comment', methods=['POST'])
+@jwt_required(refresh=False)
+def post_comment():
+    data = request.get_json()
+    post_id = int(data['post_id'])
+    text = data['text']
+    login = get_jwt_identity()
+
+    find_user = User.query.filter_by(username = login).first()
+    find_post = Post.query.filter_by(id = post_id).first()
+
+    comment = Comments(user_id = find_user.id, post_id = post_id, user = find_user, post = find_post, text = text)
+
+    db.session.add(comment)
+    db.session.commit()
+
+    return jsonify({'Status': "add_comment"})
+
+@app.route('/post/save', methods=['POST'])
+@jwt_required(refresh=False)
+def post_save():
+    data = request.get_json()
+    post_id = int(data['post_id'])
+    login = get_jwt_identity()
+
+    find_user = User.query.filter_by(username = login).first()
+    find_post = Post.query.filter_by(id = post_id).first()
+
+    find_save = SavedPost.query.filter_by(user_id = find_user.id, post_id = post_id).first()
+    if find_save != None:
+        return jsonify({'Status': "save_exist"})
+
+    save = SavedPost(user_id = find_user.id, post_id = post_id, user = find_user, post = find_post)
+
+    db.session.add(save)
+    db.session.commit()
+
+    return jsonify({'Status': "add_save"})
+
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
@@ -94,7 +167,7 @@ def get_saved():
 
     find_user = User.query.filter_by(username = login).first()
 
-    posts_request = SavedPost.query.filter_by(user_id = find_user.id).order_by(Post.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
+    posts_request = SavedPost.query.filter_by(user_id = find_user.id).order_by(SavedPost.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
 
     len = SavedPost.query.filter_by(user_id = find_user.id).count()
     len =  math.ceil(len/value)
@@ -133,33 +206,6 @@ def get_followed_posts():
 
 
     return jsonify(output)
-
-@app.route('/post/like', methods=['POST'])
-@jwt_required(refresh=False)
-def post_like():
-    data = request.get_json()
-    post_id = int(data['post_id'])
-    login = get_jwt_identity()
-
-    find_user = User.query.filter_by(username = login).first()
-    find_post = Post.query.filter_by(id = post_id).first()
-
-    find_like = Likes.query.filter_by(user_id = find_user.id, post_id = post_id).first()
-
-    if find_like != None:
-        db.session.delete(find_like)
-        find_post.like_count -= 1
-        db.session.commit()
-        return jsonify({"Status" : "delete_like"})
-
-    like = Likes(user_id = find_user.id, post_id = post_id, user = find_user, post = find_post)
-    find_post.like_count += 1
-
-    db.session.add(like)
-    db.session.commit()
-
-    return jsonify({'Status': "add_like"})
-
 
 @app.route('/profile/<username>/follow', methods=['POST'])
 @jwt_required(refresh=False)
