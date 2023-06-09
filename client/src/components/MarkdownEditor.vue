@@ -15,7 +15,8 @@
         <span v-html="compiledMarkdown"></span>
       </div>
     </div>
-    <div style="display: flex; flex-direction:row;">
+    <div style="display: flex; margin: 0 auto;">
+      <vs-button-group style="margin: 0 auto;">
       <vs-button
       size="xl"
       success
@@ -46,6 +47,7 @@
     >
       <i class='bx bx-download'></i>Скачать текст как .md
     </vs-button>
+  </vs-button-group>
   </div>
     </div>
   </template>
