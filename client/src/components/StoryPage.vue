@@ -4,11 +4,11 @@
       <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0; overflow-y: hidden;">
         <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
           <vs-avatar>
-          <img :src="require(`@/assets/img/load/${post_data.author.avatar}`)" alt="">
+          <img :src="require(`@/assets/img/load/${post_data.post.author.avatar}`)" alt="">
         </vs-avatar>
-        <p style="font-size: 3vh; margin-left: 1vw;">{{ post_data.author.username }}</p>
+        <p style="font-size: 3vh; margin-left: 1vw;">{{ post_data.post.author.username }}</p>
         <vs-button
-          v-if="post_data.has_video"
+          v-if="post_data.post.has_video"
           color="#FF0000"
           border
           upload
@@ -19,7 +19,7 @@
           <i class="bx bxl-youtube"></i> Видео на youtube!
         </vs-button>
         <vs-button
-          v-if="post_data.has_audio"
+          v-if="post_data.post.has_audio"
           danger
           border
           upload
@@ -31,14 +31,14 @@
         </div>
         <div style="display: flex; flex-direction: column; margin: 1vh; padding: 0.5vh; align-items: center;">
           <hr class="rounded2" style="margin-top: -1vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
-          <p>Жанры: {{ post_data.genre }}</p>
+          <p>Жанры: {{ post_data.post.genre }}</p>
           <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 18vw;">
-          <p>История написана: {{ post_data.timestamp }}</p>
+          <p>История написана: {{ post_data.post.timestamp }}</p>
           <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
         </div>
         <template #header>
           <h2>
-            {{ post_data.title }}
+            {{ post_data.post.title }}
           </h2>
         </template>
         <div class="con-content" style="margin-bottom: 2vh;">
@@ -53,10 +53,11 @@
             icon
             border
           >
-          <p>{{post_data.like_count}}</p>
+          <p>{{post_data.post.like_count}}</p>
             <i class='bx bxs-heart' ></i>
           </vs-button>
           <vs-button 
+            @click="addSave()"
             success
             floating
             icon
@@ -81,6 +82,7 @@
             <i class='bx bx-error' ></i>
           </vs-button>
           <vs-button
+            @click="addFollow()"
             success
             floating
             icon
@@ -92,19 +94,19 @@
         <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
         <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
         <div style="display: flex;">
-        <vs-input border v-model="value" placeholder="Прокомментировать..." style="margin: 1vh; width: 100%;" class="multiline-input"/>
+        <vs-input border v-model="text" placeholder="Прокомментировать..." style="margin: 1vh; width: 100%;" class="multiline-input"/>
         <vs-button
+        @click="addComment()"
         icon
         danger
         flat
-        :active="active == 1"
-        @click="active = 1"
       >
         <i class="bx bx-send"></i>
       </vs-button>
         </div>
-        <usercomment></usercomment>
-        <usercomment></usercomment>
+        <div v-for="comment in post_data.comments">
+          <usercomment :comment_data="comment" ></usercomment>
+        </div>
       </vs-dialog>
     </div>
   </template>
@@ -115,13 +117,14 @@ import marked from 'marked';
   export default {
     props: ['post_data', 'active'],
     data:() => ({
+      text: '',
       activebtn: '',
       markdown:  ``,
     }),
     methods:{
       addLike(){
         const path = "http://localhost:3000/post/like";
-        axios.post(path, {post_id: this.$props.post_data.id},{
+        axios.post(path, {post_id: this.$props.post_data.post.id},{
             headers: {
                 'Authorization': 'Bearer ' + this.$cookies.get("access_token")
             }
@@ -129,19 +132,73 @@ import marked from 'marked';
             .then((response) => {
             console.log(response.data);
             if (response.data.Status == "add_like")
-              this.$props.post_data.like_count++
+              this.$props.post_data.post.like_count++
             else{
-              this.$props.post_data.like_count--
+              this.$props.post_data.post.like_count--
             }
         })
             .catch((error) => {
             console.log(error);
         });
+      },
+      addComment(){
+        const path = "http://localhost:3000/post/comment";
+        axios.post(path, {post_id: this.$props.post_data.post.id, text: this.text},{
+            headers: {
+                'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+            }
+        })
+            .then((response) => {
+              this.text = ''
+              this.FetchData()
+              console.log(response.data);
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      },
+      addSave(){
+        const path = "http://localhost:3000/post/save";
+        axios.post(path, {post_id: this.$props.post_data.post.id},{
+            headers: {
+                'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+            }
+        })
+            .then((response) => {
+              console.log(response.data);
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      },
+      addFollow(){
+        const path = "http://localhost:3000/post/follow";
+        axios.post(path, {user_id: this.$props.post_data.post.author.id},{
+            headers: {
+                'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+            }
+        })
+            .then((response) => {
+              console.log(response.data);
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      },
+      FetchData(){
+        const path = "http://localhost:3000/post/" + this.$props.post_data.post.id;
+            axios.get(path)
+                .then((response) => {
+                  this.$props.post_data = response.data
+            })
+                .catch((error) => {
+                console.log(error);
+            })
       }
     },
     computed: {
         markdownToHtml(){
-            return marked(this.$props.post_data.body);
+            return marked(this.$props.post_data.post.body);
         }
     }
 }  

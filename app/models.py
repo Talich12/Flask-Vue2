@@ -40,6 +40,7 @@ class Likes(db.Model):
 class SavedPost(db.Model):
     __tablename__ = 'saved_posts'
     id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
@@ -177,4 +178,11 @@ class SavedPostSchema(ma.SQLAlchemySchema):
         load_instance = True
 
     post = fields.Nested(PostSchema)
-    
+
+class CommentsSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = Comments
+        load_instance = True
+
+    text = auto_field()
+    user = fields.Nested(UserSchema)
