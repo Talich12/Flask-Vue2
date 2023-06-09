@@ -91,6 +91,7 @@
         <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
         <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
         <usercomment></usercomment>
+        <usercomment></usercomment>
       </vs-dialog>
     </div>
   </template>

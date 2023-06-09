@@ -1,5 +1,5 @@
 <template>
-    <div class="usercard" style="align-items: center; border: 0.2vh solid #6A4E93; border-radius: 15px;">
+    <div class="usercard" style="align-items: center; border: 0.2vh solid #6A4E93; border-radius: 15px; margin-top: 2vh; margin-bottom: 1.5vh;">
         <div style="display: flex; align-items: center; margin: 2vh;">
         <vs-avatar style="margin-right: 1vw;">
             <img src='../assets/img/load/sample1.jpg' alt="">
