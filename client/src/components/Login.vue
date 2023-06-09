@@ -165,4 +165,13 @@ export default {
 .vs-dialog__close i::before {
     background: rgb(48, 48, 58);
 }
+.vs-input {
+    color: #EEEFF9;
+}
+.vs-dialog__close i::before {
+  background: #EEEFF9
+}
+.vs-dialog__close i::after {
+  background: #EEEFF9
+}
 </style>

@@ -18,37 +18,13 @@
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Поиск</p>
       </vs-sidebar-item>
-
+      <hr class="rounded">
       <vs-sidebar-item id="recommendations">
         <template #icon>
           <i class='bx bx-merge' style="font-size: 1vw;"></i>
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Рекомендации</p>
       </vs-sidebar-item>
-
-      <vs-sidebar-group>
-        <template #header>
-          <vs-sidebar-item arrow style="margin-right: 7%;">
-            <template #icon>
-              <i class='bx bxs-folder-plus' style="font-size: 1vw;"></i>
-            </template>
-            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
-          </vs-sidebar-item>
-        </template>
-        <vs-sidebar-item>
-          <template #icon>
-            <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
-          </template>
-          <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
-        </vs-sidebar-item>
-
-        <vs-sidebar-item>
-          <template #icon>
-            <i class='bx bxs-film' style="font-size: 1vw;"></i>
-          </template>
-          <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
-        </vs-sidebar-item>
-      </vs-sidebar-group>
 
       <vs-sidebar-group>
         <template #header>
@@ -122,7 +98,30 @@
           </template>
           <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По лайкам</p>
         </vs-sidebar-item>
+      </vs-sidebar-group>
+      <hr class="rounded">
+      <vs-sidebar-group>
+        <template #header>
+          <vs-sidebar-item arrow style="margin-right: 7%;">
+            <template #icon>
+              <i class='bx bxs-folder-plus' style="font-size: 1vw;"></i>
+            </template>
+            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
+          </vs-sidebar-item>
+        </template>
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
+        </vs-sidebar-item>
 
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-film' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
+        </vs-sidebar-item>
       </vs-sidebar-group>
 
       <vs-sidebar-item to="/bookmarks" id="bookmarks">
@@ -131,7 +130,7 @@
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
-      
+      <hr class="rounded">
       <vs-sidebar-item to="/about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
@@ -150,7 +149,7 @@
           </router-link>
           <Login v-if="!$cookies.isKey('access_token')"></Login>
           <router-link v-model="active" to="/notification" style="text-decoration: none;">
-            <div class="center con-avatars bell">
+            <div class="center con-avatars">
               <vs-avatar badge-color="dark" badge-position="top-right" style="padding-top: 4;">
                 <i class='bx bx-bell' style="color: #6A4E93;" @click="active = ''"></i>
               </vs-avatar>
@@ -215,3 +214,14 @@ export default {
   }
 };
 </script>
+
+<style>
+  hr.rounded {
+  border-top: 0.05vh solid #6A4E93;
+  border-radius: 15px;
+  width: 13vw;
+  margin: auto;
+  margin-top: 0.3vh;
+  margin-bottom: 0.3vh;
+}
+</style>
