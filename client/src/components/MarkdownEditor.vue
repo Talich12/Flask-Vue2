@@ -15,6 +15,17 @@
         <span v-html="compiledMarkdown"></span>
       </div>
     </div>
+    <div style="display: flex; flex-direction:row;">
+      <vs-button
+      size="xl"
+      success
+      icon
+      border
+      style="position: relative; margin: 0 auto;"
+      @click="insertMarkdown"
+    >
+      <i class='bx bx-upload'></i>Загрузить файл .md
+    </vs-button>
     <vs-button
         size="xl"
         success
@@ -25,6 +36,17 @@
       >
       <i class='bx bx-check'></i>Моя история готова
       </vs-button>
+      <vs-button
+      size="xl"
+      success
+      icon
+      border
+      style="position: relative; margin: 0 auto;"
+      @click="downloadMarkdown"
+    >
+      <i class='bx bx-download'></i>Скачать текст как .md
+    </vs-button>
+  </div>
     </div>
   </template>
   
@@ -74,6 +96,33 @@
         const words = this.input.trim().split(/\s+/);
         this.wordCount = words.length;
       },
+      downloadMarkdown() {
+      const filename = 'your-story.md';
+      const markdownContent = this.input;
+      const element = document.createElement('a');
+      const file = new Blob([markdownContent], { type: 'text/markdown' });
+      element.href = URL.createObjectURL(file);
+      element.download = filename;
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    },
+    insertMarkdown() {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.md';
+
+      fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const content = e.target.result;
+          this.input = content;
+        };
+        reader.readAsText(file);
+      };
+      fileInput.click();
+    },
     }
 };
 </script>
