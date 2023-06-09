@@ -125,16 +125,16 @@
         </vs-sidebar-item>
         <vs-sidebar-item>
           <template #icon>
-            <i class='bx bx-angry' style="font-size: 1vw;"></i>
+            <i class='bx bx-angry' style="font-size: 1vw; color: #FF0000;"></i>
           </template>
-          <vs-switch v-model="curse" primary style="background-color: black;"><p style="font-size: 0.66vw;">Нецензурная лексика</p></vs-switch>
+          <vs-switch v-model="curse" color="#FF0000" style="background-color: black;"><p style="font-size: 0.66vw;">Нецензурная лексика</p></vs-switch>
         </vs-sidebar-item>
 
         <vs-sidebar-item>
           <template #icon>
-            <i class='bx bx-knife' style="font-size: 1vw;"></i>
+            <i class='bx bx-knife' style="font-size: 1vw; color: #FF0000;"></i>
           </template>
-          <vs-switch v-model="violence" danger style="background-color: black;">Кровь/Насилие</vs-switch>
+          <vs-switch v-model="violence" color="#FF0000" style="background-color: black;">Кровь/Насилие</vs-switch>
         </vs-sidebar-item>
       </vs-sidebar-group>
 
