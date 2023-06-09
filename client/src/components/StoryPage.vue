@@ -31,9 +31,9 @@
         </div>
         <div style="display: flex; flex-direction: column; margin: 1vh; padding: 0.5vh; align-items: center;">
           <hr class="rounded2" style="margin-top: -1vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
-          <p>Жанры: </p>
+          <p>Жанры: {{ post_data.genre }}</p>
           <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 18vw;">
-          <p>История написана:</p>
+          <p>История написана: {{ post_data.timestamp }}</p>
           <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
         </div>
         <template #header>
@@ -47,15 +47,16 @@
         <hr class="rounded2" style="margin: 7vh auto 1vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
         <div style="display: flex; justify-content: center;">
           <vs-button
+            @click="addLike()"
             color="#FF0000"
             floating
             icon
             border
           >
-          <p>500</p>
+          <p>{{post_data.like_count}}</p>
             <i class='bx bxs-heart' ></i>
           </vs-button>
-          <vs-button
+          <vs-button 
             success
             floating
             icon
@@ -93,6 +94,7 @@
   </template>
 
 <script>
+import axios from 'axios';
 import marked from 'marked';
   export default {
     props: ['post_data', 'active'],
@@ -100,6 +102,27 @@ import marked from 'marked';
       activebtn: '',
       markdown:  ``,
     }),
+    methods:{
+      addLike(){
+        const path = "http://localhost:3000/post/like";
+        axios.post(path, {post_id: this.$props.post_data.id},{
+            headers: {
+                'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+            }
+        })
+            .then((response) => {
+            console.log(response.data);
+            if (response.data.Status == "add_like")
+              this.$props.post_data.like_count++
+            else{
+              this.$props.post_data.like_count--
+            }
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      }
+    },
     computed: {
         markdownToHtml(){
             return marked(this.$props.post_data.body);
