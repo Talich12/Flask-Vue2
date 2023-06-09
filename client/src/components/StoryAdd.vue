@@ -27,17 +27,7 @@
           <i class='bx bxs-microphone-alt' ></i>
         </template>
       </vs-input>
-      <vs-button
-      flat
-        style="min-width: 200px"
-        success
-        animation-type="scale"
-      >
-        <i class='bx bxl-markdown'></i>
-        <template #animate >
-          Markdown подсказка
-        </template>
-      </vs-button>
+      <mdtips></mdtips>
       </div>
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
       <vs-select
@@ -92,10 +82,12 @@
 <script>
 import axios from 'axios';
 import mdeditor from './MarkdownEditor.vue';
+import mdtips from './MarkdownTips.vue';
 
 export default {
   components: {
-    mdeditor
+    mdeditor,
+    mdtips
   },
   data() {
     return {
