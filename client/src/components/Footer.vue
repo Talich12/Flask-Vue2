@@ -134,20 +134,23 @@ h5 {
   padding: 8px;
   border: none;
   border-radius: 5px;
+  font-size: 1vw;
   color:#ffffff;
+  width: 20vw;
   background-color: rgb(62, 62, 74);
 }
 
 .newsletter-button {
   padding: 8px 20px;
   border: none;
+  font-size: 1vw;
   border-radius: 5px;
   background-color: rgb(48, 48, 58);
   color: #ffffff;
 }
 
 .description {
-    color: rgb(188, 188, 188);
+  color: rgb(188, 188, 188);
   font-weight:lighter;
   font-size: small;
   margin-bottom: 20px;

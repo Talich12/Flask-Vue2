@@ -160,3 +160,10 @@ export default {
   },
 }
 </script>
+
+<style>
+  .vs-select__chips__input::placeholder {
+    color: rgb(106, 78, 147);
+    font-family: 'Unbounded';
+  }
+</style>

@@ -11,7 +11,7 @@
         size="xl"
         success
         border
-        style="margin-top: 3vh;"
+        style="margin-top: 6vh;"
         @click="openNotifications"
       >
         <i class='bx bx-message-square-detail' style="margin-right: 0.5vw;"></i> Запустить ознакомительную часть
@@ -72,11 +72,13 @@ export default {
             icon: icons[i],
             duration: 10000,
             color: "dark",
+            width: "auto",
             border: "danger",
             progress: 'auto',
             position: positions[i % positions.length],
             title: titles[i],
-            text: texts[i]
+            text: texts[i],
+            classes: "pulsating-notification"
           });
         }, delay);
         delay += 10000;
@@ -94,5 +96,21 @@ export default {
   padding-left: 16%;
   padding-right: 7%;
   padding-top: 8%;
+}
+
+.vs-notification {
+  animation: pulsate 1.5s infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

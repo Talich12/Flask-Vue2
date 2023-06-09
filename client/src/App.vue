@@ -75,13 +75,22 @@ body {
 ::file-selector-button {
   display: none;
 }
-.vs-input-parent--border .vs-input-content .vs-input {
-  color: #EEEFF9;
-}
 .vs-dialog__close i::before {
   background: #EEEFF9
 }
 .vs-dialog__close i::after {
   background: #EEEFF9
+}
+.vs-input {
+    font-family: 'Unbounded';
+  }
+  .vs-button {
+    font-family: 'Unbounded';
+  }
+.newsletter-input {
+  font-family: 'Unbounded';
+}
+.newsletter-button {
+  font-family: 'Unbounded';
 }
 </style>

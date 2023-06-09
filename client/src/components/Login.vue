@@ -159,4 +159,10 @@ export default {
 .footer-dialog .vs-button {
     margin: 0px;
 }
+.vs-dialog__close i::after {
+    background: rgb(48, 48, 58);
+}
+.vs-dialog__close i::before {
+    background: rgb(48, 48, 58);
+}
 </style>
