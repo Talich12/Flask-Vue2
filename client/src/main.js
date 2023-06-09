@@ -14,6 +14,7 @@ import 'animate.css';
 
 import VueYoutube from 'vue-youtube'
 
+import StoryPage from './components/StoryPage'
 import Card from './components/Card';
 import Cookie from './components/Cookie'
 import Sidebar from './components/Sidebar';
@@ -28,6 +29,7 @@ import Profile from './components/Profile';
 import Notification from './components/Notification';
 import MarkdownEditor from './components/MarkdownEditor';
 import Subscribers from './components/Subscribers';
+Vue.component('storypage', StoryPage)
 Vue.component('subscriber', Subscribers);
 Vue.component('totop', ButtonToTop);
 Vue.component('cardrecs', CardRecommendations);

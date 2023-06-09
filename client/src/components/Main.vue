@@ -34,41 +34,7 @@
       <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
 
-    <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0;">
-      <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
-        <vs-avatar>
-        <img src="../assets/img/load/sample1.jpg" alt="">
-      </vs-avatar>
-      <p style="font-size: 3vh; margin-left: 1vw;">SawMassacre</p>
-      <vs-button
-        color="#FF0000"
-        border
-        upload
-        :activebtn="activebtn == 2"
-        @click="active = 2"
-        style="margin-left: 8vw;"
-      >
-        <i class="bx bxl-youtube"></i> Видео на youtube!
-      </vs-button>
-      <vs-button
-        danger
-        border
-        upload
-        :activebtn="activebtn == 2" 
-        @click="active = 2"
-      >
-        <i class="bx bxs-microphone-alt"></i> Озвучка истории!
-      </vs-button>
-      </div>
-      <template #header>
-        <h2>
-          {{ post_title }}
-        </h2>
-      </template>
-      <div class="con-content">
-            <div v-html="markdownToHtml"></div>
-      </div>
-    </vs-dialog>
+    <storypage  :active="active" :post_title="post_title" />
     <div class="footer">
       <!-- Ваш код футера -->
     </div>

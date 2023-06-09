@@ -1,9 +1,6 @@
 
 <template>
     <div class="center" style="height: 100%;">
-      <vs-button shadow @click="active=!active" style="left: 30%; z-index: 100;">
-        Open Dialog
-      </vs-button>
       <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0;">
         <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
           <vs-avatar>
@@ -32,7 +29,7 @@
         </div>
         <template #header>
           <h2>
-            ТУТ НАЗВАНИЕ ИСТОРИИ
+            {{ post_title }}
           </h2>
         </template>
         <div class="con-content">
@@ -45,8 +42,8 @@
 <script>
 import marked from 'marked';
   export default {
+    props: ['post_title', 'active'],
     data:() => ({
-      active: false,
       markdown:  `![cover](https://images.genius.com/8a661ac2b22e160af9e0504c29a0ffbc.1000x1000x1.png)
       # Текст песни "Отопление"
 
