@@ -21,8 +21,6 @@
         icon
         border
         upload
-        :active="active == 0"
-        @click="active = 0"
         style="position: relative; margin: 0 auto;"
       >
       <i class='bx bx-check'></i>Моя история готова

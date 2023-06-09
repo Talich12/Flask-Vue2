@@ -50,7 +50,32 @@ Vue.use(VueParticles);
 Vue.use(axios)
 Vue.use(VueYoutube)
 
-
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response.status === 422) {
+        if (window.$cookies.isKey('refresh_token')){
+          const path = 'http://localhost:3000/TokenRefresh'; 
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
+                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                }
+            })
+            .then((response) => {
+                window.$cookies.set("refresh_token", response.data.refresh_token)
+            })
+            .catch((error) =>{
+                console.log(error)
+            })
+        }
+        else{
+          router.push({name: 'Main'})
+        }
+    }
+    return Promise.reject(error)
+  }
+)
 
 Vue.config.productionTip = false;
 
