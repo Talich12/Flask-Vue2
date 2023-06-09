@@ -107,6 +107,33 @@ def get_saved():
 
     return jsonify(output)
 
+@app.route('/followedposts', methods=['POST'])
+@jwt_required(refresh=False)
+def get_followed_posts():
+    output = {}
+
+    data = request.get_json(silent=True)
+    value = int(data['value'])
+    page = int(data['page'])
+    
+    login = get_jwt_identity()
+    find_user = User.query.filter_by(username = login).first()
+
+    post_schema = PostSchema(many = True)
+
+    posts = find_user.followed_posts().paginate(page=page,per_page=value,error_out=False)
+
+    len = find_user.followed_posts().count()
+    len = math.ceil(len/value)
+
+    output_query = post_schema.dump(posts)
+
+    output['data'] = output_query
+    output['len'] = len
+
+
+    return jsonify(output)
+
 
 @app.route('/profile/<username>/follow', methods=['POST'])
 @jwt_required(refresh=False)

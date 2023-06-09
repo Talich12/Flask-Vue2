@@ -3,22 +3,22 @@
       <vs-row justify="space-around">
         <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
           <template #title>
-            <p><i class='bx bxs-bookmark'></i>Ваши закладки</p>
+            <p><i class='bx bxs-bookmark'></i>Ваши подписки</p>
           </template>
           <template #text>
-            Тут вы можете просмотреть сохраненные на потом истории! Чтобы сохранить на потом используйте кнопку с иконкой закладки.
+            Здесь отображаются истории тех авторов на которых вы подписаны
           </template>
         </information>
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>
-              {{ post.post.title }}
+              {{ post.title }}
             </template>
             <template #text>
-              {{ post.post.author.username }}
+              {{ post.author.username }}
             </template>
             <template #img>
-              <img :src="require(`@/assets/img/load/${post.post.img}`)" alt="">
+              <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
             </template>
           </card>
         </vs-col>
@@ -66,7 +66,7 @@
     },
     methods: {
         Get() {
-            const path = "http://localhost:3000/saved";
+            const path = "http://localhost:3000/followedposts";
             axios.post(path, {page: this.page, value: this.value}, {
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
@@ -75,6 +75,7 @@
                 .then((response) => {
                 console.log(response.data);
                 this.Data = response.data.data;
+                console.log(this.Data)
                 this.len = response.data.len
             })
                 .catch((error) => {
@@ -83,7 +84,7 @@
         },
         onPage(data){
           this.page = data.page
-          const path = "http://localhost:3000/saved";
+          const path = "http://localhost:3000/followedposts";
             axios.post(path, {page: data.page, value: this.value}, {
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
@@ -100,7 +101,7 @@
         onValue(data){
           this.value = data.value
           this.page = 1
-          const path = "http://localhost:3000/saved";
+          const path = "http://localhost:3000/followedposts";
             axios.post(path, {value: data.value, page: this.page}, {
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("access_token"),

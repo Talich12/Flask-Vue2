@@ -37,7 +37,7 @@
           </vs-sidebar-item>
         </template>
 
-        <vs-sidebar-item id="authors">
+        <vs-sidebar-item to="/followedposts" id="authors">
           <template #icon>
             <i class='bx bxs-user' style="font-size: 1vw;"></i>
           </template>
