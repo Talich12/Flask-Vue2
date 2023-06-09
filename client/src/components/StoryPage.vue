@@ -90,6 +90,18 @@
         </div>
         <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
         <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
+        <div style="display: flex;">
+        <vs-input border v-model="value" placeholder="Прокомментировать..." style="margin: 1vh; width: 100%;" class="multiline-input"/>
+        <vs-button
+        icon
+        danger
+        flat
+        :active="active == 1"
+        @click="active = 1"
+      >
+        <i class="bx bx-send"></i>
+      </vs-button>
+        </div>
         <usercomment></usercomment>
         <usercomment></usercomment>
       </vs-dialog>
@@ -113,6 +125,11 @@ import marked from 'marked';
   </script>
 
 <style>
+.vs-input-parent--border .vs-input-content .vs-input {
+  width: 100%;
+  line-break:anywhere;
+  margin-right: 1vh;
+}
 .vs-dialog {
     background: #2A2A35;
     color: #EEEFF9;
