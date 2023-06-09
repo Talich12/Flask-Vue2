@@ -155,7 +155,7 @@ export default {
             const path = "http://localhost:3000"+this.$route.path;
             axios.get(path,{
                 headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token")
                 }
             })
                 .then((response) => {
@@ -185,7 +185,7 @@ export default {
             const path = 'http://localhost:3000/LogoutAccess'; 
             axios.get(path,{
                 headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token")
                 }
             })
             .then((response) => {
@@ -197,7 +197,7 @@ export default {
             const path2 = 'http://localhost:3000/LogoutRefresh'
             axios.get(path2,{
                 headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
+                    'Authorization': 'Bearer ' + this.$cookies.get("refresh_token")
                 }
             })
             .then((response) => {
