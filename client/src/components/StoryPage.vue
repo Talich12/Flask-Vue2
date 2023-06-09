@@ -98,13 +98,12 @@
         <vs-button
         @click="addComment()"
         icon
-        danger
-        flat
+        danger :class="{ 'shake-animation': isCommentAdded }"
       >
         <i class="bx bx-send"></i>
       </vs-button>
         </div>
-        <div v-for="comment in post_data.comments">
+        <div v-for="comment in post_data.comments" :class="{ 'shake-animation': isCommentAdded }">
           <usercomment :comment_data="comment" ></usercomment>
         </div>
       </vs-dialog>
@@ -120,6 +119,7 @@ import marked from 'marked';
       text: '',
       activebtn: '',
       markdown:  ``,
+      isCommentAdded: false,
     }),
     methods:{
       addLike(){
@@ -141,21 +141,39 @@ import marked from 'marked';
             console.log(error);
         });
       },
-      addComment(){
-        const path = "http://localhost:3000/post/comment";
-        axios.post(path, {post_id: this.$props.post_data.post.id, text: this.text},{
-            headers: {
-                'Authorization': 'Bearer ' + this.$cookies.get("access_token")
-            }
-        })
-            .then((response) => {
-              this.text = ''
-              this.FetchData()
+      addComment() {
+        if (this.text.trim() !== '') {
+          let filteredText = this.replaceCurseWords(this.text);
+
+          const path = "http://localhost:3000/post/comment";
+          axios.post(path, { post_id: this.$props.post_data.post.id, text: filteredText }, {
+              headers: {
+                  'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+              }
+          })
+          .then((response) => {
+              this.text = '';
+              this.FetchData();
               console.log(response.data);
-        })
-            .catch((error) => {
-            console.log(error);
-        });
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+
+          this.isCommentAdded = true;
+          setTimeout(() => {
+              this.isCommentAdded = false;
+          }, 1000);
+        }
+      },
+
+      replaceCurseWords(text) {
+        const curseWords = ['бля', 'хуйня', 'пиздец', 'гладиолус'];
+        for (const word of curseWords) {
+          const regex = new RegExp(word, 'gi');
+          text = text.replace(regex, '*'.repeat(word.length));
+        }
+        return text;
       },
       addSave(){
         const path = "http://localhost:3000/post/save";
@@ -179,6 +197,8 @@ import marked from 'marked';
             }
         })
             .then((response) => {
+              this.text = '';
+              this.FetchData();
               console.log(response.data);
         })
             .catch((error) => {
@@ -205,6 +225,30 @@ import marked from 'marked';
   </script>
 
 <style>
+.shake-animation {
+  animation: shake 0.35s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .vs-input-parent--border .vs-input-content .vs-input {
   width: 100%;
   line-break:anywhere;
