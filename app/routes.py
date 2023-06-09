@@ -83,9 +83,10 @@ def search():
     return jsonify(output)
 
 @app.route('/saved', methods=['POST'])
+@jwt_required(refresh=False)
 def get_saved():
     output = {}
-    login = "Denis"
+    login = get_jwt_identity()
 
     data = request.get_json(silent=True)
     value = int(data['value'])
@@ -110,7 +111,7 @@ def get_saved():
 @app.route('/profile/<username>/follow', methods=['POST'])
 @jwt_required(refresh=False)
 def user_follow(username):
-    login = "Lera"
+    login = get_jwt_identity()
     find_user = User.query.filter_by(username=login).first()
     follow_user =  User.query.filter_by(username=username).first()
 
@@ -156,7 +157,7 @@ def get_posts(username):
 @app.route('/profile/<username>', methods=['GET'])
 @jwt_required(refresh=False)
 def get_profile(username):
-    login = "Lera"
+    login = get_jwt_identity()
     access = False
     if username == login:
         access = True
