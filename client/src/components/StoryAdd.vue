@@ -19,7 +19,7 @@
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
       <vs-input color="#FF0000" state="success" type="video" v-model="video" label-placeholder="youtube" style="margin-right: 5px;">
         <template #icon>
-          <i class='bx bxl-youtube' ></i>
+          <i class='bx bxl-youtube'></i>
         </template>
       </vs-input>
       <vs-input danger type="audio" state="success" v-model="audio" label-placeholder="audioboom">
@@ -109,11 +109,30 @@ export default {
     }
   },
   methods: {
+    validateYouTubeLink(link) {
+      const youtubePattern = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]{11}$/;
+      return youtubePattern.test(link);
+    },
+    validateYoutube() {
+      if (this.video && !this.validateYouTubeLink(this.video)) {
+        this.openNotification('top-center');
+      }
+    },
+    openNotification(position = null, icon = `<i class='bx bxl-youtube'><i>`, title = 'Ссылка на youtube не работает', text = `Проверьте на правильность и попробуйте еще раз!`) {
+          const noti = this.$vs.notification({  
+            position,
+            icon,
+            title,
+            icon,
+            text
+          })
+    },
     OnFileSelected(event) {
       this.file = event.target.files[0]
       console.log(event)
     },
     onUpload() {
+      this.validateYoutube();
       const fd = new FormData();
       fd.append('genre', this.value)
       fd.append('file', this.file)
@@ -152,7 +171,7 @@ export default {
   },
   watch:{
     value: function(){
-      console.log(this.value)
+      console.log(this.value);
     }
   },
   created() {
