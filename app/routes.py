@@ -47,6 +47,14 @@ def get_index():
     return jsonify(output)
 
 
+@app.route('/post/<id>', methods=['GET'])
+def get_post(id):
+    post_schema = PostSchema(many=False)
+    post = Post.query.filter_by(id=id).first()
+    output = post_schema.dump(post)
+
+    return jsonify(output)
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     output = {}
@@ -204,11 +212,8 @@ def upload():
 
     has_video = False
     has_audio = False
-
     if video != '':
         has_video = True
-        url_data =urlparse(video)
-        video_id = parse_qs(url_data.query)['v'][0]
     if audio != '':
         has_audio = True
 
@@ -220,7 +225,7 @@ def upload():
 
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
-    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre, video = video_id, has_video = has_video, audio = audio, has_audio = has_audio)
+    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre, video = video, has_video = has_video, audio = audio, has_audio = has_audio)
     db.session.add(post)
     db.session.commit()
     return jsonify({'status': "ok"})

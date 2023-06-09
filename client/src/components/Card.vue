@@ -1,5 +1,5 @@
 <template>
-    <vs-card style="margin-top: 7%;">
+    <vs-card @click="onClick()" style="margin-top: 7%;">
         <template #title>
             <h3><slot name="title"></slot></h3>
         </template>
@@ -29,7 +29,27 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-
+    props:['id'],
+    data() {
+      return {
+        len: 1,
+        page: 1,
+        value: 4,
+      };
+    },
+    methods:{
+        onClick(){
+            const path = "http://localhost:3000/post/" + this.$props.id;
+            axios.get(path)
+                .then((response) => {
+                this.$emit('data', response.data)
+            })
+                .catch((error) => {
+                console.log(error);
+            })
+        }
+    }
 }
 </script>

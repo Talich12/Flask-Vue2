@@ -19,7 +19,7 @@
         </template>
       </information>
       <vs-col v-for="post in Data" offset="1" w="5">
-        <card>
+        <card @data="Open" :id="post.id">
           <template #title>
             {{ post.title }}
           </template>
@@ -33,6 +33,42 @@
       </vs-col>
       <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
+
+    <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0;">
+      <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
+        <vs-avatar>
+        <img src="../assets/img/load/sample1.jpg" alt="">
+      </vs-avatar>
+      <p style="font-size: 3vh; margin-left: 1vw;">SawMassacre</p>
+      <vs-button
+        color="#FF0000"
+        border
+        upload
+        :activebtn="activebtn == 2"
+        @click="active = 2"
+        style="margin-left: 8vw;"
+      >
+        <i class="bx bxl-youtube"></i> Видео на youtube!
+      </vs-button>
+      <vs-button
+        danger
+        border
+        upload
+        :activebtn="activebtn == 2" 
+        @click="active = 2"
+      >
+        <i class="bx bxs-microphone-alt"></i> Озвучка истории!
+      </vs-button>
+      </div>
+      <template #header>
+        <h2>
+          {{ post_title }}
+        </h2>
+      </template>
+      <div class="con-content">
+            <div v-html="markdownToHtml"></div>
+      </div>
+    </vs-dialog>
     <div class="footer">
       <!-- Ваш код футера -->
     </div>
@@ -61,17 +97,21 @@
 <script>
 import axios from 'axios';
 import Information from './Information.vue';
-
+import marked from 'marked';
 export default {
   name: "index",
   props:['video', 'audio'],
   data() {
       return {
-          Data: [],
-          len: 1,
-          page: 1,
-          value: 4,
-          UserIcon: require(`@/assets/img/load/sample1.jpg`),
+        post_title: '',
+        post_text: '',
+        activebtn: '',
+        active: false,
+        Data: [],
+        len: 1,
+        page: 1,
+        value: 4,
+        UserIcon: require(`@/assets/img/load/sample1.jpg`),
       };
   },
   methods: {
@@ -112,6 +152,11 @@ export default {
               .catch((error) => {
               console.log(error);
           });
+      },
+      Open(data){
+        this.post_text = data.body
+        this.post_title = data.title
+        this.active = true
       }
   },
   watch:{
@@ -123,6 +168,11 @@ export default {
       this.page = 1
       this.Get()
     }
+  },
+  computed: {
+      markdownToHtml(){
+          return marked(this.post_text);
+      }
   },
   created() {
       this.Get();
