@@ -3,7 +3,7 @@
         <div class="profile-header__content">
             <div class="profile__user">
                 <div class="profile__user-avatar">
-                    <vs-avatar :loading = "loading" size="70" class="avatar">
+                    <vs-avatar :loading = "loading" size="70" class="avatar" @click="openUploadWindow">
                         <img :src="UserIcon" alt="">
                     </vs-avatar>
                 </div>
@@ -103,6 +103,30 @@ export default {
         };
     },
     methods: {
+        openUploadWindow() {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            axios.post('http://localhost:3000/upload', formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': 'Bearer ' + this.$cookies.get('access_token'),
+                },
+            })
+                .then((response) => {
+                const imageUrl = response.data.imageUrl;
+                this.UserIcon = imageUrl;
+                })
+                .catch((error) => {
+                console.log(error);
+                });
+            });
+            fileInput.click();
+        },
         Get() {
             const path = "http://localhost:3000"+this.$route.path+ "/posts";
             axios.get(path,{

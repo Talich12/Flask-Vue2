@@ -2,26 +2,40 @@
   <div id="app">
     <cookie></cookie>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
-      <sidebar @curse="onCurse" @violence="onViolence" @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
-      </sidebar>
-      <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
-    <router-view :violence="violence" :curse="curse" :audio="audio" :video="video" />
+    <sidebar @curse="onCurse" @violence="onViolence" @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
+    </sidebar>
+    <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
+    <Flashlight v-show="flashlightVisible" ref="flashlight" style="right: 0; bottom: 0;"></Flashlight>
+    <vs-button
+      icon
+      dark
+      relief
+      :active="flashlightVisible"
+      @click="toggleFlashlight"
+      style="position: absolute; right: 0; bottom: 0;"
+    >
+      <i class="bx bxs-torch"></i>
+    </vs-button>
+    <router-view :audio="audio" :video="video" />
     <myfooter style="z-index: 10; position: relative; bottom: 0;"></myfooter>
   </div>
 </template>
 
 <script>
+import Flashlight from './components/Flashlight.vue';
+
 export default {
-  name: 'App',
+  name: "App",
   data: () => ({
     audio: false,
     video: false,
     curse: false,
     violence: false,
+    flashlightVisible: false,
   }),
-  methods:{
-    onVideo(data){
-      this.video = data.video
+  methods: {
+    onVideo(data) {
+      this.video = data.video;
     },
     onAudio(data){
       this.audio = data.audio
@@ -32,7 +46,11 @@ export default {
     onViolence(data){
       this.violence = data.violence
     },
-  }
+    toggleFlashlight() {
+      this.flashlightVisible = !this.flashlightVisible; // Toggle the visibility of the flashlight
+    },
+  },
+  components: { Flashlight },
 };
 </script>
 

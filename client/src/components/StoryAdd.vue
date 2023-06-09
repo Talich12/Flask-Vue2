@@ -22,22 +22,12 @@
           <i class='bx bxl-youtube'></i>
         </template>
       </vs-input>
-      <vs-input danger type="audio" state="success" v-model="audio" label-placeholder="audioboom">
+      <vs-input danger type="audio" state="success" v-model="audio" label-placeholder="soundcloud">
         <template #icon>
           <i class='bx bxs-microphone-alt' ></i>
         </template>
       </vs-input>
-      <vs-button
-      flat
-        style="min-width: 200px"
-        success
-        animation-type="scale"
-      >
-        <i class='bx bxl-markdown'></i>
-        <template #animate >
-          Markdown подсказка
-        </template>
-      </vs-button>
+      <mdtips></mdtips>
       </div>
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
       <vs-select
@@ -92,10 +82,12 @@
 <script>
 import axios from 'axios';
 import mdeditor from './MarkdownEditor.vue';
+import mdtips from './MarkdownTips.vue';
 
 export default {
   components: {
-    mdeditor
+    mdeditor,
+    mdtips
   },
   data() {
     return {
@@ -113,9 +105,19 @@ export default {
       const youtubePattern = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]{11}$/;
       return youtubePattern.test(link);
     },
+    validateSoundCloudLink(link) {
+      const soundcloudPattern = /^(https?:\/\/)?(www\.)?soundcloud\.com\/[\w-]+\/[\w-]+$/;
+      return soundcloudPattern.test(link);
+    },                          
     validateYoutube() {
       if (this.video && !this.validateYouTubeLink(this.video)) {
         this.openNotification('top-center');
+      }
+    },
+    validateSoundCloud() {
+      if (this.audio && !this.validateSoundCloudLink(this.audio)) {
+        this.openNotification('top-center', `<i class='bx bxs-microphone-alt'><i>`, 'Ссылка на SoundCloud не работает',
+          'Проверьте на правильность и попробуйте еще раз!');
       }
     },
     openNotification(position = null, icon = `<i class='bx bxl-youtube'><i>`, title = 'Ссылка на youtube не работает', text = `Проверьте на правильность и попробуйте еще раз!`) {
@@ -133,6 +135,8 @@ export default {
     },
     onUpload() {
       this.validateYoutube();
+      this.validateSoundCloud();
+
       const fd = new FormData();
       fd.append('genre', this.value)
       fd.append('file', this.file)

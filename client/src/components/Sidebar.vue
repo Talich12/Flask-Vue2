@@ -31,6 +31,45 @@
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
             <template #icon>
+              <i class='bx bxs-folder-plus' style="font-size: 1vw;"></i>
+            </template>
+            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
+          </vs-sidebar-item>
+        </template>
+
+
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
+          </template>
+          <vs-tooltip right danger>
+            <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
+
+            <template #tooltip>
+              Кнопка, фильтрующая истории только с озвочкой.
+            </template>
+          </vs-tooltip>
+        </vs-sidebar-item>
+
+
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-film' style="font-size: 1vw;"></i>
+          </template>
+          <vs-tooltip right danger>
+            <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
+
+            <template #tooltip>
+              Кнопка, фильтрующая истории только с видео.
+            </template>
+          </vs-tooltip>
+        </vs-sidebar-item>
+      </vs-sidebar-group>
+
+      <vs-sidebar-group>
+        <template #header>
+          <vs-sidebar-item arrow style="margin-right: 7%;">
+            <template #icon>
               <i class='bx bxs-plus-circle' style="font-size: 1vw;"></i>
             </template>
             <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Подписки</p>
@@ -41,20 +80,28 @@
           <template #icon>
             <i class='bx bxs-user' style="font-size: 1vw;"></i>
           </template>
-          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Авторы</p>
-        </vs-sidebar-item>
-        
-          <vs-sidebar-item to="subscriptiongenre" id="genresubs">
-            <template #icon>
-              <i class='bx bxs-book-heart' style="font-size: 1vw;"></i>
-            </template>
-            <vs-tooltip right danger>
-            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Жанры</p>
+          <vs-tooltip right danger>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Авторы</p>
+
             <template #tooltip>
-            Кнопка быстрого доступа к вашим любимым жанрам!
+              Кнопка быстрого доступа к вашим любимым авторам!
+            </template>
+          </vs-tooltip>
+        </vs-sidebar-item>
+
+
+        <vs-sidebar-item to="subscriptiongenre" id="genresubs">
+          <template #icon>
+            <i class='bx bxs-book-heart' style="font-size: 1vw;"></i>
           </template>
-        </vs-tooltip>
-          </vs-sidebar-item>
+          <vs-tooltip right danger>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Жанры</p>
+
+            <template #tooltip>
+              Кнопка быстрого доступа к вашим любимым жанрам!
+            </template>
+          </vs-tooltip>
+        </vs-sidebar-item>
       </vs-sidebar-group>
 
       <vs-sidebar-group>
@@ -67,37 +114,61 @@
           </vs-sidebar-item>
         </template>
 
+
         <vs-sidebar-item id="genre">
           <template #icon>
             <i class='bx bxs-book' style="font-size: 1vw;"></i>
           </template>
-          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По жанрам</p>
+          <vs-tooltip right danger>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По жанрам</p>
+
+            <template #tooltip>
+              Лучшие в своем жанре!
+            </template>
+          </vs-tooltip>
         </vs-sidebar-item>
+
 
         <vs-sidebar-item id="winners">
           <template #icon>
             <i class='bx bxs-trophy' style="font-size: 1vw;"></i>
           </template>
-          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Победители</p>
+          <vs-tooltip right danger>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Победители</p>
+
+            <template #tooltip>
+              Истории-победители в еженедельном конкурсе!
+            </template>
+          </vs-tooltip>
         </vs-sidebar-item>
 
-        <vs-tooltip right danger>
-          <vs-sidebar-item id="admin">
-            <template #icon>
-              <i class='bx bxs-quote-right' style="font-size: 1vw;"></i>
-            </template>
-            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">От редакции</p>
-          </vs-sidebar-item>
-          <template #tooltip>
-            Истории отобранные администрацией
+
+        <vs-sidebar-item id="admin">
+          <template #icon>
+            <i class='bx bxs-quote-right' style="font-size: 1vw;"></i>
           </template>
-        </vs-tooltip>
+          <vs-tooltip right danger>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">От редакции</p>
+
+            <template #tooltip>
+              Истории отобранные администрацией.
+            </template>
+          </vs-tooltip>
+        </vs-sidebar-item>
+
 
         <vs-sidebar-item id="likes">
           <template #icon>
             <i class='bx bxs-like' style="font-size: 1vw;"></i>
           </template>
-          <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По лайкам</p>
+          <vs-tooltip right danger>
+            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">По лайкам</p>
+
+            <template #tooltip>
+              Самые любимые истории пользователей.
+            </template>
+          </vs-tooltip>
+          
         </vs-sidebar-item>
       </vs-sidebar-group>
         <hr class="rounded">
@@ -125,16 +196,16 @@
         </vs-sidebar-item>
         <vs-sidebar-item>
           <template #icon>
-            <i class='bx bx-angry' style="font-size: 1vw;"></i>
+            <i class='bx bx-angry' style="font-size: 1vw; color: #FF0000;"></i>
           </template>
-          <vs-switch v-model="curse" primary style="background-color: black;"><p style="font-size: 0.66vw;">Нецензурная лексика</p></vs-switch>
+          <vs-switch v-model="curse" color="#FF0000" style="background-color: black;"><p style="font-size: 0.66vw;">Нецензурная лексика</p></vs-switch>
         </vs-sidebar-item>
 
         <vs-sidebar-item>
           <template #icon>
-            <i class='bx bx-knife' style="font-size: 1vw;"></i>
+            <i class='bx bx-knife' style="font-size: 1vw; color: #FF0000;"></i>
           </template>
-          <vs-switch v-model="violence" danger style="background-color: black;">Кровь/Насилие</vs-switch>
+          <vs-switch v-model="violence" color="#FF0000" style="background-color: black;">Кровь/Насилие</vs-switch>
         </vs-sidebar-item>
       </vs-sidebar-group>
 
@@ -145,6 +216,7 @@
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
       <hr class="rounded">
+
       <vs-sidebar-item to="/about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
@@ -156,7 +228,7 @@
         <vs-row justify="space-between">
           <router-link v-if="$cookies.isKey('access_token')" v-model="active" :to="ProfileUrl">
             <div class="center con-avatars">
-              <vs-avatar  @click="active = ''">
+              <vs-avatar @click="active = ''">
                 <img :src="UserIcon" alt="">
               </vs-avatar>
             </div>
@@ -181,43 +253,43 @@ import Login from './Login.vue'
 import axios from 'axios';
 export default {
   components: {
-        Login
-    },
+    Login
+  },
   data: () => ({
     audio: false,
     video: false,
     curse: false,
     violence: false,
     active: '',
-    ProfileUrl: '/profile/'+ $cookies.get("login"),
+    ProfileUrl: '/profile/' + $cookies.get("login"),
     User: [],
     UserIcon: require(`@/assets/img/load/sample1.jpg`),
   }),
-  methods :{
-    GetUserData(){
-            if (!this.$cookies.isKey('login')){
-              return
-            }
-            const path = "http://localhost:3000/profile/"+this.$cookies.get('login');
-            axios.get(path,{
-                headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
-                }
-            })
-                .then((response) => {
-                console.log(response.data);
-                const data = response.data;
-                this.User = data;
-                this.UserIcon = require(`@/assets/img/load/${data.avatar}`)
-            })
-                .catch((error) => {
-                console.log(error);
-            });
-        },
+  methods: {
+    GetUserData() {
+      if (!this.$cookies.isKey('login')) {
+        return
+      }
+      const path = "http://localhost:3000/profile/" + this.$cookies.get('login');
+      axios.get(path, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+        }
+      })
+        .then((response) => {
+          console.log(response.data);
+          const data = response.data;
+          this.User = data;
+          this.UserIcon = require(`@/assets/img/load/${data.avatar}`)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
-  watch:{
-    audio: function(){
-      this.$emit('audio', {audio: this.audio})
+  watch: {
+    audio: function () {
+      this.$emit('audio', { audio: this.audio })
     },
     video: function(){
       this.$emit('video', {video: this.video})
@@ -229,7 +301,7 @@ export default {
       this.$emit('violence', {violence: this.violence})
     }
   },
-  created(){
+  created() {
     this.GetUserData()
     console.log(this.$cookies.get('access_token'))
     console.log(this.$cookies.get('login'))

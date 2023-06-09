@@ -43,10 +43,10 @@ export default {
   methods: {
     openNotifications() {
       const icons = [
-        "<i class='bx bxs-happy-beaming'></i>",
-        "<i class='bx bxs-sleepy'></i>",
-        "<i class='bx bxs-happy-alt'></i>",
-        "<i class='bx bxs-tired'></i>"
+        "<i class='bx bx-bell'></i>",
+        "<i class='bx bx-pen'></i>",
+        "<i class='bx bx-edit'></i>",
+        "<i class='bx bx-medal'></i>"
       ];
 
       const positions = [
@@ -56,13 +56,13 @@ export default {
         "top-left"
       ];
 
-      const titles = ["1", "2", "3", "4"];
+      const titles = ["Начало работы", "Истории", "Публикация", "Достижения"];
 
       const texts = [
-        "one",
-        "two",
-        "three",
-        "four"
+        "Для того, чтобы использовать всю функциональность нашего сайта, вам необходимо зарегистрироваться. Сделать это вы можете, нажав на кнопку \"Войти\" в нижнем левом углу.\nПосле регистрации у вас создастся личный кабинет, в котором вы сможете посмотреть свой рейтинг, подписки и подписчиков, а также ваши истории.",
+        "На главной странице нашего сайта вы можете просматривать самые популярные истории. В левом меню доступны различные фильтры историй, а также отдельный поиск. Вы можете сохранять и комментировать истории, а также подписываться на их авторов.",
+        "Вы можете сами стать писателем страшных историй! Для этого в личном кабинете нажмите кнопку \"Написать историю\". Перед вами откроется редактор, в котором вы можете добавить сам текст истории, изображения к ней, видео и аудио. Когда вы завершите написание истории, нажмите \"Моя история готова\". Так вы опубликуете свою историю!",
+        "Являясь пользователем нашего сайта, вы можете получать различные достижения. Мы уверены, что система достижений будет мотивировать вас и других пользователей читать и писать страшные истории."
       ];
 
       let delay = 0;
@@ -70,9 +70,9 @@ export default {
         setTimeout(() => {
           const noti = this.$vs.notification({
             icon: icons[i],
-            duration: 10000,
+            duration: 20000,
             color: "dark",
-            width: "auto",
+            width: "500px",
             border: "danger",
             progress: 'auto',
             position: positions[i % positions.length],
@@ -81,7 +81,7 @@ export default {
             classes: "pulsating-notification"
           });
         }, delay);
-        delay += 10000;
+        delay += 20000;
       }
     }
   }
@@ -99,7 +99,7 @@ export default {
 }
 
 .vs-notification {
-  animation: pulsate 1.5s infinite;
+  /*animation: pulsate 1.5s infinite;*/
 }
 
 @keyframes pulsate {
