@@ -15,13 +15,13 @@
         <span v-html="compiledMarkdown"></span>
       </div>
     </div>
-    <div style="display: flex; margin: 0 auto;">
+    <div style="display: flex;">
       <vs-button-group style="margin: 0 auto;">
       <vs-button
       size="xl"
-      success
+      dark
       icon
-      border
+      relief
       style="position: relative; margin: 0 auto;"
       @click="insertMarkdown"
     >
@@ -29,9 +29,9 @@
     </vs-button>
     <vs-button
         size="xl"
-        success
         icon
-        border
+        danger
+        relief
         upload
         style="position: relative; margin: 0 auto;"
       >
@@ -39,9 +39,9 @@
       </vs-button>
       <vs-button
       size="xl"
-      success
       icon
-      border
+      dark
+      relief
       style="position: relative; margin: 0 auto;"
       @click="downloadMarkdown"
     >
