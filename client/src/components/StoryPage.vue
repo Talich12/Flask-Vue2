@@ -4,10 +4,11 @@
       <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0;">
         <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
           <vs-avatar>
-          <img src="../assets/img/load/sample1.jpg" alt="">
+          <img :src="require(`@/assets/img/load/${post_data.author.avatar}`)" alt="">
         </vs-avatar>
-        <p style="font-size: 3vh; margin-left: 1vw;">SawMassacre</p>
+        <p style="font-size: 3vh; margin-left: 1vw;">{{ post_data.author.username }}</p>
         <vs-button
+          v-if="post_data.has_video"
           color="#FF0000"
           border
           upload
@@ -18,6 +19,7 @@
           <i class="bx bxl-youtube"></i> Видео на youtube!
         </vs-button>
         <vs-button
+          v-if="post_data.has_audio"
           danger
           border
           upload
@@ -29,7 +31,7 @@
         </div>
         <template #header>
           <h2>
-            {{ post_title }}
+            {{ post_data.title }}
           </h2>
         </template>
         <div class="con-content">
@@ -42,8 +44,9 @@
 <script>
 import marked from 'marked';
   export default {
-    props: ['post_title', 'active'],
+    props: ['post_data', 'active'],
     data:() => ({
+      activebtn: '',
       markdown:  `![cover](https://images.genius.com/8a661ac2b22e160af9e0504c29a0ffbc.1000x1000x1.png)
       # Текст песни "Отопление"
 
@@ -116,7 +119,7 @@ import marked from 'marked';
     }),
     computed: {
         markdownToHtml(){
-            return marked(this.markdown);
+            return marked(this.$props.post_data.body);
         }
     }
 }  

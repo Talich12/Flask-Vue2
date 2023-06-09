@@ -160,6 +160,11 @@ class PostSchema(ma.SQLAlchemySchema):
     body = auto_field()  
     img = auto_field() 
     genre = auto_field()
+    has_video = auto_field()
+    video = auto_field()
+    has_audio = auto_field()
+    audio = auto_field()
+    
     author = fields.Nested(UserSchema)
 
 class SavedPostSchema(ma.SQLAlchemySchema):

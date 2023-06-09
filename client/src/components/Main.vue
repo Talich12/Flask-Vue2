@@ -34,7 +34,8 @@
       <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
 
-    <storypage  :active="active" :post_title="post_title" />
+    <storypage  :active="active" :post_data="post_data" />
+    
     <div class="footer">
       <!-- Ваш код футера -->
     </div>
@@ -69,8 +70,7 @@ export default {
   props:['video', 'audio'],
   data() {
       return {
-        post_title: '',
-        post_text: '',
+        post_data: [],
         activebtn: '',
         active: false,
         Data: [],
@@ -120,8 +120,8 @@ export default {
           });
       },
       Open(data){
-        this.post_text = data.body
-        this.post_title = data.title
+        console.log(data)
+        this.post_data = data
         this.active = true
       }
   },
