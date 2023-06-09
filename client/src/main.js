@@ -29,6 +29,8 @@ import Profile from './components/Profile';
 import Notification from './components/Notification';
 import MarkdownEditor from './components/MarkdownEditor';
 import Subscribers from './components/Subscribers';
+import UserComment from './components/UserComment';
+Vue.component('usercomment', UserComment)
 Vue.component('storypage', StoryPage)
 Vue.component('subscriber', Subscribers);
 Vue.component('totop', ButtonToTop);
@@ -54,7 +56,7 @@ axios.interceptors.response.use(
   response => response,
   error => {
     if (error.response.status === 401) {
-      console.log("PIZDEC")
+      console.log("error")
       const path = 'http://localhost:3000/TokenRefresh'; 
       axios.get(path,{
           headers: {
