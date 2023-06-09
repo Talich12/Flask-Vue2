@@ -216,6 +216,7 @@
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
       <hr class="rounded">
+
       <vs-sidebar-item to="/about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
