@@ -29,6 +29,8 @@ import Profile from './components/Profile';
 import Notification from './components/Notification';
 import MarkdownEditor from './components/MarkdownEditor';
 import Subscribers from './components/Subscribers';
+import UserComment from './components/UserComment';
+Vue.component('usercomment', UserComment)
 Vue.component('storypage', StoryPage)
 Vue.component('subscriber', Subscribers);
 Vue.component('totop', ButtonToTop);
@@ -50,7 +52,34 @@ Vue.use(VueParticles);
 Vue.use(axios)
 Vue.use(VueYoutube)
 
-
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response.status === 401) {
+      console.log("error")
+      const path = 'http://localhost:3000/TokenRefresh'; 
+      axios.get(path,{
+          headers: {
+              'Authorization': 'Bearer ' + window.$cookies.get("refresh_token")
+          }
+      })
+      .then((response) => {
+          window.$cookies.set("access_token", response.data.access_token)
+          console.log(response.data)
+      })
+      .catch((error) =>{
+        this.$cookies.remove('access_token')
+        this.$cookies.remove('refresh_token')
+        this.$cookies.remove('login')
+        this.$router.push({name: 'Main'})
+      })
+    }
+    else if (error.response.status === 422){
+      router.push({name: 'Main'})
+    }
+    return Promise.reject(error)
+  }
+)
 
 Vue.config.productionTip = false;
 

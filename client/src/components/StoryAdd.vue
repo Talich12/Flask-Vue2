@@ -3,13 +3,13 @@
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
       <div style="display: flex; justify-content: center; margin-bottom: 2vh; opacity: 0.8;">
-          <vs-checkbox danger v-model="option1">
+          <vs-checkbox danger >
             <p style="color: #EEEFF9; font-size: 1vw;">Нецензурная лексика</p>
           <template #icon>
             <i class='bx bx-angry'></i>
           </template>
         </vs-checkbox>
-        <vs-checkbox danger v-model="option1" style="margin-left: 2vw;">
+        <vs-checkbox danger style="margin-left: 2vw;">
             <p style="color: #EEEFF9; font-size: 1vw;">Кровь/Насилие</p>
           <template #icon>
             <i class='bx bx-knife'></i>
@@ -19,7 +19,7 @@
       <div style="display: flex; justify-content: center; margin-bottom: 2vh;">
       <vs-input color="#FF0000" state="success" type="video" v-model="video" label-placeholder="youtube" style="margin-right: 5px;">
         <template #icon>
-          <i class='bx bxl-youtube' ></i>
+          <i class='bx bxl-youtube'></i>
         </template>
       </vs-input>
       <vs-input danger type="audio" state="success" v-model="audio" label-placeholder="audioboom">
@@ -39,7 +39,7 @@
         placeholder="Выберите"
         collapse-chips
         v-model="value"
-        style="margin-right: 5px;"
+        style="margin-right: 5px; margin-top: 2.3px; height: 34px;"
       >
         <vs-option v-for="genre in Data" :label="genre.name" :value="genre.name">
           {{genre.name}}
@@ -101,11 +101,30 @@ export default {
     }
   },
   methods: {
+    validateYouTubeLink(link) {
+      const youtubePattern = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]{11}$/;
+      return youtubePattern.test(link);
+    },
+    validateYoutube() {
+      if (this.video && !this.validateYouTubeLink(this.video)) {
+        this.openNotification('top-center');
+      }
+    },
+    openNotification(position = null, icon = `<i class='bx bxl-youtube'><i>`, title = 'Ссылка на youtube не работает', text = `Проверьте на правильность и попробуйте еще раз!`) {
+          const noti = this.$vs.notification({  
+            position,
+            icon,
+            title,
+            icon,
+            text
+          })
+    },
     OnFileSelected(event) {
       this.file = event.target.files[0]
       console.log(event)
     },
     onUpload() {
+      this.validateYoutube();
       const fd = new FormData();
       fd.append('genre', this.value)
       fd.append('file', this.file)
@@ -144,7 +163,7 @@ export default {
   },
   watch:{
     value: function(){
-      console.log(this.value)
+      console.log(this.value);
     }
   },
   created() {

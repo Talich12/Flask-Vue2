@@ -5,6 +5,7 @@
       <template #logo>
         <!-- ...img logo -->
       </template>
+      <hr class="rounded" style="margin-top: 2vh;">
       <vs-sidebar-item id="main" to="/">
         <template #icon>
           <i class='bx bxs-home' style="font-size: 1vw;"></i>
@@ -18,7 +19,7 @@
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Поиск</p>
       </vs-sidebar-item>
-
+      <hr class="rounded">
       <vs-sidebar-item id="recommendations">
         <template #icon>
           <i class='bx bx-merge' style="font-size: 1vw;"></i>
@@ -35,33 +36,18 @@
             <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
           </vs-sidebar-item>
         </template>
-
-
         <vs-sidebar-item>
           <template #icon>
             <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
           </template>
-          <vs-tooltip right danger>
-            <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
-
-            <template #tooltip>
-              Кнопка, фильтрующая истории только с озвочкой.
-            </template>
-          </vs-tooltip>
+          <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
         </vs-sidebar-item>
-
 
         <vs-sidebar-item>
           <template #icon>
             <i class='bx bxs-film' style="font-size: 1vw;"></i>
           </template>
-          <vs-tooltip right danger>
-            <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
-
-            <template #tooltip>
-              Кнопка, фильтрующая истории только с видео.
-            </template>
-          </vs-tooltip>
+          <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
         </vs-sidebar-item>
       </vs-sidebar-group>
 
@@ -169,6 +155,7 @@
             </template>
           </vs-tooltip>
         </vs-sidebar-item>
+
       </vs-sidebar-group>
 
       <vs-sidebar-item to="/bookmarks" id="bookmarks">
@@ -177,7 +164,7 @@
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
-
+<hr class="rounded">
       <vs-sidebar-item to="/about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
@@ -196,8 +183,8 @@
           </router-link>
           <Login v-if="!$cookies.isKey('access_token')"></Login>
           <router-link v-model="active" to="/notification" style="text-decoration: none;">
-            <div class="center con-avatars bell">
-              <vs-avatar badge-color="dark" badge-position="top-right" style="padding-top: 4;">
+            <div class="center con-avatars">
+              <vs-avatar badge-color="dark" badge-position="top-right" style="padding-top: 4; background: #EEEFF9;">
                 <i class='bx bx-bell' style="color: #6A4E93;" @click="active = ''"></i>
               </vs-avatar>
             </div>
@@ -261,3 +248,14 @@ export default {
   }
 };
 </script>
+
+<style>
+  hr.rounded {
+  border-top: 0.2vh solid #6A4E93;
+  border-radius: 15px;
+  width: 8vw;
+  margin: auto;
+  margin-top: 2.5vh;
+  margin-bottom: 0vh;
+}
+</style>

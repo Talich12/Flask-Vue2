@@ -40,6 +40,7 @@ class Likes(db.Model):
 class SavedPost(db.Model):
     __tablename__ = 'saved_posts'
     id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
@@ -77,8 +78,7 @@ class User(db.Model):
     def followed_posts(self):
         return Post.query.join(
             followers, (followers.c.followed_id == Post.author_id)).filter(
-                followers.c.follower_id == self.id).order_by(
-                    Post.timestamp.desc())
+                followers.c.follower_id == self.id)
     
 
     def set_password(self, password):
@@ -99,6 +99,8 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="books")
     genre = db.Column(db.String())
+    like_count = db.Column(db.Integer, default=0)
+    comment_count = db.Column(db.Integer, default=0)
     video = db.Column(db.String())
     has_video = db.Column(db.Boolean(), default=False)
     audio = db.Column(db.String())
@@ -164,6 +166,9 @@ class PostSchema(ma.SQLAlchemySchema):
     video = auto_field()
     has_audio = auto_field()
     audio = auto_field()
+    timestamp = auto_field()
+    like_count = auto_field()
+    comment_count = auto_field()
     
     author = fields.Nested(UserSchema)
 
@@ -173,4 +178,11 @@ class SavedPostSchema(ma.SQLAlchemySchema):
         load_instance = True
 
     post = fields.Nested(PostSchema)
-    
+
+class CommentsSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = Comments
+        load_instance = True
+
+    text = auto_field()
+    user = fields.Nested(UserSchema)

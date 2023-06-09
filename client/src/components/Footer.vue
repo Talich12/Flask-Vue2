@@ -9,6 +9,7 @@
             <a class="social-icon" href="https://github.com/Talich12/ThrillTogether"><i class="bx bxl-github"></i></a>
         </div>
       </div>
+      <hr style="margin: 3vh auto; margin-bottom: 3vh; border-top: 0.2vh solid #EEEFF9; width: 22vw; opacity: 0.7;">
       <form class="newsletter-form">
         <p class="newsletter-text">Подпишитесь на нашу рассылку:</p>
         <input type="email" class="newsletter-input" placeholder="Ваш адрес электронной почты">
@@ -30,6 +31,7 @@
       <p class="description" style="color: rgb(238, 239, 249); margin-top: 1%;">
         Пугаем вас уже вот столько дней: {{ randomNumber }} 
       </p>
+      <hr style="margin: 3vh auto; margin-bottom: 3vh; border-top: 0.2vh solid #EEEFF9; width: 22vw; opacity: 0.7;">
       <div class="footer-links">
         <div class="footer-column">
           <h5 class="footer-heading">Оказать помощь ресурсу</h5>

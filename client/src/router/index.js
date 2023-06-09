@@ -11,7 +11,7 @@ import Notification from '@/components/Notification';
 import Search from '@/components/Search';
 import SubscriptionGenre from '@/components/SubscriptionGenre';
 import Bookmarks from '@/components/Bookmarks';
-import StoryPage from '@/components/StoryPage';
+import FollowedPosts from '@/components/FollowedPosts';
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
 import marked from 'marked';
@@ -81,9 +81,9 @@ export default new Router({
       component: SubscriptionGenre,
     },
     {
-      path: '/storypage',
-      name: 'storypage',
-      component: StoryPage,
-    }
+      path: '/followedposts',
+      name: 'folowedposts',
+      component: FollowedPosts,
+    },
   ],
 });

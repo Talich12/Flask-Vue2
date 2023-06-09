@@ -3,7 +3,7 @@
         <div class="profile-header__content">
             <div class="profile__user">
                 <div class="profile__user-avatar">
-                    <vs-avatar :loading = "loading" size="70" class="avatar">
+                    <vs-avatar :loading = "loading" size="70" class="avatar" @click="openUploadWindow">
                         <img :src="UserIcon" alt="">
                     </vs-avatar>
                 </div>
@@ -17,11 +17,11 @@
                         </vs-button>
                     </div>
                     <div v-if="User.access == false"   class="profile__user-rank">
-                        <vs-button @click="onFollow" danger size="large" shadow class="rank">
+                        <vs-button @click="onFollow()" danger size="large" shadow class="rank">
                             Подписаться
                         </vs-button>
                     </div>
-                    <div class="profile__user-rank">
+                    <div v-if="User.access == true" class="profile__user-rank">
                         <vs-button @click="Exit" danger size="large" shadow class="rank">
                             Выйти
                         </vs-button>
@@ -61,7 +61,7 @@
                                     {{ post.title }}
                                     </template>
                                     <template #text>
-                                    {{ post.body }}
+                                    {{ post.author.username }}
                                     </template>
                                     <template #img>
                                     <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
@@ -103,6 +103,30 @@ export default {
         };
     },
     methods: {
+        openUploadWindow() {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            axios.post('http://localhost:3000/upload', formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': 'Bearer ' + this.$cookies.get('access_token'),
+                },
+            })
+                .then((response) => {
+                const imageUrl = response.data.imageUrl;
+                this.UserIcon = imageUrl;
+                })
+                .catch((error) => {
+                console.log(error);
+                });
+            });
+            fileInput.click();
+        },
         Get() {
             const path = "http://localhost:3000"+this.$route.path+ "/posts";
             axios.get(path,{
@@ -155,7 +179,7 @@ export default {
             const path = "http://localhost:3000"+this.$route.path;
             axios.get(path,{
                 headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token")
                 }
             })
                 .then((response) => {
@@ -173,7 +197,11 @@ export default {
         },
         onFollow(){
           const path = "http://localhost:3000"+this.$route.path +"/follow";
-          axios.post(path, {page: this.page, value: this.value})
+          axios.post(path, {page: this.page, value: this.value}, {
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
+                }
+            })
               .then((response) => {
               console.log(response.data);
           })
@@ -185,8 +213,7 @@ export default {
             const path = 'http://localhost:3000/LogoutAccess'; 
             axios.get(path,{
                 headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
-                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token")
                 }
             })
             .then((response) => {
@@ -198,8 +225,7 @@ export default {
             const path2 = 'http://localhost:3000/LogoutRefresh'
             axios.get(path2,{
                 headers: {
-                    'Authorization': 'Bearer ' + this.$cookies.get("refresh_token"),
-                    'Access-Control-Allow-Origin': 'http//localhost:8081'
+                    'Authorization': 'Bearer ' + this.$cookies.get("refresh_token")
                 }
             })
             .then((response) => {
@@ -229,10 +255,6 @@ export default {
         }
     },
     created() {
-        if (!this.$cookies.isKey('login')){
-            this.$router.push({name: 'Main'})
-            return
-        }
         this.loading = true
         this.Get();
         this.GetUserData();

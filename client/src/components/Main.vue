@@ -1,5 +1,6 @@
 <template>
   <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
+    <storypage  :active="active" :post_data="post_data" style="z-index: 100;"/>
     <vs-row justify="space-around">
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
@@ -19,7 +20,7 @@
         </template>
       </information>
       <vs-col v-for="post in Data" offset="1" w="5">
-        <card @data="Open" :id="post.id">
+        <card @data="Open" :comment_count="post.comment_count" :like_count="post.like_count" :id="post.id">
           <template #title>
             {{ post.title }}
           </template>
@@ -33,8 +34,6 @@
       </vs-col>
       <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
-
-    <storypage  :active="active" :post_data="post_data" />
     
     <div class="footer">
       <!-- Ваш код футера -->

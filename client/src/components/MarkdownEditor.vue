@@ -1,10 +1,10 @@
 <template>
   <div>
     <div style="display: flex; justify-content:space-between;">
-    <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bxs-pen' style="margin-right: 0.5vw;"></i>Всего слов написано: {{ wordCount }}</p>
-    <vs-tooltip border>
-    <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bx-time-five' style="margin-right: 0.5vw;"></i>Примерное время чтения: {{ readingTime }} {{ minutesText }}</p>
-    <template #tooltip>
+      <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bxs-pen' style="margin-right: 0.5vw;"></i>Всего слов написано: {{ wordCount }}</p>
+      <vs-tooltip border>
+        <p style="color: #EEEFF9; margin-bottom: 2vh;"><i class='bx bx-time-five' style="margin-right: 0.5vw;"></i>Примерное время чтения: {{ readingTime }} {{ minutesText }}</p>
+        <template #tooltip>
           При средней скорости чтения 180 слов в минуту
         </template>
       </vs-tooltip>
@@ -15,37 +15,59 @@
         <span v-html="compiledMarkdown"></span>
       </div>
     </div>
-    <vs-button
-        size="xl"
-        success
-        icon
-        border
-        upload
-        :active="active == 0"
-        @click="active = 0"
-        style="position: relative; margin: 0 auto;"
-      >
-      <i class='bx bx-check'></i>Моя история готова
-      </vs-button>
+    <div style="display: flex;">
+      <vs-button-group style="margin: 0 auto;">
+        <vs-button
+          size="xl"
+          dark
+          icon
+          relief
+          style="position: relative; margin: 0 auto;"
+          @click="insertMarkdown"
+        >
+          <i class='bx bx-upload'></i>Загрузить файл .md
+        </vs-button>
+        <vs-button
+          size="xl"
+          icon
+          danger
+          relief
+          upload
+          style="position: relative; margin: 0 auto;"
+        >
+          <i class='bx bx-check'></i>Моя история готова
+        </vs-button>
+        <vs-button
+          size="xl"
+          icon
+          dark
+          relief
+          style="position: relative; margin: 0 auto;"
+          @click="downloadMarkdown"
+        >
+          <i class='bx bx-download'></i>Скачать текст как .md
+        </vs-button>
+      </vs-button-group>
     </div>
-  </template>
-  
-  <script>
-  import marked from 'marked';
-  import _ from 'lodash';
-  
-  export default {
-    data() {
-      return {
-        input: '**Ваша история начинается тут**',
-        wordCount: 4
-      };
+  </div>
+</template>
+
+<script>
+import marked from 'marked';
+import _ from 'lodash';
+
+export default {
+  data() {
+    return {
+      input: '**Ваша история начинается тут**',
+      wordCount: 4,
+    };
+  },
+  computed: {
+    compiledMarkdown() {
+      return marked(this.input, { sanitize: true });
     },
-    computed: {
-      compiledMarkdown() {
-        return marked(this.input, { sanitize: true });
-      },
-      readingTime() {
+    readingTime() {
       const words = this.input.trim().split(/\s+/).length;
       const readingSpeed = 180; // words per minute
       const readingTimeMinutes = Math.ceil(words / readingSpeed);
@@ -60,23 +82,54 @@
       } else {
         return 'минут';
       }
-    }
     },
-    watch: {
-      input: function(){
-            this.$emit('body', {body: this.input});
-            this.updateWordCount();
-      },
+    wordCountOutput() {
+      const words = this.compiledMarkdown.trim().split(/\s+/);
+      return words.length;
     },
-    methods: {
-      update: _.debounce(function(e) {
-        this.input = e.target.value;
-      }, 300),
-      updateWordCount() {
-        const words = this.input.trim().split(/\s+/);
-        this.wordCount = words.length;
-      },
-    }
+  },
+  watch: {
+    input: function () {
+      this.$emit('body', { body: this.input });
+      this.updateWordCount();
+    },
+  },
+  methods: {
+    update: _.debounce(function (e) {
+      this.input = e.target.value;
+    }, 300),
+    updateWordCount() {
+      const words = this.input.trim().replace(/#+\s/g, '').split(/\s+/);
+      this.wordCount = words.length;
+    },
+    downloadMarkdown() {
+      const filename = 'your-story.md';
+      const markdownContent = this.input;
+      const element = document.createElement('a');
+      const file = new Blob([markdownContent], { type: 'text/markdown' });
+      element.href = URL.createObjectURL(file);
+      element.download = filename;
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    },
+    insertMarkdown() {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.md';
+
+      fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const content = e.target.result;
+          this.input = content;
+        };
+        reader.readAsText(file);
+      };
+      fileInput.click();
+    },
+  },
 };
 </script>
 

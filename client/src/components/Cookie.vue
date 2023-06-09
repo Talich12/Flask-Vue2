@@ -14,19 +14,19 @@ import AcceptCookie from './AcceptCookie.vue'
         this.openNotification();
     },
     methods: {
-    openNotification() {
-        this.$vs.notification({
-        title: 'Cookie',
-        text: `Для корректной работы нашего сайта необходимо использование cookie-файлов`,
-        icon: `<i class='bx bx-cookie' ></i>`,
-        color: 'danger',
-        progress: 'auto',
-        flat: 'true',
-        duration: '20000',
-        content: AcceptCookie,
-        clickClose: true
-        })
-    }
+      openNotification() {
+          this.$vs.notification({
+          title: 'Cookie',
+          text: `Для корректной работы нашего сайта необходимо использование cookie-файлов`,
+          icon: `<i class='bx bx-cookie' ></i>`,
+          color: 'danger',
+          progress: 'auto',
+          flat: 'true',
+          duration: '20000',
+          content: AcceptCookie,
+          clickClose: true
+          })
+      }
     }
 }
 </script>
