@@ -3,13 +3,13 @@
   <div class="container" style=" margin-left: 16%; margin-right: 7%;">
     <vs-col offset="1" style="margin-top: 11%;">
       <div style="display: flex; justify-content: center; margin-bottom: 2vh; opacity: 0.8;">
-          <vs-checkbox danger v-model="option1">
+          <vs-checkbox danger >
             <p style="color: #EEEFF9; font-size: 1vw;">Нецензурная лексика</p>
           <template #icon>
             <i class='bx bx-angry'></i>
           </template>
         </vs-checkbox>
-        <vs-checkbox danger v-model="option1" style="margin-left: 2vw;">
+        <vs-checkbox danger style="margin-left: 2vw;">
             <p style="color: #EEEFF9; font-size: 1vw;">Кровь/Насилие</p>
           <template #icon>
             <i class='bx bx-knife'></i>
