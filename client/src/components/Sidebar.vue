@@ -105,9 +105,9 @@
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
             <template #icon>
-              <i class='bx bxs-folder-plus' style="font-size: 1vw;"></i>
+              <i class='bx bxs-toggle-right' style="font-size: 1vw;"></i>
             </template>
-            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
+            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Содержание</p>
           </vs-sidebar-item>
         </template>
         <vs-sidebar-item>
@@ -122,6 +122,19 @@
             <i class='bx bxs-film' style="font-size: 1vw;"></i>
           </template>
           <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
+        </vs-sidebar-item>
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bx-angry' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch v-model="curse" primary style="background-color: black;"><p style="font-size: 0.66vw;">Нецензурная лексика</p></vs-switch>
+        </vs-sidebar-item>
+
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bx-knife' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch v-model="violence" danger style="background-color: black;">Кровь/Насилие</vs-switch>
         </vs-sidebar-item>
       </vs-sidebar-group>
 
