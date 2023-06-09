@@ -9,6 +9,7 @@ from urllib.parse import urlparse, parse_qs
 import os
 import time
 import json
+from gtts import gTTS
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -27,15 +28,30 @@ def get_index():
     data = request.get_json(silent=True)
     output = {}
 
+    filters = []
+
     value = int(data['value'])
     page = data['page']
     video = data['video']
     audio = data['audio']
+    curse = data['curse']
+    violence = data['violence']
 
-    if not audio and not video:
+    if video:
+        filters.append(getattr(Post, 'has_video') == video)
+    if audio:
+        filters.append(getattr(Post, 'has_audio') == audio)
+    if curse:
+        filters.append(getattr(Post, 'has_curse') == curse)
+    if violence:
+        filters.append(getattr(Post, 'has_violence') == violence)
+
+
+    if  filters == {}:
         req = Post.query.order_by(Post.timestamp.desc())
     else:
-        req = Post.query.filter_by(has_audio = audio, has_video = video).order_by(Post.timestamp.desc())
+        req = Post.query.filter(*filters).order_by(Post.timestamp.desc())
+
 
 
     posts = req.paginate(page=page,per_page=value,error_out=False)
@@ -333,13 +349,17 @@ def upload():
 
     genre = str(data['genre'])
 
-    print(genre)
+
+    speech_filename = str(time.time()) + "_speech.mp3"
+    speech = gTTS(text=body, lang="ru", slow=False)
+    speech.save(os.path.join(app.config['SPEECH_FOLDER'], speech_filename))
+
     username = get_jwt_identity()
     filename = str(time.time()) + "_" + secure_filename(file.filename)
 
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     find_user = User.query.filter_by(username=username).first()
-    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre, video = video, has_video = has_video, audio = audio, has_audio = has_audio)
+    post = Post(title=title, body=body, author_id=find_user.id, author=find_user, img=filename, genre=genre, video = video, has_video = has_video, audio = audio, has_audio = has_audio, tts = speech_filename)
     db.session.add(post)
     db.session.commit()
     return jsonify({'status': "ok"})

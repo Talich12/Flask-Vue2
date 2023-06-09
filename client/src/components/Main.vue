@@ -66,7 +66,7 @@ import Information from './Information.vue';
 import marked from 'marked';
 export default {
   name: "index",
-  props:['video', 'audio'],
+  props:['video', 'audio', 'curse', 'violence'],
   data() {
       return {
         post_data: [],
@@ -82,7 +82,8 @@ export default {
   methods: {
       Get() {
           const path = "http://localhost:3000/";
-          axios.post(path, {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio})
+          console.log( {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
+          axios.post(path, {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
@@ -95,7 +96,7 @@ export default {
       onPage(data){
         this.page = data.page
         const path = "http://localhost:3000/";
-          axios.post(path, {page: data.page, value: this.value, video: this.$props.video, audio: this.$props.audio})
+          axios.post(path, {page: data.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
@@ -108,7 +109,7 @@ export default {
         this.value = data.value
         this.page = 1
         const path = "http://localhost:3000/";
-          axios.post(path, {value: data.value, page: this.page, video: this.$props.video, audio: this.$props.audio})
+          axios.post(path, {value: data.value, page: this.page, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
@@ -130,9 +131,18 @@ export default {
       this.Get()
     },
     audio: function(){
+      console.log("fasd")
       this.page = 1
       this.Get()
-    }
+    },
+    curse: function(){
+      this.page = 1
+      this.Get()
+    },
+    violence: function(){
+      this.page = 1
+      this.Get()
+    },
   },
   computed: {
       markdownToHtml(){

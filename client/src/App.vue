@@ -2,10 +2,10 @@
   <div id="app">
     <cookie></cookie>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
-      <sidebar @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
+      <sidebar @curse="onCurse" @violence="onViolence" @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
       </sidebar>
       <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
-    <router-view  :audio="audio" :video="video" />
+    <router-view :violence="violence" :curse="curse" :audio="audio" :video="video" />
     <myfooter style="z-index: 10; position: relative; bottom: 0;"></myfooter>
   </div>
 </template>
@@ -16,6 +16,8 @@ export default {
   data: () => ({
     audio: false,
     video: false,
+    curse: false,
+    violence: false,
   }),
   methods:{
     onVideo(data){
@@ -23,7 +25,13 @@ export default {
     },
     onAudio(data){
       this.audio = data.audio
-    }
+    },
+    onCurse(data){
+      this.curse = data.curse
+    },
+    onViolence(data){
+      this.violence = data.violence
+    },
   }
 };
 </script>

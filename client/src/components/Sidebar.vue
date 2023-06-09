@@ -186,6 +186,8 @@ export default {
   data: () => ({
     audio: false,
     video: false,
+    curse: false,
+    violence: false,
     active: '',
     ProfileUrl: '/profile/'+ $cookies.get("login"),
     User: [],
@@ -219,6 +221,12 @@ export default {
     },
     video: function(){
       this.$emit('video', {video: this.video})
+    },
+    curse: function(){
+      this.$emit('curse', {curse: this.curse})
+    },
+    violence: function(){
+      this.$emit('violence', {violence: this.violence})
     }
   },
   created(){

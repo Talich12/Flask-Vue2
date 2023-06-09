@@ -105,6 +105,9 @@ class Post(db.Model):
     has_video = db.Column(db.Boolean(), default=False)
     audio = db.Column(db.String())
     has_audio = db.Column(db.Boolean(), default=False)
+    has_curse = db.Column(db.Boolean(), default=False)
+    has_violence = db.Column(db.Boolean(), default=False)
+    tts = db.Column(db.String())
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
