@@ -80,7 +80,7 @@
                 <h2>Изображения</h2>
                 <p>![Текст описания] (https://www.example.com/image.jpg)</p>
                 <h2>Пример</h2>
-                <img src="../assets/img/load/1686147739.7975798_sml1.69841a6.jpg" alt="описание картинки">
+                <img src="" alt="описание картинки">
 
             </div>
         </vs-dialog>

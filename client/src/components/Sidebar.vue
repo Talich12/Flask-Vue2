@@ -36,18 +36,33 @@
             <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
           </vs-sidebar-item>
         </template>
+
+
         <vs-sidebar-item>
           <template #icon>
             <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
           </template>
-          <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
+          <vs-tooltip right danger>
+            <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
+
+            <template #tooltip>
+              Кнопка, фильтрующая истории только с озвочкой.
+            </template>
+          </vs-tooltip>
         </vs-sidebar-item>
+
 
         <vs-sidebar-item>
           <template #icon>
             <i class='bx bxs-film' style="font-size: 1vw;"></i>
           </template>
-          <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
+          <vs-tooltip right danger>
+            <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
+
+            <template #tooltip>
+              Кнопка, фильтрующая истории только с видео.
+            </template>
+          </vs-tooltip>
         </vs-sidebar-item>
       </vs-sidebar-group>
 
@@ -61,8 +76,7 @@
           </vs-sidebar-item>
         </template>
 
-
-        <vs-sidebar-item id="authors">
+        <vs-sidebar-item to="/followedposts" id="authors">
           <template #icon>
             <i class='bx bxs-user' style="font-size: 1vw;"></i>
           </template>
@@ -154,8 +168,45 @@
               Самые любимые истории пользователей.
             </template>
           </vs-tooltip>
+          
+        </vs-sidebar-item>
+      </vs-sidebar-group>
+        <hr class="rounded">
+      <vs-sidebar-group>
+        <template #header>
+          <vs-sidebar-item arrow style="margin-right: 7%;">
+            <template #icon>
+              <i class='bx bxs-toggle-right' style="font-size: 1vw;"></i>
+            </template>
+            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Содержание</p>
+          </vs-sidebar-item>
+        </template>
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
         </vs-sidebar-item>
 
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bxs-film' style="font-size: 1vw;"></i>
+          </template>
+          <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
+        </vs-sidebar-item>
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bx-angry' style="font-size: 1vw; color: #FF0000;"></i>
+          </template>
+          <vs-switch v-model="curse" color="#FF0000" style="background-color: black;"><p style="font-size: 0.66vw;">Нецензурная лексика</p></vs-switch>
+        </vs-sidebar-item>
+
+        <vs-sidebar-item>
+          <template #icon>
+            <i class='bx bx-knife' style="font-size: 1vw; color: #FF0000;"></i>
+          </template>
+          <vs-switch v-model="violence" color="#FF0000" style="background-color: black;">Кровь/Насилие</vs-switch>
+        </vs-sidebar-item>
       </vs-sidebar-group>
 
       <vs-sidebar-item to="/bookmarks" id="bookmarks">
@@ -164,7 +215,7 @@
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Закладки</p>
       </vs-sidebar-item>
-<hr class="rounded">
+      <hr class="rounded">
       <vs-sidebar-item to="/about" id="help">
         <template #icon>
           <i class='bx bxs-help-circle' style="font-size: 1vw;"></i>
