@@ -2,7 +2,7 @@ import math
 from app import app, db, jwt
 from flask import jsonify, request, g
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt
-from app.models import User, Post, Genre, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, SavedPostSchema, followers
+from app.models import User, Post, Genre, Likes, Comments, SavedPost, RevokedTokenModel, PostSchema, UserSchema ,GenreSchema, SavedPostSchema, followers
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 from urllib.parse import urlparse, parse_qs
@@ -33,9 +33,9 @@ def get_index():
     audio = data['audio']
 
     if not audio and not video:
-        req = Post.query
+        req = Post.query.order_by(Post.timestamp.desc())
     else:
-        req = Post.query.filter_by(has_audio = audio, has_video = video)
+        req = Post.query.filter_by(has_audio = audio, has_video = video).order_by(Post.timestamp.desc())
 
 
     posts = req.paginate(page=page,per_page=value,error_out=False)
@@ -65,9 +65,9 @@ def search():
     page = int(data['page'])
 
     if search == "":
-        posts_request = Post.query
+        posts_request = Post.query.order_by(Post.timestamp.desc())
     else:
-        posts_request = Post.query.filter(Post.title.ilike(f'%{search}%'))
+        posts_request = Post.query.filter(Post.title.ilike(f'%{search}%')).order_by(Post.timestamp.desc())
 
     posts = posts_request.paginate(page=page,per_page=value,error_out=False)
 
@@ -94,7 +94,7 @@ def get_saved():
 
     find_user = User.query.filter_by(username = login).first()
 
-    posts_request = SavedPost.query.filter_by(user_id = find_user.id).paginate(page=page,per_page=value,error_out=False)
+    posts_request = SavedPost.query.filter_by(user_id = find_user.id).order_by(Post.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
 
     len = SavedPost.query.filter_by(user_id = find_user.id).count()
     len =  math.ceil(len/value)
@@ -121,7 +121,7 @@ def get_followed_posts():
 
     post_schema = PostSchema(many = True)
 
-    posts = find_user.followed_posts().paginate(page=page,per_page=value,error_out=False)
+    posts = find_user.followed_posts().order_by(Post.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
 
     len = find_user.followed_posts().count()
     len = math.ceil(len/value)
@@ -134,6 +134,32 @@ def get_followed_posts():
 
     return jsonify(output)
 
+@app.route('/post/like', methods=['POST'])
+@jwt_required(refresh=False)
+def post_like():
+    data = request.get_json()
+    post_id = int(data['post_id'])
+    login = get_jwt_identity()
+
+    find_user = User.query.filter_by(username = login).first()
+    find_post = Post.query.filter_by(id = post_id).first()
+
+    find_like = Likes.query.filter_by(user_id = find_user.id, post_id = post_id).first()
+
+    if find_like != None:
+        db.session.delete(find_like)
+        find_post.like_count -= 1
+        db.session.commit()
+        return jsonify({"Status" : "delete_like"})
+
+    like = Likes(user_id = find_user.id, post_id = post_id, user = find_user, post = find_post)
+    find_post.like_count += 1
+
+    db.session.add(like)
+    db.session.commit()
+
+    return jsonify({'Status': "add_like"})
+
 
 @app.route('/profile/<username>/follow', methods=['POST'])
 @jwt_required(refresh=False)
@@ -144,7 +170,7 @@ def user_follow(username):
 
     find_user.follow(follow_user)
 
-    return jsonify({'Status': "success"})
+    return jsonify({'Status': "Success"})
 
 
 @app.route('/profile/<username>/followers', methods=['GET'])

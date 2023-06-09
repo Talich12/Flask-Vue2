@@ -98,6 +98,8 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship("User", backref="books")
     genre = db.Column(db.String())
+    like_count = db.Column(db.Integer, default=0)
+    comment_count = db.Column(db.Integer, default=0)
     video = db.Column(db.String())
     has_video = db.Column(db.Boolean(), default=False)
     audio = db.Column(db.String())
@@ -163,6 +165,9 @@ class PostSchema(ma.SQLAlchemySchema):
     video = auto_field()
     has_audio = auto_field()
     audio = auto_field()
+    timestamp = auto_field()
+    like_count = auto_field()
+    comment_count = auto_field()
     
     author = fields.Nested(UserSchema)
 

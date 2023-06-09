@@ -20,7 +20,7 @@
         </template>
       </information>
       <vs-col v-for="post in Data" offset="1" w="5">
-        <card @data="Open" :id="post.id">
+        <card @data="Open" :comment_count="post.comment_count" :like_count="post.like_count" :id="post.id">
           <template #title>
             {{ post.title }}
           </template>

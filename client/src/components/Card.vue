@@ -15,13 +15,13 @@
         <vs-button danger icon>
             <i class='bx bx-heart'></i>
             <span class="span">
-            54
+            {{like_count}}
             </span>
         </vs-button>
         <vs-button class="btn-chat" shadow primary>
             <i class='bx bx-chat' ></i>
             <span class="span">
-            54
+            {{comment_count}}
             </span>
         </vs-button>
         </template>
@@ -31,7 +31,7 @@
 <script>
 import axios from 'axios';
 export default {
-    props:['id'],
+    props:['id', 'comment_count', 'like_count'],
     data() {
       return {
         len: 1,
