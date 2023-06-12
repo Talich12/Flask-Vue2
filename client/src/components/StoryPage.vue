@@ -97,6 +97,15 @@
           <i class='bx bxs-user-minus'  ></i>Отписаться от автора
           </span>
           </vs-button>
+          <vs-button
+            @click="addFollow()"
+            color="#FF0000"
+            floating
+            icon
+            border
+          >
+            <i class='bx bx-x'  ></i>Удалить пост
+          </vs-button>
         </div>
         <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
         <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
