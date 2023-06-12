@@ -51,7 +51,7 @@
         </template>
 
 
-        <vs-sidebar-item id="genre">
+        <vs-sidebar-item to="/genre" id="genre">
           <template #icon>
             <i class='bx bxs-book' style="font-size: 1vw;"></i>
           </template>

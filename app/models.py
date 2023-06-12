@@ -132,6 +132,8 @@ class RevokedTokenModel(db.Model):
 class Genre(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(120))
+    description = db.Column(db.String())
+    image = db.Column(db.String())
 
     def __repr__(self):
         return '<Genre {}>'.format(self.body)
@@ -144,6 +146,8 @@ class GenreSchema(ma.SQLAlchemySchema):
 
     id = ma.auto_field()
     name = ma.auto_field()
+    image = ma.auto_field()
+    description = ma.auto_field()
 
 class UserSchema(ma.SQLAlchemySchema):
     class Meta:

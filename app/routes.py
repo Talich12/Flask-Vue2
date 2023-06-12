@@ -156,6 +156,47 @@ def post_like_top():
     output["len"] = len
     return jsonify(output)
 
+@app.route('/genretop', methods=['POST'])
+def post_genre_top():
+    post_schema = PostSchema(many=True)
+    data = request.get_json(silent=True)
+    output = {}
+
+    filters = []
+
+    value = int(data['value'])
+    page = data['page']
+    genre = data['genre']
+    video = data['video']
+    audio = data['audio']
+    curse = data['curse']
+    violence = data['violence']
+
+    if video:
+        filters.append(getattr(Post, 'has_video') == video)
+    if audio:
+        filters.append(getattr(Post, 'has_audio') == audio)
+    if curse:
+        filters.append(getattr(Post, 'has_curse') == curse)
+    if violence:
+        filters.append(getattr(Post, 'has_violence') == violence)
+
+
+    if  filters == {}:
+        req = Post.query.filter(Post.title.ilike(f'%{genre}%')).order_by(Post.like_count.desc())
+    else:
+        req = Post.query.filter(Post.title.ilike(f'%{genre}%') ,*filters).order_by(Post.like_count.desc())
+
+
+
+    posts = req.paginate(page=page,per_page=value,error_out=False)
+    output_query = post_schema.dump(posts)
+    len = req.count()
+    len =  math.ceil(len/value)
+    output["data"] = output_query
+    output["len"] = len
+    return jsonify(output)
+
 
 @app.route('/followedposts', methods=['POST'])
 @jwt_required(refresh=False)
