@@ -286,6 +286,16 @@ def get_post(id):
 
     return jsonify(output)
 
+@app.route('/post/<id>/delete', methods=['DELETE'])
+@jwt_required(refresh=False)
+def delete_post(id):
+
+    find_post =  Post.query.filter_by(id = id).first()
+    db.session.delete(find_post)
+    db.session.commit()
+
+    return jsonify({'Status': 'Success'})
+
 
 @app.route('/post/like', methods=['POST'])
 @jwt_required(refresh=False)
