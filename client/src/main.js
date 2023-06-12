@@ -31,8 +31,10 @@ import Notification from './components/Notification';
 import MarkdownEditor from './components/MarkdownEditor';
 import Subscribers from './components/Subscribers';
 import UserComment from './components/UserComment';
-Vue.component('usercomment', UserComment)
-Vue.component('storypage', StoryPage)
+import NoMatches from './components/NoMatches';
+Vue.component('nomatches', NoMatches);
+Vue.component('usercomment', UserComment);
+Vue.component('storypage', StoryPage);
 Vue.component('subscriber', Subscribers);
 Vue.component('totop', ButtonToTop);
 Vue.component('cardrecs', CardRecommendations);
