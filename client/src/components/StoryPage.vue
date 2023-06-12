@@ -84,17 +84,29 @@
             <i class='bx bx-error' ></i>
           </vs-button>
           <vs-button
-            @click="addFollow()"
-            success
+          v-if="success"
+          @click="addFollow()"
+          success
+          floating
+          icon
+          border
+        >
+          <span v-if="!TEMPLATE">
+            <i class='bx bxs-user-plus'></i>Подписаться на автора
+          </span>
+          <i class='bx bxs-user-minus' v-else>Отписаться от автора</i>
+        </vs-button>
+        <div v-else>
+          <vs-button
+            @click="deleteHistory()"
+            danger
             floating
             icon
             border
           >
-          <span v-if="!TEMPLATE">
-            <i class='bx bxs-user-plus' ></i>Подписаться на автора
-          </span>
-          <i class='bx bxs-user-minus' v-else >Отписаться от автора</i>
+            <i class='bx bx-trash'></i>Удалить историю
           </vs-button>
+        </div>
         </div>
         <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
         <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
@@ -124,7 +136,7 @@ import marked from 'marked';
   export default {
     props: ['post_data', 'active'],
     data:() => ({
-      success: false,
+      success: false, //delete
       text: '',
       activebtn: '',
       markdown:  ``,
