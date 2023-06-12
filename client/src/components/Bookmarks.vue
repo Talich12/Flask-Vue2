@@ -11,16 +11,7 @@
           </template>
         </information>
         <vs-col v-for="post in Data" offset="1" w="5">
-          <card @data="Open" :comment_count="post.post.comment_count" :like_count="post.post.like_count" :id="post.post.id">
-            <template #title>
-              {{ post.post.title }}
-            </template>
-            <template #text>
-              {{ post.post.author.username }}
-            </template>
-            <template #img>
-              <img :src="require(`@/assets/img/load/${post.post.img}`)" alt="">
-            </template>
+          <card @data="Open" :post="post.post">
           </card>
         </vs-col>
         <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>

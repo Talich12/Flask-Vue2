@@ -1,49 +1,48 @@
 <template>
     <vs-card @click="onClick()" style="margin-top: 7%;">
         <template #title>
-            <h3><slot name="title"></slot></h3>
+            <h3>{{post.title}}</h3>
         </template>
         <template #img>
-            <slot name="img"></slot>
+            <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
         </template>
         <template #text>
         <p>
-            <slot name="text"></slot>
+            {{ post.author.username }}
         </p>
         </template>
         <template #interactions>
         <vs-button danger icon>
             <i class='bx bx-heart'></i>
             <span class="span">
-            {{like_count}}
+            {{post.like_count}}
             </span>
         </vs-button>
         <vs-button danger icon>
             <i class='bx bx-chat' ></i>
             <span class="span">
-            {{comment_count}}
+            {{post.comment_count}}
             </span>
         </vs-button>
-        <vs-button primary icon>
+        <vs-button v-if="post.has_audio == true" primary icon>
             <i class='bx bxs-microphone-alt' ></i>
             <span class="span">
             </span>
         </vs-button>
-        <vs-button primary icon>
+        <vs-button  v-if="post.has_video == true" primary icon>
             <i class='bx bxs-film' ></i>
             <span class="span">
 
             </span>
         </vs-button>
-        <vs-button color="#FF0000" icon>
+        <vs-button v-if="post.has_curse == true" color="#FF0000" icon>
             <i class='bx bx-angry' ></i>
             <span class="span">
             </span>
         </vs-button>
-        <vs-button color="#FF0000" icon>
+        <vs-button v-if="post.has_violence == true" color="#FF0000" icon>
             <i class='bx bx-knife' ></i>
             <span class="span">
-            {{violence_boolean}}
             </span>
         </vs-button>
         </template>
@@ -53,7 +52,7 @@
 <script>
 import axios from 'axios';
 export default {
-    props:['id', 'comment_count', 'like_count'],
+    props:['post'],
     data() {
       return {
         len: 1,
@@ -63,7 +62,7 @@ export default {
     },
     methods:{
         onClick(){
-            const path = "http://localhost:3000/post/" + this.$props.id;
+            const path = "http://localhost:3000/post/" + this.$props.post.id;
             axios.get(path)
                 .then((response) => {
                 this.$emit('data', response.data)
