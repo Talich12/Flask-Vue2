@@ -20,24 +20,14 @@
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Поиск</p>
       </vs-sidebar-item>
       <hr class="rounded">
-      <vs-sidebar-item id="recommendations">
+      <vs-sidebar-item v-if="$cookies.isKey('access_token')" id="recommendations">
         <template #icon>
           <i class='bx bx-merge' style="font-size: 1vw;"></i>
         </template>
         <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Рекомендации</p>
       </vs-sidebar-item>
 
-      <vs-sidebar-group>
-        <template #header>
-          <vs-sidebar-item arrow style="margin-right: 7%;">
-            <template #icon>
-              <i class='bx bxs-plus-circle' style="font-size: 1vw;"></i>
-            </template>
-            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Подписки</p>
-          </vs-sidebar-item>
-        </template>
-
-        <vs-sidebar-item to="/followedposts" id="authors">
+      <vs-sidebar-item v-if="$cookies.isKey('access_token')" to="/followedposts" id="authors">
           <template #icon>
             <i class='bx bxs-user' style="font-size: 1vw;"></i>
           </template>
@@ -49,21 +39,6 @@
             </template>
           </vs-tooltip>
         </vs-sidebar-item>
-
-
-        <vs-sidebar-item to="subscriptiongenre" id="genresubs">
-          <template #icon>
-            <i class='bx bxs-book-heart' style="font-size: 1vw;"></i>
-          </template>
-          <vs-tooltip right danger>
-            <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Жанры</p>
-
-            <template #tooltip>
-              Кнопка быстрого доступа к вашим любимым жанрам!
-            </template>
-          </vs-tooltip>
-        </vs-sidebar-item>
-      </vs-sidebar-group>
 
       <vs-sidebar-group>
         <template #header>
@@ -170,7 +145,7 @@
         </vs-sidebar-item>
       </vs-sidebar-group>
 
-      <vs-sidebar-item to="/bookmarks" id="bookmarks">
+      <vs-sidebar-item v-if="$cookies.isKey('access_token')" to="/bookmarks" id="bookmarks">
         <template #icon>
           <i class='bx bxs-bookmark' style="font-size: 1vw;"></i>
         </template>
@@ -219,6 +194,8 @@ export default {
   data: () => ({
     audio: false,
     video: false,
+    curse: false,
+    violence: false,
     active: '',
     ProfileUrl: '/profile/' + $cookies.get("login"),
     User: [],
@@ -250,8 +227,14 @@ export default {
     audio: function () {
       this.$emit('audio', { audio: this.audio })
     },
-    video: function () {
-      this.$emit('video', { video: this.video })
+    video: function(){
+      this.$emit('video', {video: this.video})
+    },
+    curse: function(){
+      this.$emit('curse', {curse: this.curse})
+    },
+    violence: function(){
+      this.$emit('violence', {violence: this.violence})
     }
   },
   created() {

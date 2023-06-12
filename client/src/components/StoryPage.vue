@@ -1,7 +1,7 @@
 
 <template>
     <div class="center" style="height: 100%;">
-      <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0; overflow-y: hidden;">
+      <vs-dialog scroll blur overflow-hidden not-close v-model="$props.active" style="padding-top: 0; padding-bottom: 0; overflow-y: hidden;">
         <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
           <vs-avatar>
           <img :src="require(`@/assets/img/load/${post_data.post.author.avatar}`)" alt="">
@@ -12,8 +12,6 @@
           color="#FF0000"
           border
           upload
-          :activebtn="activebtn == 2"
-          @click="active = 2"
           style="margin-left: 8vw;"
         >
           <i class="bx bxl-youtube"></i> Видео на youtube!
@@ -23,8 +21,6 @@
           danger
           border
           upload
-          :activebtn="activebtn == 2" 
-          @click="active = 2"
         >
           <i class="bx bxs-microphone-alt"></i> Озвучка истории!
         </vs-button>
@@ -257,6 +253,7 @@ import marked from 'marked';
 .vs-dialog {
     background: #2A2A35;
     color: #EEEFF9;
+    z-index: 10000000000;
 }
 .vs-dialog--scroll {
     max-width:none;

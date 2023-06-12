@@ -3,7 +3,7 @@
     <div id="top" style="position: absolute; top: 10px; left: 0;"></div>
     <cookie></cookie>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
-    <sidebar @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
+    <sidebar @curse="onCurse" @violence="onViolence" @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
     </sidebar>
     <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
     <Flashlight v-show="flashlightVisible" ref="flashlight" style="right: 0; bottom: 0;"></Flashlight>
@@ -18,7 +18,7 @@
     >
       <i class="bx bxs-torch"></i>
     </vs-button>
-    <router-view :audio="audio" :video="video" />
+    <router-view :curse="curse" :violence="violence" :audio="audio" :video="video" />
     <myfooter style="z-index: 10; position: relative; bottom: 0;"></myfooter>
   </div>
 </template>
@@ -31,14 +31,22 @@ export default {
   data: () => ({
     audio: false,
     video: false,
+    curse: false,
+    violence: false,
     flashlightVisible: false,
   }),
   methods: {
     onVideo(data) {
       this.video = data.video;
     },
-    onAudio(data) {
-      this.audio = data.audio;
+    onAudio(data){
+      this.audio = data.audio
+    },
+    onCurse(data){
+      this.curse = data.curse
+    },
+    onViolence(data){
+      this.violence = data.violence
     },
     toggleFlashlight() {
       this.flashlightVisible = !this.flashlightVisible; // Toggle the visibility of the flashlight

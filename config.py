@@ -12,4 +12,5 @@ class Config(object):
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
     UPLOAD_FOLDER = os.path.join(basedir, 'client', 'src', 'assets', 'img', 'load')
+    SPEECH_FOLDER = os.path.join(basedir, 'client', 'src', 'assets', "speech")
     PROPAGATE_EXCEPTIONS = True

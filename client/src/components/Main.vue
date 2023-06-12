@@ -10,7 +10,7 @@
           Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
         </template>
       </information>
-      <cardrecs></cardrecs>
+      <cardrecs @data="Open" :data="top"></cardrecs>
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
           Подборка самых популярных историй на сегодня
@@ -65,10 +65,11 @@ import Information from './Information.vue';
 import marked from 'marked';
 export default {
   name: "index",
-  props:['video', 'audio'],
+  props:['video', 'audio', 'curse', 'violence'],
   data() {
       return {
         post_data: [],
+        top: [],
         activebtn: '',
         active: false,
         Data: [],
@@ -81,11 +82,13 @@ export default {
   methods: {
       Get() {
           const path = "http://localhost:3000/";
-          axios.post(path, {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio})
+          console.log( {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
+          axios.post(path, {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
               this.len = response.data.len
+              this.active = false
           })
               .catch((error) => {
               console.log(error);
@@ -94,10 +97,11 @@ export default {
       onPage(data){
         this.page = data.page
         const path = "http://localhost:3000/";
-          axios.post(path, {page: data.page, value: this.value, video: this.$props.video, audio: this.$props.audio})
+          axios.post(path, {page: data.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
+              this.active = false
           })
               .catch((error) => {
               console.log(error);
@@ -107,20 +111,36 @@ export default {
         this.value = data.value
         this.page = 1
         const path = "http://localhost:3000/";
-          axios.post(path, {value: data.value, page: this.page, video: this.$props.video, audio: this.$props.audio})
+          axios.post(path, {value: data.value, page: this.page, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence})
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
               this.len = response.data.len
+              this.active = false
           })
               .catch((error) => {
               console.log(error);
           });
       },
+      getTop(){
+        const path = "http://localhost:3000/liketop";
+        console.log( {style: "crop"})
+        axios.post(path, {style: "crop"})
+            .then((response) => {
+            console.log(response.data);
+            this.top = response.data
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      },
       Open(data){
         console.log(data)
         this.post_data = data
         this.active = true
+      },
+      Exit(){
+        console.log("Exit")
       }
   },
   watch:{
@@ -129,9 +149,18 @@ export default {
       this.Get()
     },
     audio: function(){
+      console.log("fasd")
       this.page = 1
       this.Get()
-    }
+    },
+    curse: function(){
+      this.page = 1
+      this.Get()
+    },
+    violence: function(){
+      this.page = 1
+      this.Get()
+    },
   },
   computed: {
       markdownToHtml(){
@@ -140,6 +169,7 @@ export default {
   },
   created() {
       this.Get();
+      this.getTop()
       console.log(this.$props.audio)
   },
   components: { Information }

@@ -75,10 +75,10 @@ class User(db.Model):
         return self.followed.filter(
             followers.c.followed_id == user.id).count() > 0
     
-    def followed_posts(self):
+    def followed_posts(self, filters):
         return Post.query.join(
             followers, (followers.c.followed_id == Post.author_id)).filter(
-                followers.c.follower_id == self.id)
+                followers.c.follower_id == self.id, *filters)
     
 
     def set_password(self, password):
@@ -105,6 +105,9 @@ class Post(db.Model):
     has_video = db.Column(db.Boolean(), default=False)
     audio = db.Column(db.String())
     has_audio = db.Column(db.Boolean(), default=False)
+    has_curse = db.Column(db.Boolean(), default=False)
+    has_violence = db.Column(db.Boolean(), default=False)
+    tts = db.Column(db.String())
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)

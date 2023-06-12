@@ -1,5 +1,6 @@
 <template>
     <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
+      <storypage :active="active" :post_data="post_data" style="z-index: 100;"/>
       <vs-row justify="space-around">
         <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
           <template #title>
@@ -10,7 +11,7 @@
           </template>
         </information>
         <vs-col v-for="post in Data" offset="1" w="5">
-          <card>
+          <card @data="Open" :comment_count="post.comment_count" :like_count="post.like_count" :id="post.id">
             <template #title>
               {{ post.title }}
             </template>
@@ -54,6 +55,7 @@
   import Information from './Information.vue';
   
   export default {
+    props:['video', 'audio', 'curse', 'violence'],
     name: "index",
     data() {
         return {
@@ -62,12 +64,14 @@
             page: 1,
             value: 4,
             UserIcon: require(`@/assets/img/load/sample1.jpg`),
+            active: false,
+            post_data: [],
         };
     },
     methods: {
         Get() {
             const path = "http://localhost:3000/followedposts";
-            axios.post(path, {page: this.page, value: this.value}, {
+            axios.post(path, {page: this.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence}, {
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
                 }
@@ -85,7 +89,7 @@
         onPage(data){
           this.page = data.page
           const path = "http://localhost:3000/followedposts";
-            axios.post(path, {page: data.page, value: this.value}, {
+            axios.post(path, {page: data.page, value: this.value, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence}, {
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
                 }
@@ -102,7 +106,7 @@
           this.value = data.value
           this.page = 1
           const path = "http://localhost:3000/followedposts";
-            axios.post(path, {value: data.value, page: this.page}, {
+            axios.post(path, {value: data.value, page: this.page, video: this.$props.video, audio: this.$props.audio, curse: this.$props.curse, violence: this.$props.violence}, {
                 headers: {
                     'Authorization': 'Bearer ' + this.$cookies.get("access_token"),
                 }
@@ -115,7 +119,31 @@
                 .catch((error) => {
                 console.log(error);
             });
-        }
+        },
+        Open(data){
+          console.log(data)
+          this.post_data = data
+          this.active = true
+        },
+    },
+    watch:{
+      video: function(){
+        this.page = 1
+        this.Get()
+      },
+      audio: function(){
+        console.log("fasd")
+        this.page = 1
+        this.Get()
+      },
+      curse: function(){
+        this.page = 1
+        this.Get()
+      },
+      violence: function(){
+        this.page = 1
+        this.Get()
+      },
     },
     created() {
         this.Get();
