@@ -1,35 +1,33 @@
 <template>
       <vs-card-group style="margin-left: 8%; margin-top: 2%;">
-    <vs-card v-for="card in 6">
-      <template #title>
-        <h3>Демо</h3>
-      </template>
-      <template #img>
-        <img :src="require('@/assets/img/load/sample1.jpg')" alt="">
-      </template>
-      <template #text>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        </p>
-      </template>
-      <template #interactions>
-        <vs-button danger icon>
-          <i class='bx bx-heart'></i>
-          <span class="span">
-            54
-          </span>
-        </vs-button>
-        <vs-button class="btn-chat" shadow primary>
-          <i class='bx bx-chat' ></i>
-          <span class="span">
-            54
-          </span>
-        </vs-button>
-      </template>
-    </vs-card>
+        <div v-for="post in $props.data">
+          <card @data="Open" :comment_count="post.comment_count" :like_count="post.like_count" :id="post.id">
+          <template #title>
+            {{ post.title }}
+          </template>
+          <template #text>
+            {{ post.author.username }}
+          </template>
+          <template #img>
+            <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
+          </template>
+        </card>
+        </div>
   </vs-card-group>
 </template>
 
 <script>
-
+export default {
+  props:['data'],
+  data() {
+      return {
+      
+      };
+  },
+  methods:{
+    Open(data){
+      this.$emit('data', data)
+    }
+  }
+}
 </script>

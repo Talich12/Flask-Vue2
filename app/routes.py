@@ -105,6 +105,23 @@ def get_saved():
 
     return jsonify(output)
 
+@app.route('/liketop', methods=['POST'])
+def like_top():
+    data = request.get_json()
+    style = data['style']
+
+    post_schema = PostSchema(many = True)
+
+    if style == "crop":
+        req = Post.query.filter(Post.like_count > 0).order_by(Post.like_count.desc())
+    else:
+        req = Post.query.order_by(Post.like_count.desc())
+    
+    output = post_schema.dump(req)
+
+    return jsonify(output)
+
+
 @app.route('/followedposts', methods=['POST'])
 @jwt_required(refresh=False)
 def get_followed_posts():

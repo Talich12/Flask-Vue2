@@ -10,7 +10,7 @@
           Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
         </template>
       </information>
-      <cardrecs></cardrecs>
+      <cardrecs @data="Open" :data="top"></cardrecs>
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
           Подборка самых популярных историй на сегодня
@@ -70,6 +70,7 @@ export default {
   data() {
       return {
         post_data: [],
+        top: [],
         activebtn: '',
         active: false,
         Data: [],
@@ -122,6 +123,18 @@ export default {
               console.log(error);
           });
       },
+      getTop(){
+        const path = "http://localhost:3000/liketop";
+        console.log( {style: "crop"})
+        axios.post(path, {style: "crop"})
+            .then((response) => {
+            console.log(response.data);
+            this.top = response.data
+        })
+            .catch((error) => {
+            console.log(error);
+        });
+      },
       Open(data){
         console.log(data)
         this.post_data = data
@@ -157,6 +170,7 @@ export default {
   },
   created() {
       this.Get();
+      this.getTop()
       console.log(this.$props.audio)
   },
   components: { Information }
