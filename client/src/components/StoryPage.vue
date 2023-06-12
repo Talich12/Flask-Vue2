@@ -90,10 +90,12 @@
             icon
             border
           >
-          <span v-if="!TEMPLATE">
-            <i class='bx bxs-user-plus' ></i>Подписаться на автора
+          <span v-if="post_data.has_followed == 1">
+            <i class='bx bxs-user-plus'  ></i>Подписаться на автора
           </span>
-          <i class='bx bxs-user-minus' v-else >Отписаться от автора</i>
+          <span v-if="post_data.has_followed == 0">
+          <i class='bx bxs-user-minus'  ></i>Отписаться от автора
+          </span>
           </vs-button>
         </div>
         <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
@@ -113,7 +115,6 @@
         </div>
         <div v-for="comment in post_data.comments" :class="{ 'shake-animation': isCommentAdded }">
           <usercomment :comment_data="comment" ></usercomment>
-        </div>
         </div>
       </vs-dialog>
     </div>
