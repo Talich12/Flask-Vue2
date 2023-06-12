@@ -10,7 +10,7 @@
           </template>
         </information>
         <vs-col v-for="genre in Data" offset="1" w="5">
-            <vs-card style="margin-top: 7%;">
+            <vs-card @click="onClick(genre.id)" style="margin-top: 7%;">
                 <template #title>
                     <h3>{{ genre.name }}</h3>
                 </template>
@@ -70,6 +70,9 @@
                 console.log(error);
             });
         },
+        onClick(id){
+            this.$router.push('/genretop/' + id)
+        }
     },
     created() {
         this.Get();

@@ -156,8 +156,8 @@ def post_like_top():
     output["len"] = len
     return jsonify(output)
 
-@app.route('/genretop', methods=['POST'])
-def post_genre_top():
+@app.route('/genretop/<id>', methods=['POST'])
+def post_genre_top(id):
     post_schema = PostSchema(many=True)
     data = request.get_json(silent=True)
     output = {}
@@ -166,11 +166,12 @@ def post_genre_top():
 
     value = int(data['value'])
     page = data['page']
-    genre = data['genre']
     video = data['video']
     audio = data['audio']
     curse = data['curse']
     violence = data['violence']
+
+    genre = Genre.query.filter_by(id = id).first()
 
     if video:
         filters.append(getattr(Post, 'has_video') == video)
@@ -183,9 +184,9 @@ def post_genre_top():
 
 
     if  filters == {}:
-        req = Post.query.filter(Post.title.ilike(f'%{genre}%')).order_by(Post.like_count.desc())
+        req = Post.query.filter(Post.genre.ilike(f'%{genre.name}%')).order_by(Post.like_count.desc())
     else:
-        req = Post.query.filter(Post.title.ilike(f'%{genre}%') ,*filters).order_by(Post.like_count.desc())
+        req = Post.query.filter(Post.genre.ilike(f'%{genre.name}%') ,*filters).order_by(Post.like_count.desc())
 
 
 
@@ -195,6 +196,7 @@ def post_genre_top():
     len =  math.ceil(len/value)
     output["data"] = output_query
     output["len"] = len
+    output["genre"] = genre.name
     return jsonify(output)
 
 

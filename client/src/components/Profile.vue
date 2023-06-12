@@ -57,16 +57,7 @@
                             <div class="containerProfile">
                             <vs-row justify="space-around" style="margin-top: 8vh;">
                                 <vs-col v-for="post in Data" offset="1" w="5">
-                                <card @data="Open" :comment_count="post.comment_count" :like_count="post.like_count" :id="post.id" >
-                                    <template #title>
-                                    {{ post.title }}
-                                    </template>
-                                    <template #text>
-                                    {{ post.author.username }}
-                                    </template>
-                                    <template #img>
-                                    <img :src="require(`@/assets/img/load/${post.img}`)" alt="">
-                                    </template>
+                                <card @data="Open" :post="post" >
                                 </card>
                                 </vs-col>
                             </vs-row>
