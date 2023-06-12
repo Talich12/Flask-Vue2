@@ -27,9 +27,9 @@
         </div>
         <div style="display: flex; flex-direction: column; margin: 1vh; padding: 0.5vh; align-items: center;">
           <hr class="rounded2" style="margin-top: -1vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
-          <p>Жанры: {{ post_data.post.genre }}</p>
+          <p>Жанры: <p style="color: #6A4E93; font-style: italic; margin-top: 1vh;">{{ post_data.post.genre }}</p></p>
           <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 18vw;">
-          <p>История написана: {{ post_data.post.timestamp }}</p>
+          <p>История написана: <p style="color: #6A4E93; font-style: italic; margin-top: 1vh;">{{ formattedTimestamp }}</p></p>
           <hr class="rounded2" style="margin-top: 2vh; border-top: 0.2vh solid #6A4E93; width: 14vw;">
         </div>
         <template #header>
@@ -93,8 +93,11 @@
         <vs-input border v-model="text" placeholder="Прокомментировать..." style="margin: 1vh; width: 100%;" class="multiline-input"/>
         <vs-button
         @click="addComment()"
+        border
         icon
-        danger :class="{ 'shake-animation': isCommentAdded }"
+        danger 
+        :class="{ 'shake-animation': isCommentAdded }"
+        style="width: 100px"
       >
         <i class="bx bx-send"></i>
       </vs-button>
@@ -213,6 +216,14 @@ import marked from 'marked';
       }
     },
     computed: {
+        formattedTimestamp() {
+          const timestamp = this.$props.post_data.post.timestamp;
+          const date = new Date(timestamp);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
+          return `${year}-${month}-${day}`;
+        },
         markdownToHtml(){
             return marked(this.$props.post_data.post.body);
         }
