@@ -105,20 +105,55 @@ def get_saved():
 
     return jsonify(output)
 
-@app.route('/liketop', methods=['POST'])
-def like_top():
-    data = request.get_json()
-    style = data['style']
+@app.route('/liketop', methods=['GET'])
+def get_like_top():
 
     post_schema = PostSchema(many = True)
 
-    if style == "crop":
-        req = Post.query.filter(Post.like_count > 0).order_by(Post.like_count.desc())
-    else:
-        req = Post.query.order_by(Post.like_count.desc())
-    
+    req = Post.query.filter(Post.like_count > 0).order_by(Post.like_count.desc())
     output = post_schema.dump(req)
+    
 
+    return jsonify(output)
+
+@app.route('/liketop', methods=['POST'])
+def post_like_top():
+    post_schema = PostSchema(many=True)
+    data = request.get_json(silent=True)
+    output = {}
+
+    filters = []
+
+    value = int(data['value'])
+    page = data['page']
+    video = data['video']
+    audio = data['audio']
+    curse = data['curse']
+    violence = data['violence']
+
+    if video:
+        filters.append(getattr(Post, 'has_video') == video)
+    if audio:
+        filters.append(getattr(Post, 'has_audio') == audio)
+    if curse:
+        filters.append(getattr(Post, 'has_curse') == curse)
+    if violence:
+        filters.append(getattr(Post, 'has_violence') == violence)
+
+
+    if  filters == {}:
+        req = Post.query.order_by(Post.like_count.desc())
+    else:
+        req = Post.query.filter(*filters).order_by(Post.like_count.desc())
+
+
+
+    posts = req.paginate(page=page,per_page=value,error_out=False)
+    output_query = post_schema.dump(posts)
+    len = req.count()
+    len =  math.ceil(len/value)
+    output["data"] = output_query
+    output["len"] = len
     return jsonify(output)
 
 

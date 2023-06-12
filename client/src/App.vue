@@ -7,7 +7,6 @@
     </sidebar>
     <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
     <Flashlight v-show="flashlightVisible" ref="flashlight" style="right: 0; bottom: 0;"></Flashlight>
-    <a href="#" v-scroll-to="'#top'" style="position: absolute; right: 100px; bottom: 100px; z-index: 100;"> dsadsad</a>
     <vs-button
       icon
       dark

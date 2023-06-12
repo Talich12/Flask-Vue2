@@ -12,6 +12,7 @@ import Search from '@/components/Search';
 import SubscriptionGenre from '@/components/SubscriptionGenre';
 import Bookmarks from '@/components/Bookmarks';
 import FollowedPosts from '@/components/FollowedPosts';
+import LikeTop from '@/components/LikeTop'
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
 import marked from 'marked';
@@ -84,6 +85,11 @@ const router = new Router({
       path: '/followedposts',
       name: 'followedposts',
       component: FollowedPosts,
+    },
+    {
+      path: '/liketop',
+      name: 'liketop',
+      component: LikeTop,
     },
   ],
   scrollBehavior(to, from, savedPosition) {

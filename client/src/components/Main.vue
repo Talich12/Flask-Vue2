@@ -2,7 +2,7 @@
   <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
     <storypage :active="active" :post_data="post_data" style="z-index: 100;"/>
     <vs-row justify="space-around">
-      <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
+      <information id="top" style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
           Рекомендации на сегодня
         </template>
@@ -125,7 +125,7 @@ export default {
       getTop(){
         const path = "http://localhost:3000/liketop";
         console.log( {style: "crop"})
-        axios.post(path, {style: "crop"})
+        axios.get(path)
             .then((response) => {
             console.log(response.data);
             this.top = response.data
@@ -141,7 +141,7 @@ export default {
       },
       Exit(){
         console.log("Exit")
-      }
+      },
   },
   watch:{
     video: function(){

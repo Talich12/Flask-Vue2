@@ -74,10 +74,12 @@ axios.interceptors.response.use(
         this.$cookies.remove('refresh_token')
         this.$cookies.remove('login')
         this.$router.push({name: 'Main'})
+        window.location.reload();
       })
     }
     else if (error.response.status === 422){
       router.push({name: 'Main'})
+      window.location.reload();
     }
     return Promise.reject(error)
   }

@@ -93,7 +93,7 @@
         </vs-sidebar-item>
 
 
-        <vs-sidebar-item id="likes">
+        <vs-sidebar-item to="/liketop" id="likes">
           <template #icon>
             <i class='bx bxs-like' style="font-size: 1vw;"></i>
           </template>
