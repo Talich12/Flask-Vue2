@@ -53,16 +53,17 @@
                         
                     </vs-navbar>
                     <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s; width: 100%;">
-                        <div v-if="active == 'post'">
+                        <div v-if="active == 'post' && Data.length > 0">
                             <div class="containerProfile">
-                            <vs-row justify="space-around" style="margin-top: 8vh;">
+                                <vs-row justify="space-around" style="margin-top: 8vh;">
                                 <vs-col v-for="post in Data" offset="1" w="5">
-                                <card @data="Open" :post="post" >
-                                </card>
+                                    <card @data="Open" :post="post">
+                                    </card>
                                 </vs-col>
-                            </vs-row>
+                                </vs-row>
                             </div>
-                        </div>
+                            </div>
+                            <nomatches v-else style="z-index: 0; margin-left: 23%; width: 70%; margin-top: 15vh; margin-bottom: 7vh;"></nomatches>
                         <div v-if="active == 'subscribers'">
                             <div class="containerSubscribers">
                                 <subscriber :users="Users"></subscriber>

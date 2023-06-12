@@ -1,7 +1,5 @@
 <template>
   <div class="center">
-
-
     <vs-button danger transparent :active="active == true" @click="active = true">
       Зарегистрируйтесь!
     </vs-button>
@@ -12,27 +10,29 @@
         </h4>
       </template>
 
-
       <div class="con-form">
         <vs-input danger border v-model="Login" placeholder="Логин">
-          <template v-if="error1" #message-danger >
-              Данный логин уже занят
+          <template v-if="error1" #message-danger>
+            Данный логин уже занят
           </template>
           <template #icon>
-            <i class='bx bxs-user'></i>
+            <i class="bx bxs-user"></i>
           </template>
         </vs-input>
         <vs-input danger border type="password" v-model="Password" placeholder="Пароль">
+          <template #message-danger>
+            <span v-if="!isPasswordValid">Пароль должен быть длиннее 8 символов и содержать специальные символы</span>
+          </template>
           <template #icon>
-            <i class='bx bxs-lock'></i>
+            <i class="bx bxs-lock"></i>
           </template>
         </vs-input>
         <vs-input danger border type="password" v-model="RepeatPassword" placeholder="Повторите пароль">
-          <template v-if="error2" #message-danger >
-              Пароли не совпадают
+          <template v-if="error2" #message-danger>
+            Пароли не совпадают
           </template>
           <template #icon>
-            <i class='bx bxs-lock'></i>
+            <i class="bx bxs-lock"></i>
           </template>
         </vs-input>
       </div>
@@ -47,55 +47,62 @@
     </vs-dialog>
   </div>
 </template>
+
 <script>
 import axios from 'axios';
+
 export default {
-  data: () => ({
-    active: false,
-    Login: '',
-    Password: '',
-    RepeatPassword: '',
-    data: [],
-    error1: false,
-    error2: false,
-  }),
-  methods: {
-      Done() {
-        const path = 'http://localhost:3000/registration';
-        if (!this.error2){
-          axios.post(path, { login: this.Login, password: this.Password})
-            .then((response) => {
-              console.log(response.data);
-              const data = response.data;
-              this.data = data;
-              console.log(response);
-              if (response.data.status == 'Success') {
-                  this.active = false
-              }
-              else {
-                  this.error1 = true
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      },
+  data() {
+    return {
+      active: false,
+      Login: '',
+      Password: '',
+      RepeatPassword: '',
+      data: [],
+      error1: false,
+      error2: false,
+    };
+  },
+  computed: {
+    isPasswordValid() {
+      const regex = /^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+      return regex.test(this.Password);
     },
-  watch:{
-    RepeatPassword: function(){
-            if (this.Password != this.RepeatPassword){
-              this.error2 = true
+  },
+  methods: {
+    Done() {
+      const path = 'http://localhost:3000/registration';
+      if (!this.error2 && this.isPasswordValid) {
+        axios
+          .post(path, { login: this.Login, password: this.Password })
+          .then((response) => {
+            console.log(response.data);
+            const data = response.data;
+            this.data = data;
+            console.log(response);
+            if (response.data.status == 'Success') {
+              this.active = false;
+            } else {
+              this.error1 = true;
             }
-            else {
-              this.error2 = false
-            }
-        },
-  }
-}
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    },
+  },
+  watch: {
+    RepeatPassword() {
+      if (this.Password !== this.RepeatPassword) {
+        this.error2 = true;
+      } else {
+        this.error2 = false;
+      }
+    },
+  },
+};
 </script>
-
-
 
 <style>
 .not-margin {

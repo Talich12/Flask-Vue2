@@ -62,36 +62,40 @@ export default {
       document.removeEventListener('mousemove', this.updatePupilPosition);
     },
     updatePupilPosition(event) {
-      const pupil = this.$refs.pupil;
-      const imageContainer = this.$refs.imageContainer;
-      const rect = imageContainer.getBoundingClientRect();
+    const pupil = this.$refs.pupil;
+    const imageContainer = this.$refs.imageContainer;
+    const rect = imageContainer.getBoundingClientRect();
 
-      // Calculate the position of the mouse relative to the image container
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
+    // Calculate the position of the mouse relative to the image container
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
 
-      // Calculate the maximum range of movement for the pupil within the image container
-      const maxX = imageContainer.offsetWidth - pupil.offsetWidth;
-      const maxY = imageContainer.offsetHeight - pupil.offsetHeight;
+    // Calculate the maximum range of movement for the pupil within the image container
+    const maxX = 9;
+    const maxY = 5;
 
-      // Calculate the position of the pupil based on the mouse coordinates
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const distanceX = mouseX - centerX;
-      const distanceY = mouseY - centerY;
+    // Calculate the position of the pupil based on the mouse coordinates
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const distanceX = mouseX - centerX;
+    const distanceY = mouseY - centerY;
 
-      // Calculate the distance ratio within the radius
-      const radius = 15;
-      const distanceRatioX = Math.min(Math.max(distanceX, -radius), radius) / radius;
-      const distanceRatioY = Math.min(Math.max(distanceY, -radius), radius) / radius;
+    // Calculate the distance ratio within the radius
+    const radius = 100;
+    const distanceRatioX = Math.min(Math.max(distanceX, -radius), radius) / radius;
+    
+    // Clamp the distanceY value within a certain range
+    const clampedDistanceY = Math.min(Math.max(distanceY, -radius), radius);
+    const distanceRatioY = clampedDistanceY / radius;
 
-      // Calculate the position of the pupil within the maximum range
-      const pupilX = (distanceRatioX * maxX + maxX / 2);
-      const pupilY = (distanceRatioY * maxY + maxY / 2);
+    // Calculate the position of the pupil within the maximum range
+    const pupilX = (distanceRatioX * maxX + maxX / 2 -4);
+    const pupilY = (distanceRatioY * maxY + maxY / 2);
 
-      // Update the position of the pupil
-      pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
-    },
+    // Update the position of the pupil
+    pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
+  },
+
   },
 };
 </script>
