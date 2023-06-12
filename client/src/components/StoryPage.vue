@@ -59,7 +59,10 @@
             icon
             border
           >
-            <i class='bx bxs-bookmark' ></i>
+          <span v-if="!success">
+            <i class='bx bx-bookmark' ></i>
+          </span>
+          <i class='bx bxs-bookmark' v-else ></i>
           </vs-button>
           <vs-button
             success
@@ -67,7 +70,7 @@
             icon
             border
           >
-            <i class='bx bx-share' ></i>
+              <i class='bx bx-share' ></i>
           </vs-button>
           <vs-button
             warn
@@ -115,6 +118,7 @@ import marked from 'marked';
   export default {
     props: ['post_data', 'active'],
     data:() => ({
+      success: false,
       text: '',
       activebtn: '',
       markdown:  ``,
@@ -175,6 +179,7 @@ import marked from 'marked';
         return text;
       },
       addSave(){
+        this.success = !this.success;
         const path = "http://localhost:3000/post/save";
         axios.post(path, {post_id: this.$props.post_data.post.id},{
             headers: {

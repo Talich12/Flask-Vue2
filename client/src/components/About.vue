@@ -11,7 +11,7 @@
         size="xl"
         success
         border
-        style="margin-top: 6vh;"
+        style="margin-top: 6vh; margin-left: 7%;"
         @click="openNotifications"
       >
         <i class='bx bx-message-square-detail' style="margin-right: 0.5vw;"></i> Запустить ознакомительную часть
