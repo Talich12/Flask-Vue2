@@ -5,6 +5,7 @@ import Vuesax from 'vuesax';
 import router from './router';
 import VueParticles from 'vue-particles'
 import axios from 'axios';
+import VueScrollTo from 'vue-scrollto';
 
 import 'vuesax/dist/vuesax.css';
 import 'boxicons/css/boxicons.min.css';
@@ -47,6 +48,7 @@ Vue.component('information', Information);
 Vue.component('profile', Profile);
 Vue.component('notification', Notification);
 
+Vue.use(VueScrollTo);
 Vue.use(VueCookies);
 Vue.use(VueParticles);
 Vue.use(axios)

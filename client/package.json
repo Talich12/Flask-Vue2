@@ -21,6 +21,7 @@
     "vue": "^2.5.2",
     "vue-cookies": "^1.8.3",
     "vue-router": "^3.0.1",
+    "vue-scrollto": "^2.20.0",
     "vue-youtube": "^1.4.0",
     "vuesax": "^4.0.1-alpha.25"
   },

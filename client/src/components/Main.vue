@@ -1,6 +1,6 @@
 <template>
   <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
-    <storypage  :active="active" :post_data="post_data" style="z-index: 100;"/>
+    <storypage :active="active" :post_data="post_data" style="z-index: 100;"/>
     <vs-row justify="space-around">
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
@@ -34,7 +34,6 @@
       </vs-col>
       <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
     </vs-row>
-    
     <div class="footer">
       <!-- Ваш код футера -->
     </div>

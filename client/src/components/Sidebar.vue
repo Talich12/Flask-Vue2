@@ -31,45 +31,6 @@
         <template #header>
           <vs-sidebar-item arrow style="margin-right: 7%;">
             <template #icon>
-              <i class='bx bxs-folder-plus' style="font-size: 1vw;"></i>
-            </template>
-            <p style="font-size: 0.95vw; font-family: 'Unbounded'; font-weight: bolder;">Фильтр по медиа</p>
-          </vs-sidebar-item>
-        </template>
-
-
-        <vs-sidebar-item>
-          <template #icon>
-            <i class='bx bxs-microphone-alt' style="font-size: 1vw;"></i>
-          </template>
-          <vs-tooltip right danger>
-            <vs-switch v-model="audio" danger style="background-color: black;">С озвучкой</vs-switch>
-
-            <template #tooltip>
-              Кнопка, фильтрующая истории только с озвочкой.
-            </template>
-          </vs-tooltip>
-        </vs-sidebar-item>
-
-
-        <vs-sidebar-item>
-          <template #icon>
-            <i class='bx bxs-film' style="font-size: 1vw;"></i>
-          </template>
-          <vs-tooltip right danger>
-            <vs-switch v-model="video" danger style="background-color: black;">С видео</vs-switch>
-
-            <template #tooltip>
-              Кнопка, фильтрующая истории только с видео.
-            </template>
-          </vs-tooltip>
-        </vs-sidebar-item>
-      </vs-sidebar-group>
-
-      <vs-sidebar-group>
-        <template #header>
-          <vs-sidebar-item arrow style="margin-right: 7%;">
-            <template #icon>
               <i class='bx bxs-plus-circle' style="font-size: 1vw;"></i>
             </template>
             <p style="font-size: 1vw; font-family: 'Unbounded'; font-weight: bolder;">Подписки</p>

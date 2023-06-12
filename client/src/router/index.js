@@ -26,8 +26,8 @@ Vue.use(Vuesax, {
     danger:'rgb(106, 78, 147)',
   },
 })
- 
-export default new Router({
+
+const router = new Router({
   mode: "hash",
   routes: [
     {
@@ -82,8 +82,22 @@ export default new Router({
     },
     {
       path: '/followedposts',
-      name: 'folowedposts',
+      name: 'followedposts',
       component: FollowedPosts,
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    } else if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { left: 0, top: 0 };
+    }
+  },
 });
+
+export default router;
