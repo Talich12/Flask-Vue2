@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <div id="top" style="position: absolute; top: 10px; left: 0;"></div>
     <cookie></cookie>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
     <sidebar @curse="onCurse" @violence="onViolence" @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
     </sidebar>
     <logoheader style="animation-duration: 0.7s;" class="animate__animated animate__fadeIn"/>
     <Flashlight v-show="flashlightVisible" ref="flashlight" style="right: 0; bottom: 0;"></Flashlight>
-    <a href="#" v-scroll-to="'#top'" style="position: absolute; right: 100px; bottom: 100px; z-index: 100;"> dsadsad</a>
     <vs-button
       icon
       dark

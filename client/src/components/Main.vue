@@ -32,7 +32,9 @@
           </template>
         </card>
       </vs-col>
-      <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
+      <div style="width: 100%;">
+        <pagination :len="len" :page="page" @value="onValue" @page="onPage" style="margin-left: 9%;"></pagination>
+      </div>
     </vs-row>
     <div class="footer">
       <!-- Ваш код футера -->
