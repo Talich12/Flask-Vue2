@@ -1,7 +1,7 @@
 
 <template>
     <div class="center" style="height: 100%;">
-      <vs-dialog scroll blur overflow-hidden not-close v-model="$props.active" style="padding-top: 0; padding-bottom: 0; overflow-y: hidden;">
+      <vs-dialog scroll blur overflow-hidden not-close v-model="active" style="padding-top: 0; padding-bottom: 0; overflow-y: hidden;">
         <div class="storyheader" style="margin-bottom: 3vh; display: flex; align-items: center;">
           <vs-avatar>
           <img :src="require(`@/assets/img/load/${post_data.post.author.avatar}`)" alt="">
@@ -50,7 +50,7 @@
             border
           >
           <p>{{post_data.post.like_count}}</p>
-          <span v-if="!TEMPLATE">
+          <span v-if="!post_data.has_liked">
             <i class='bx bx-heart' ></i>
           </span>
           <i class='bx bxs-heart' v-else ></i>
@@ -62,7 +62,7 @@
             icon
             border
           >
-          <span v-if="!TEMPLATE">
+          <span v-if="post_data.has_saved">
             <i class='bx bx-bookmark' ></i>
           </span>
           <i class='bx bxs-bookmark' v-else ></i>
@@ -90,29 +90,33 @@
             icon
             border
           >
-          <span v-if="!TEMPLATE">
+          <span v-if="post_data.has_followed == 0">
             <i class='bx bxs-user-plus' ></i>Подписаться на автора
           </span>
-          <i class='bx bxs-user-minus' v-else >Отписаться от автора</i>
+          <span  v-if="post_data.has_followed == 1">
+          <i class='bx bxs-user-minus' ></i>Отписаться от автора
+          </span>
           </vs-button>
         </div>
-        <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
-        <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
-        <div style="display: flex;">
-        <vs-input border v-model="text" placeholder="Прокомментировать..." style="margin: 1vh; width: 100%;" class="multiline-input"/>
-        <vs-button
-        @click="addComment()"
-        border
-        icon
-        danger 
-        :class="{ 'shake-animation': isCommentAdded }"
-        style="width: 100px"
-      >
-        <i class="bx bx-send"></i>
-      </vs-button>
+        <div>
+          <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
+          <h2><i class='bx bx-comment-detail' style="margin-right: 0.5vw;"></i>Комментарии:</h2>
+          <div style="display: flex;">
+          <vs-input border v-model="text" placeholder="Прокомментировать..." style="margin: 1vh; width: 100%;" class="multiline-input"/>
+          <vs-button
+          @click="addComment()"
+          border
+          icon
+          danger 
+          :class="{ 'shake-animation': isCommentAdded }"
+          style="width: 100px"
+          >
+          <i class="bx bx-send"></i>
+          </vs-button>
+          </div>
+          <div v-for="comment in post_data.comments" :class="{ 'shake-animation': isCommentAdded }">
+            <usercomment :comment_data="comment" ></usercomment>
         </div>
-        <div v-for="comment in post_data.comments" :class="{ 'shake-animation': isCommentAdded }">
-          <usercomment :comment_data="comment" ></usercomment>
         </div>
       </vs-dialog>
     </div>
@@ -124,6 +128,7 @@ import marked from 'marked';
   export default {
     props: ['post_data', 'active'],
     data:() => ({
+      isActive: this.active, 
       success: false,
       text: '',
       activebtn: '',
@@ -140,11 +145,7 @@ import marked from 'marked';
         })
             .then((response) => {
             console.log(response.data);
-            if (response.data.Status == "add_like")
-              this.$props.post_data.post.like_count++
-            else{
-              this.$props.post_data.post.like_count--
-            }
+            this.FetchData();
         })
             .catch((error) => {
             console.log(error);
@@ -185,7 +186,6 @@ import marked from 'marked';
         return text;
       },
       addSave(){
-        this.success = !this.success;
         const path = "http://localhost:3000/post/save";
         axios.post(path, {post_id: this.$props.post_data.post.id},{
             headers: {
@@ -194,6 +194,7 @@ import marked from 'marked';
         })
             .then((response) => {
               console.log(response.data);
+              this.FetchData();
         })
             .catch((error) => {
             console.log(error);
@@ -207,7 +208,6 @@ import marked from 'marked';
             }
         })
             .then((response) => {
-              this.text = '';
               this.FetchData();
               console.log(response.data);
         })
@@ -217,9 +217,14 @@ import marked from 'marked';
       },
       FetchData(){
         const path = "http://localhost:3000/post/" + this.$props.post_data.post.id;
-            axios.get(path)
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+                }
+            })
                 .then((response) => {
-                  this.$props.post_data = response.data
+                  this.post_data = response.data
+                  
             })
                 .catch((error) => {
                 console.log(error);

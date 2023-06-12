@@ -63,7 +63,11 @@ export default {
     methods:{
         onClick(){
             const path = "http://localhost:3000/post/" + this.$props.post.id;
-            axios.get(path)
+            axios.get(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+                }
+            })
                 .then((response) => {
                 this.$emit('data', response.data)
             })

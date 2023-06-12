@@ -243,15 +243,46 @@ def get_followed_posts():
 
 
 @app.route('/post/<id>', methods=['GET'])
+@jwt_required(refresh=False)
 def get_post(id):
+    login = get_jwt_identity()
     output = {}
     post_schema = PostSchema(many= False)
     comments_schema = CommentsSchema(many = True)
     post = Post.query.filter_by(id=id).first()
 
+    find_user = User.query.filter_by(username = login).first()
+
     comments = Comments.query.filter_by(post_id = id).order_by(Comments.timestamp.desc())
+
+    find_like = Likes.query.filter_by(user_id = find_user.id, post_id = id).first()
+
+    if find_like is not None:
+        has_liked = True
+    else:
+        has_liked = False
+
+    find_saved = SavedPost.query.filter_by(user_id = find_user.id, post_id = id).first()
+
+    if find_saved is not None:
+        has_saved = True
+    else:
+        has_saved = False
+
+    if post.author.id == find_user.id:
+        has_followed = 2
+    else:
+        if find_user.is_following(post.author):
+            has_followed = 1
+        else:
+            has_followed = 0
+
+
     output['post'] = post_schema.dump(post)
     output['comments'] = comments_schema.dump(comments)
+    output['has_liked'] = has_liked
+    output['has_saved'] = has_saved
+    output['has_followed'] = has_followed
 
     return jsonify(output)
 
@@ -332,9 +363,12 @@ def post_follow():
     find_user = User.query.filter_by(username = login).first()
     find_follow = User.query.filter_by(id = user_id).first()
 
-    find_user.follow(find_follow)
-
-    return jsonify({'Status': "add_follow"})
+    if find_user.is_following(find_follow):
+        find_user.unfollow(find_follow)
+        return jsonify({'Status': "add_follow"})
+    else:
+        find_user.follow(find_follow)
+        return jsonify({'Status': "delete_follow"})
 
 
 @app.route('/search', methods=['GET', 'POST'])
