@@ -200,7 +200,7 @@ def post_comment():
     find_post = Post.query.filter_by(id = post_id).first()
 
     comment = Comments(user_id = find_user.id, post_id = post_id, user = find_user, post = find_post, text = text)
-
+    find_post.comment_count +=1
     db.session.add(comment)
     db.session.commit()
 
@@ -312,7 +312,7 @@ def get_posts(username):
     login = username
     post_schema = PostSchema(many=True)
     find_user = User.query.filter_by(username=login).first()
-    posts = Post.query.filter_by(author_id=find_user.id).all()
+    posts = Post.query.filter_by(author_id=find_user.id).order_by(Post.timestamp.desc())
     output = post_schema.dump(posts)
     return jsonify(output)
 

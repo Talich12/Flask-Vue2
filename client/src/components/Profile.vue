@@ -1,5 +1,6 @@
 <template>
     <div class="profile">
+        <storypage :active="active2" :post_data="post_data" style="z-index: 100;"/>
         <div class="profile-header__content">
             <div class="profile__user">
                 <div class="profile__user-avatar">
@@ -56,7 +57,7 @@
                             <div class="containerProfile">
                             <vs-row justify="space-around" style="margin-top: 8vh;">
                                 <vs-col v-for="post in Data" offset="1" w="5">
-                                <card>
+                                <card @data="Open" :comment_count="post.comment_count" :like_count="post.like_count" :id="post.id" >
                                     <template #title>
                                     {{ post.title }}
                                     </template>
@@ -100,6 +101,8 @@ export default {
             User: [],
             UserIcon: require(`@/assets/img/load/sample1.jpg`),
             Users: [],
+            post_data: [],
+            active2: false
         };
     },
     methods: {
@@ -243,7 +246,12 @@ export default {
             this.$router.push({name: 'Main'})
 
             window.location.reload();
-        }
+        },
+        Open(data){
+            console.log(data)
+            this.post_data = data
+            this.active2 = true
+        },
     },
     watch:{
         '$route' (to, from){
