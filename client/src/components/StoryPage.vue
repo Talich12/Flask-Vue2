@@ -89,6 +89,7 @@
             floating
             icon
             border
+            v-if="post_data.has_followed != 2"
           >
           <span v-if="post_data.has_followed == 1">
             <i class='bx bxs-user-plus'  ></i>Подписаться на автора
@@ -98,11 +99,12 @@
           </span>
           </vs-button>
           <vs-button
-            @click="addFollow()"
+            @click="deletePost()"
             color="#FF0000"
             floating
             icon
             border
+            v-if="post_data.has_followed == 2"
           >
             <i class='bx bx-x'  ></i>Удалить пост
           </vs-button>
@@ -231,6 +233,21 @@ import marked from 'marked';
                 .then((response) => {
                   this.post_data = response.data
                   
+            })
+                .catch((error) => {
+                console.log(error);
+            })
+      },
+      deletePost(){
+        const path = "http://localhost:3000/post/" + this.$props.post_data.post.id + "/delete";
+        axios.delete(path,{
+                headers: {
+                    'Authorization': 'Bearer ' + this.$cookies.get("access_token")
+                }
+            })
+                .then((response) => {
+                  this.post_data = response.data
+                  window.location.reload();
             })
                 .catch((error) => {
                 console.log(error);
