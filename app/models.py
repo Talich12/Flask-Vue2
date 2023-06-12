@@ -176,6 +176,8 @@ class PostSchema(ma.SQLAlchemySchema):
     timestamp = auto_field()
     like_count = auto_field()
     comment_count = auto_field()
+    has_curse = auto_field()
+    has_violence = auto_field()
     
     author = fields.Nested(UserSchema)
 
