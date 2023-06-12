@@ -1,10 +1,12 @@
 <template>
     <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
       <vs-row justify="space-around">
-        <input type="text" v-model="search" placeholder="Search title.." style="display: block;"/>
-        <vs-button @click="Search()" block>
+        <div style="display: flex; flex-direction: column; width: 100%; align-items: center; margin-left: 7%; margin-top: 2vh;">
+        <vs-input type="text" v-model="search" placeholder="Поиск по названию..." style="display: block;"/>
+        <vs-button @click="Search()" relief danger style="width: 7vw; margin-top: 2vh;">
             Найти
         </vs-button>
+        </div>
         <vs-col v-for="post in Data" offset="1" w="5">
           <card>
             <template #title>
@@ -73,6 +75,16 @@
                 console.log(error);
             });
         },
+        openLoading() {
+          const loading = this.$vs.loading({
+            background: 'dark',
+            color: 'danger',
+            type: 'rectangle'
+          });
+          setTimeout(() => {
+            loading.close();
+          }, 800);
+        },
         onPage(data){
           this.page = data.page
           const path = "http://localhost:3000/search";
@@ -100,6 +112,7 @@
             });
         },
         Search(){
+            this.openLoading();
             const path = "http://localhost:3000/search";
             axios.post(path, {search: this.search, value: this.value, page: this.page})
                 .then((response) => {

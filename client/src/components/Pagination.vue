@@ -45,11 +45,11 @@ export default {
         const loading = this.$vs.loading({
           background: 'dark',
           color: 'danger',
-          type: 'points'
+          type: 'rectangle'
         });
         setTimeout(() => {
           loading.close();
-        }, 600);
+        }, 800);
       },
     }
 }   

@@ -1,5 +1,5 @@
 <template>
-  <div class="containerInfoAbout animate__animated animate__fadeIn" style="animation-duration: 1s;">
+  <div class="containerInfoAbout animate__animated animate__fadeIn" style="animation-duration: 1s; justify-content: center; align-items: center;">
     <vs-row justify="space-around">
       <vs-alert shadow color="success" style="margin-left: 8%; z-index: 0;">
         <template #title>
@@ -92,7 +92,7 @@ export default {
 .containerInfoAbout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 40vh;
   padding-left: 16%;
   padding-right: 7%;
   padding-top: 8%;
