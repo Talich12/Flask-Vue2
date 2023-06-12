@@ -11,7 +11,6 @@
       dark
       relief
       :active="flashlightVisible"
-      @click="scrollTop"
       style="position: absolute; right: 0; bottom: 0; z-index: 100;"
     >
       <i class="bx bxs-torch"></i>
