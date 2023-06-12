@@ -18,10 +18,32 @@
             {{like_count}}
             </span>
         </vs-button>
-        <vs-button class="btn-chat" shadow primary>
+        <vs-button danger icon>
             <i class='bx bx-chat' ></i>
             <span class="span">
             {{comment_count}}
+            </span>
+        </vs-button>
+        <vs-button primary icon>
+            <i class='bx bxs-microphone-alt' ></i>
+            <span class="span">
+            </span>
+        </vs-button>
+        <vs-button primary icon>
+            <i class='bx bxs-film' ></i>
+            <span class="span">
+
+            </span>
+        </vs-button>
+        <vs-button color="#FF0000" icon>
+            <i class='bx bx-angry' ></i>
+            <span class="span">
+            </span>
+        </vs-button>
+        <vs-button color="#FF0000" icon>
+            <i class='bx bx-knife' ></i>
+            <span class="span">
+            {{violence_boolean}}
             </span>
         </vs-button>
         </template>
