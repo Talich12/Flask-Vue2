@@ -10,12 +10,6 @@
             <vs-th sort @click="users = $vs.sortData($event ,users, 'username')">
               Name
             </vs-th>
-            <vs-th sort @click="users = $vs.sortData($event ,users, 'email')">
-              Email
-            </vs-th>
-            <vs-th sort @click="users = $vs.sortData($event ,users, 'id')">
-              Id
-            </vs-th>
           </vs-tr>
         </template>
         <template #tbody>
@@ -25,16 +19,12 @@
             :data="tr"
           >
             <router-link :to="ProfileUrl+tr.username">
-              <vs-td> 
-                  <vs-avatar size="35"><img :src="require(`@/assets/img/load/${tr.avatar}`)" alt="" style="transform: 0;"></vs-avatar> {{ tr.username }}
-              </vs-td>
+              <vs-td style="width: 100%;"> 
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <vs-avatar size="35"><img :src="require(`@/assets/img/load/${tr.avatar}`)" alt="" style="transform: 0;"></vs-avatar> <p style="margin-left: 1vw; font-size: 2vh;">{{ tr.username }}</p>
+                </div>
+                </vs-td>
             </router-link>
-            <vs-td>
-            {{ tr.email }}
-            </vs-td>
-            <vs-td>
-            {{ tr.id }}
-            </vs-td>
           </vs-tr>
         </template>
       </vs-table>
@@ -65,6 +55,10 @@
   color: #EEEFF9;
   background: #30303A;
 }
+.custom-table .vs-table__tr:hover .vs-table__td {
+  background: #2A2A35;
+  transform: scale(0.95);
+}
 
 .custom-table .vs-input-parent--border .vs-input-content .vs-input {
   color: #EEEFF9;
@@ -76,7 +70,6 @@
 .custom-table .vs-table_not-found tr td {
   color: #6A4E93;
 }
-
 .custom-table .vs-table table {
   background: #30303A;
 }
