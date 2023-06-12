@@ -1,6 +1,6 @@
 <template>
+  <div>
   <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
-    <storypage :active="active" :post_data="post_data" style="z-index: 100;"/>
     <vs-row justify="space-around">
       <information id="top" style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
@@ -55,6 +55,8 @@
         clickMode="push"
         style="position:absolute; z-index: -10; height: 100%; width: 100vw; left: 0%; top: 8%;"
       > </vue-particles>
+      </div>
+      <storypage :active="active" :post_data="post_data" style="z-index: 100;"/>
   </div>
 </template>
 
@@ -168,6 +170,7 @@ export default {
       }
   },
   created() {
+
       this.Get();
       this.getTop()
       console.log(this.$props.audio)
