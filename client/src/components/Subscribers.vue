@@ -17,7 +17,6 @@
             :key="i"
             v-for="(tr, i) in $vs.getSearch(users, search)"
             :data="tr"
-            style="width: 100%;"
           >
             <router-link :to="ProfileUrl+tr.username">
               <vs-td style="width: 100%;"> 
@@ -55,6 +54,10 @@
 .custom-table .vs-table__header {
   color: #EEEFF9;
   background: #30303A;
+}
+.custom-table .vs-table__tr:hover .vs-table__td {
+  background: #2A2A35;
+  transform: scale(0.95);
 }
 
 .custom-table .vs-input-parent--border .vs-input-content .vs-input {
