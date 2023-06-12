@@ -16,7 +16,7 @@
     >
       <i class="bx bxs-torch"></i>
     </vs-button>
-    <router-view :audio="audio" :video="video" />
+    <router-view :curse="curse" :violence="violence" :audio="audio" :video="video" />
     <myfooter style="z-index: 10; position: relative; bottom: 0;"></myfooter>
   </div>
 </template>

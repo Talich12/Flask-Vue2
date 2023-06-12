@@ -75,10 +75,10 @@ class User(db.Model):
         return self.followed.filter(
             followers.c.followed_id == user.id).count() > 0
     
-    def followed_posts(self):
+    def followed_posts(self, filters):
         return Post.query.join(
             followers, (followers.c.followed_id == Post.author_id)).filter(
-                followers.c.follower_id == self.id)
+                followers.c.follower_id == self.id, *filters)
     
 
     def set_password(self, password):

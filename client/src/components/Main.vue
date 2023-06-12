@@ -1,6 +1,6 @@
 <template>
   <div class="containerMain animate__animated animate__fadeIn" style="animation-duration: 1s;">
-    <storypage  :active="active" :post_data="post_data" style="z-index: 100;"/>
+    <storypage :active="active" :post_data="post_data" style="z-index: 100;"/>
     <vs-row justify="space-around">
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
@@ -88,6 +88,7 @@ export default {
               console.log(response.data);
               this.Data = response.data.data;
               this.len = response.data.len
+              this.active = false
           })
               .catch((error) => {
               console.log(error);
@@ -100,6 +101,7 @@ export default {
               .then((response) => {
               console.log(response.data);
               this.Data = response.data.data;
+              this.active = false
           })
               .catch((error) => {
               console.log(error);
@@ -114,6 +116,7 @@ export default {
               console.log(response.data);
               this.Data = response.data.data;
               this.len = response.data.len
+              this.active = false
           })
               .catch((error) => {
               console.log(error);
@@ -123,6 +126,9 @@ export default {
         console.log(data)
         this.post_data = data
         this.active = true
+      },
+      Exit(){
+        console.log("Exit")
       }
   },
   watch:{

@@ -62,6 +62,90 @@ def get_index():
     output["len"] = len
     return jsonify(output)
 
+@app.route('/saved', methods=['POST'])
+@jwt_required(refresh=False)
+def get_saved():
+    output = {}
+    filters = []
+
+    login = get_jwt_identity()
+
+    data = request.get_json(silent=True)
+    value = int(data['value'])
+    page = int(data['page'])
+
+    video = data['video']
+    audio = data['audio']
+    curse = data['curse']
+    violence = data['violence']
+
+    if video:
+        filters.append(getattr(Post, 'has_video') == video)
+    if audio:
+        filters.append(getattr(Post, 'has_audio') == audio)
+    if curse:
+        filters.append(getattr(Post, 'has_curse') == curse)
+    if violence:
+        filters.append(getattr(Post, 'has_violence') == violence)
+
+    find_user = User.query.filter_by(username = login).first()
+
+    filters.append(getattr(SavedPost, 'user_id') == find_user.id)
+
+    posts_request = SavedPost.query.join(Post, (Post.id == SavedPost.post_id)).filter(*filters).order_by(SavedPost.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
+
+    len =  SavedPost.query.join(Post, (Post.id == SavedPost.post_id)).filter(*filters).count()
+    len =  math.ceil(len/value)
+
+    post_schema = SavedPostSchema(many=True)
+    output_query = post_schema.dump(posts_request)
+
+    output['data'] = output_query
+    output['len'] = len
+
+    return jsonify(output)
+
+@app.route('/followedposts', methods=['POST'])
+@jwt_required(refresh=False)
+def get_followed_posts():
+    filters = []
+    output = {}
+
+    data = request.get_json(silent=True)
+    value = int(data['value'])
+    page = int(data['page'])
+    video = data['video']
+    audio = data['audio']
+    curse = data['curse']
+    violence = data['violence']
+
+    if video:
+        filters.append(getattr(Post, 'has_video') == video)
+    if audio:
+        filters.append(getattr(Post, 'has_audio') == audio)
+    if curse:
+        filters.append(getattr(Post, 'has_curse') == curse)
+    if violence:
+        filters.append(getattr(Post, 'has_violence') == violence)
+    
+    login = get_jwt_identity()
+    find_user = User.query.filter_by(username = login).first()
+
+    post_schema = PostSchema(many = True)
+
+    posts = find_user.followed_posts(filters).order_by(Post.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
+
+    len = find_user.followed_posts(filters).count()
+    len = math.ceil(len/value)
+
+    output_query = post_schema.dump(posts)
+
+    output['data'] = output_query
+    output['len'] = len
+
+
+    return jsonify(output)
+
 
 @app.route('/post/<id>', methods=['GET'])
 def get_post(id):
@@ -185,57 +269,7 @@ def search():
     
     return jsonify(output)
 
-@app.route('/saved', methods=['POST'])
-@jwt_required(refresh=False)
-def get_saved():
-    output = {}
-    login = get_jwt_identity()
 
-    data = request.get_json(silent=True)
-    value = int(data['value'])
-    page = int(data['page'])
-
-    find_user = User.query.filter_by(username = login).first()
-
-    posts_request = SavedPost.query.filter_by(user_id = find_user.id).order_by(SavedPost.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
-
-    len = SavedPost.query.filter_by(user_id = find_user.id).count()
-    len =  math.ceil(len/value)
-
-    post_schema = SavedPostSchema(many=True)
-    output_query = post_schema.dump(posts_request)
-
-    output['data'] = output_query
-    output['len'] = len
-
-    return jsonify(output)
-
-@app.route('/followedposts', methods=['POST'])
-@jwt_required(refresh=False)
-def get_followed_posts():
-    output = {}
-
-    data = request.get_json(silent=True)
-    value = int(data['value'])
-    page = int(data['page'])
-    
-    login = get_jwt_identity()
-    find_user = User.query.filter_by(username = login).first()
-
-    post_schema = PostSchema(many = True)
-
-    posts = find_user.followed_posts().order_by(Post.timestamp.desc()).paginate(page=page,per_page=value,error_out=False)
-
-    len = find_user.followed_posts().count()
-    len = math.ceil(len/value)
-
-    output_query = post_schema.dump(posts)
-
-    output['data'] = output_query
-    output['len'] = len
-
-
-    return jsonify(output)
 
 @app.route('/profile/<username>/follow', methods=['POST'])
 @jwt_required(refresh=False)
