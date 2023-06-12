@@ -50,7 +50,10 @@
             border
           >
           <p>{{post_data.post.like_count}}</p>
-            <i class='bx bxs-heart' ></i>
+          <span v-if="!TEMPLATE">
+            <i class='bx bx-heart' ></i>
+          </span>
+          <i class='bx bxs-heart' v-else ></i>
           </vs-button>
           <vs-button 
             @click="addSave()"
@@ -59,7 +62,7 @@
             icon
             border
           >
-          <span v-if="!success">
+          <span v-if="!TEMPLATE">
             <i class='bx bx-bookmark' ></i>
           </span>
           <i class='bx bxs-bookmark' v-else ></i>
@@ -87,7 +90,10 @@
             icon
             border
           >
+          <span v-if="!TEMPLATE">
             <i class='bx bxs-user-plus' ></i>Подписаться на автора
+          </span>
+          <i class='bx bxs-user-minus' v-else >Отписаться от автора</i>
           </vs-button>
         </div>
         <hr class="rounded2" style="margin: 3vh auto 1vh; margin-bottom: 3vh; border-top: 0.2vh solid #6A4E93; width: 15vw;">
