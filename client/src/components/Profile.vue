@@ -12,11 +12,6 @@
                     <span class="username">{{ $route.params.username }}</span>
                 </div>
                 <div class="profile-rank-cog">
-                    <div class="profile__user-rank">
-                        <vs-button danger size="large" shadow :active="active == 0" @click="active = 0" class="rank">
-                            Рейтинг
-                        </vs-button>
-                    </div>
                     <div v-if="User.access == false"   class="profile__user-rank">
                         <vs-button @click="onFollow()" danger size="large" shadow class="rank">
                             Подписаться
@@ -27,14 +22,12 @@
                             Выйти
                         </vs-button>
                     </div>
-                    <div v-if="User.access == true"  class="profile__cog">
-                        <vs-button icon color="danger" shadow :active="active == 0" @click="active = 0" class="cog">
-                            <i class='bx bxs-cog'></i>
+                    <div v-if="User.access == true" class="profile__cog" style="display: ">
+                        <vs-button v-if="User.access == true" danger relief class="cog">
+                            <i class='bx bxs-cog' style="font-size:x-large;"></i>
                         </vs-button>
                     </div>
-                    
                 </div>
-
             </div>
             <div v-if="User.access == true"  class="profile__writer">
                 <vs-button danger size="large" shadow upload to="/storyadd" class="write-history">
@@ -52,8 +45,8 @@
                         <vs-navbar-item :active="active == 'achievements'" id="achievements" style="font-size: 1vw;"> Достижения </vs-navbar-item>
                         
                     </vs-navbar>
-                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s; width: 100%;">
-                        <div v-if="active == 'post' && Data.length > 0">
+                    <div class="square animate__animated animate__fadeIn" style="animation-duration: 1s; width: 100%; height: 100%;">
+                        <div v-if="active == 'post'">
                             <div class="containerProfile">
                                 <vs-row justify="space-around" style="margin-top: 8vh;">
                                 <vs-col v-for="post in Data" offset="1" w="5">
@@ -63,7 +56,6 @@
                                 </vs-row>
                             </div>
                             </div>
-                            <nomatches v-else style="z-index: 0; margin-left: 23%; width: 70%; margin-top: 15vh; margin-bottom: 7vh;"></nomatches>
                         <div v-if="active == 'subscribers'">
                             <div class="containerSubscribers">
                                 <subscriber :users="Users"></subscriber>
@@ -72,6 +64,11 @@
                         <div v-if="active == 'subscription'">
                             <div class="containerSubscribers">
                                 <subscriber @path="onRoute" :users="Users"></subscriber>
+                            </div>
+                        </div>
+                        <div v-if="active == 'achievements'">
+                            <div class="containerAchievments" style="height: 100%; display: flex; justify-content: center; overflow: hidden;">
+                                <soon></soon>
                             </div>
                         </div>
                     </div>
@@ -305,6 +302,7 @@ export default {
 .rank, .cog {
     margin-left: 0.5vw;
 }
+
 .profile__navbar{
     position: relative;
     z-index: 1;
@@ -319,7 +317,7 @@ export default {
 .containerProfile {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Высота экрана, чтобы футер всегда был внизу */
+  min-height: 100%; /* Высота экрана, чтобы футер всегда был внизу */
   margin-left: 16%;
   margin-right: 7%;
 }

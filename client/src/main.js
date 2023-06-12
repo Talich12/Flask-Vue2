@@ -32,6 +32,8 @@ import MarkdownEditor from './components/MarkdownEditor';
 import Subscribers from './components/Subscribers';
 import UserComment from './components/UserComment';
 import NoMatches from './components/NoMatches';
+import Soon from './components/Soon';
+Vue.component('soon', Soon);
 Vue.component('nomatches', NoMatches);
 Vue.component('usercomment', UserComment);
 Vue.component('storypage', StoryPage);
