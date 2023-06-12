@@ -1,5 +1,5 @@
 <template> 
-    <div class="center con-pagination page" style="margin-top: 7vh; display: flex; flex-direction: column;">
+    <div class="center con-pagination page" style="margin-top: 7vh; display: flex; flex-direction: column; width: 100%;">
         <vs-pagination not-margin color="danger" progress v-model="page" :length="len" style=""/>
         <vs-select placeholder="Кол-во на странице" v-model="value" style="min-width: 8vw; max-width: 8vw; justify-content: center; align-content: center; margin: 0 auto; margin-top: 2vh;">
         <template #message-success>

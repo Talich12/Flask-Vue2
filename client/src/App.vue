@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <div id="top" style="position: absolute; top: 10px; left: 0;"></div>
     <cookie></cookie>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
     <sidebar @curse="onCurse" @violence="onViolence" @video="onVideo" @audio="onAudio" style="z-index: 10; animation-duration: 0.5s;" class="animate__animated animate__fadeIn">
@@ -12,7 +11,7 @@
       dark
       relief
       :active="flashlightVisible"
-      @click="toggleFlashlight"
+      @click="scrollTop"
       style="position: absolute; right: 0; bottom: 0; z-index: 100;"
     >
       <i class="bx bxs-torch"></i>
