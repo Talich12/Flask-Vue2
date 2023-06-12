@@ -14,6 +14,7 @@ import Bookmarks from '@/components/Bookmarks';
 import FollowedPosts from '@/components/FollowedPosts';
 import LikeTop from '@/components/LikeTop'
 import Genre from '@/components/Genre'
+import GenreTop from '@/components/GenreTop'
 import 'vuesax/dist/vuesax.css';
 import 'boxicons';
 import marked from 'marked';
@@ -96,6 +97,11 @@ const router = new Router({
       path: '/genre',
       name: 'genre',
       component: Genre,
+    },
+    {
+      path: '/genretop/:id',
+      name: 'genretop',
+      component: GenreTop,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
