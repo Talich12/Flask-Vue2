@@ -118,4 +118,9 @@ const router = new Router({
   },
 });
 
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'thrilltogether'; // Set the title for the current route
+  next();
+});
+
 export default router;

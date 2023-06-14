@@ -17,6 +17,7 @@
                 </vs-alert>
             </template>
         </div>
+        <soon style="display: flex; margin-left: 32%;"></soon>
     </div>
 </template>
 
