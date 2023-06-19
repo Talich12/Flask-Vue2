@@ -9,6 +9,7 @@
         <p style="font-size: 3vh; margin-left: 1vw;">{{ post_data.post.author.username }}</p>
         <vs-button
           v-if="post_data.post.has_video"
+          :href="post_data.post.video"
           color="#FF0000"
           border
           upload

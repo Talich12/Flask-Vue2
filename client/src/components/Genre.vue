@@ -3,10 +3,10 @@
       <vs-row justify="space-around">
         <information id="top" style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
           <template #title>
-            Рекомендации на сегодня
+            <p><i class='bx bx-list-ul'></i> Жанры</p>
           </template>
           <template #text>
-            Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
+            Здесь собраны жанры и их описания! 
           </template>
         </information>
         <vs-col v-for="genre in Data" offset="1" w="5">

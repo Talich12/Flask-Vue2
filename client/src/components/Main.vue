@@ -4,7 +4,7 @@
     <vs-row justify="space-around">
       <information id="top" style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
-          Рекомендации на сегодня
+          Самые популярные истории
         </template>
         <template #text>
           Обновления происходят каждые два дня чтобы вы все успели прочесть. Рекомендации строятся на основе ваших предпочтений. Не забывайте ставить оценки историям чтобы улучшить систему рекомендаций.
@@ -13,7 +13,7 @@
       <cardrecs @data="Open" :data="top"></cardrecs>
       <information style="margin-left: 8%; margin-top: 5vh; z-index: 0;">
         <template #title>
-          Подборка самых популярных историй на сегодня
+          Свежие истории
         </template>
         <template #text>
           Эти истории заслужили самое большое внимание наших читателей за последнее время!
